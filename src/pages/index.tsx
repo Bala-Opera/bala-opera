@@ -9,7 +9,7 @@ export default function Home() {
         <title>Bala Opera</title>
       </Head>
       <h1>Hello Bala Opera!</h1>
-      <Button />
+      <Button text='@bala_opera' clickHandler={() => console.log('Hello')} />
     </>
   )
 }
