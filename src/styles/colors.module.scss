@@ -16,3 +16,13 @@ $black-secondary: #111;
 $green-secondary: #66FF66;
 $magenta-secondary: #FF66FF;
 $cyan-secondary: #66FFFF;
+
+@mixin important {
+  color: $yellow-primary;
+  background-color: $blue-primary;
+}
+
+@mixin default {
+  color: $blue-primary;
+  background-color: $gray-primary;
+}

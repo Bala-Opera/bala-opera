@@ -1,5 +1,3 @@
-@import 'fonts.module.scss';
-
 html,
 body {
   padding: 0;
@@ -13,8 +11,4 @@ body {
 img {
   max-width: 100%;
   display: block;
-}
-
-.font-medium-label {
-  @include medium-label;
 }

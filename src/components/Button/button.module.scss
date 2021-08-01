@@ -1,13 +1,13 @@
+@import '../../styles/breakpoints.module.scss';
 @import '../../styles/colors.module.scss';
+@import '../../styles/fonts.module.scss';
 
 .important {
-  color: $yellow-primary;
-  background-color: $blue-primary;
+  @include important;
 }
 
 .default {
-  color: $blue-primary;
-  background-color: $gray-primary;
+  @include default;
 }
 
 .button {
@@ -15,4 +15,8 @@
   border: solid 1px #FFF;
   padding: 12px 16px;
   cursor: pointer;
+  @include small-label;
+  @include md {
+    @include medium-label;
+  }
 }

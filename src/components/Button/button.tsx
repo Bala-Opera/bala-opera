@@ -10,11 +10,9 @@ export default function Button({
   clickHandler: Function,
 }) {
   const background = isImportant ? styles.important : styles.default;
+  const handleClick = () => clickHandler();
   return (
-    <button
-      className={`${background} ${styles.button} font-medium-label`}
-      onClick={() => clickHandler()}
-    >
+    <button className={`${background} ${styles.button}`} onClick={handleClick}>
       {text}
     </button>
   )
