@@ -1,8 +1,9 @@
 import Head from 'next/head'
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 
 import Button from '../components/Button/button'
 import Dropdown from '../components/Dropdown/dropdown'
+import TextInput from '../components/TextInput/textInput';
 
 export default function Home() {
   return (
@@ -23,6 +24,11 @@ export default function Home() {
           console.log(element.value);
         }}
         isInitialArrowUp
+      />
+      <TextInput
+        name='mailing-list'
+        placeholder='Your email here'
+        submitHandler={(e: React.SyntheticEvent) => console.log(e) }
       />
     </>
   )

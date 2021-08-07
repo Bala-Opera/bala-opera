@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState, useEffect } from 'react'
+import { ChangeEventHandler, useState } from 'react'
 import styles from './dropdown.module.scss'
 
 import DownArrow from '../../public/images/down.svg'

@@ -1,0 +1,41 @@
+@import '../../styles/breakpoints.module.scss';
+@import '../../styles/colors.module.scss';
+@import '../../styles/fonts.module.scss';
+
+.input {
+  border: 1px solid #FFF;
+  padding: 12px 24px;
+  caret-color: $blue-primary;
+  @include small-label;
+  @include md {
+    @include medium-label;
+  }
+}
+
+.submit {
+  cursor: pointer;
+  border: 1px solid #FFF;
+  padding: 12px;
+  @include default;
+  @include small-label;
+  @include md {
+    @include medium-label;
+  }
+}
+
+.submit:hover {
+  opacity: 0.9;
+}
+
+.input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $gray-primary;
+  opacity: 1; /* Firefox */
+}
+
+.input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $gray-primary;
+}
+
+.input::-ms-input-placeholder { /* Microsoft Edge */
+  color: $gray-primary;
+}
