@@ -1,0 +1,44 @@
+@import '../../styles/breakpoints.module.scss';
+@import '../../styles/colors.module.scss';
+@import '../../styles/fonts.module.scss';
+
+.header {
+  width: 100%;
+  display: flex;
+
+  @include small-label;
+  @include md {
+    @include medium-label;
+  }
+}
+
+.text {
+  width: 100%;
+  margin: 0;
+  vertical-align: middle;
+  @include important;
+  
+  padding: 10px 16px;
+  @include md {
+    padding: 12px 24px;
+  }
+}
+
+.minimize {
+  width: 44px;
+  height: 44px;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+
+  @include md {
+    width: 52px;
+    height: 52px;
+    font-size: 36px;
+  }
+  @include default;
+}
+
+.minimize:hover {
+  opacity: 0.9;
+}

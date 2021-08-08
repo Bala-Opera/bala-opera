@@ -6,6 +6,10 @@
   display: flex;
 }
 
+.dropdown:hover {
+  opacity: 0.9;
+}
+
 .dropdown select {
   display: block;
   border: 1px solid #FFF;
