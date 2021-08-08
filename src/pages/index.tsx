@@ -4,7 +4,8 @@ import React, { ChangeEvent } from 'react'
 import Button from '../components/Button/button'
 import Dropdown from '../components/Dropdown/dropdown'
 import TextInput from '../components/TextInput/textInput'
-import Window from '../components/Window/window';
+import Window from '../components/Window/window'
+import MobileLoading from '../components/MobileLoading/mobileLoading'
 
 export default function Home() {
 
@@ -13,6 +14,8 @@ export default function Home() {
       <Head>
         <title>Bala Opera</title>
       </Head>
+
+      <MobileLoading />
 
       <Window
         title="What?"
