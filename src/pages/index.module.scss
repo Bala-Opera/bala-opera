@@ -1,0 +1,46 @@
+@import '../styles/breakpoints.module.scss';
+@import '../styles/colors.module.scss';
+@import '../styles/fonts.module.scss';
+
+.sideBar {
+  display: flex;
+  flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  justify-content: space-between;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 64px 24px 32px 36px;
+  height: 100%;
+  width: 88px;
+  font-size: 24px;
+  @include medium-label;
+
+  @include md {
+    width: 112px;
+    padding: 74px 32px 32px 36px;
+    @include medium-body;
+  }
+  
+  @include lg {
+    width: 120px;
+    padding: 84px 24px 32px 56px;
+    @include medium-logo;
+  }
+
+  @include important;
+}
+
+.sideBar > span {
+  -webkit-transform:rotate(270deg);
+  -moz-transform:rotate(270deg);
+  -o-transform: rotate(270deg);
+  -ms-transform:rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.sideBar > span:last-child {
+  text-align: right;
+}
