@@ -22,7 +22,6 @@ export const generateAnimationConfig = (
     ? _randomizePath(lowerBound, upperBound, previousConfig.to)
     : _randomizePath(lowerBound, upperBound)
   const animationConfig = _applyAnimation(start, end, object)
-  console.log('Animation config', animationConfig)
   return { ...animationConfig, config: { duration: mechanics.duration } }
 }
 

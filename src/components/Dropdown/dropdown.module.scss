@@ -40,11 +40,16 @@
 
 .arrowContainer {
   border: 1px solid #FFF;
-  padding: 18px;
+  padding: 15px;
+  margin-left: 102px;
   cursor: pointer;
-  left: -52px;
-  position: relative;
+  position: absolute;
   pointer-events: none;
+
+  @include md {
+    padding: 17px;
+    margin-left: 112px;
+  }
 }
 
 .important {

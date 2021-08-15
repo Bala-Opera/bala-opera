@@ -1,12 +1,16 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
 import { useSpring, animated } from 'react-spring'
 
+import Button from '../components/Button/button'
+import Dropdown from '../components/Dropdown/dropdown'
+import Window from '../components/Window/window'
 import styles from './index.module.scss'
-import { generateAnimationConfig } from '../common/animations/floating';
-import { AnimationConfig } from '../common/types/animation';
-import { getRandomInt } from '../common/utils/random';
+import { generateAnimationConfig } from '../common/animations/floating'
+import { AnimationConfig } from '../common/types/animation'
+import { getRandomInt } from '../common/utils/random'
+import Copy from '../copy/homepage'
 
 const ICON_DIMENSIONS = {
   lg: { width: 715, height: 402 },
@@ -35,6 +39,7 @@ const getRandomIndexFromPool = (pool: Array<number>) => {
 }
 
 export default function Home() {
+  /* Floating Icon */
   const [screenSize, setScreenSize] = useState('none')
   const [iconIndex, setIconIndex] = useState(null)
   const [iconAnimation, setIconAnimation] = useState(null)
@@ -79,7 +84,6 @@ export default function Home() {
   }
 
   const updateIconSource = () => {
-    console.log(iconIndexPool.current)
     const newIndex = getRandomIndexFromPool(iconIndexPool.current)
     setIconIndex(newIndex)
 
@@ -89,7 +93,6 @@ export default function Home() {
     const indexToRemove = newPool.indexOf(newIndex)
     newPool.splice(indexToRemove, 1)
     iconIndexPool.current = newPool
-    console.log(newIndex, newPool)
   }
 
   useEffect(() => {
@@ -117,6 +120,10 @@ export default function Home() {
 
   const animation = useSpring(iconAnimation)
 
+  /* What? */
+  const [isWhatWindowVisible, setIsWhatWindowVisible] = useState(false)
+  const whatButtonHandler = () => setIsWhatWindowVisible(!isWhatWindowVisible)
+
   return (
     <>
       <Head>
@@ -138,6 +145,32 @@ export default function Home() {
           {...ICON_DIMENSIONS[screenSize]}
         />
       </animated.div>
+      )}
+
+      <div className={styles.footer}>
+        <div>
+        <Button
+          text="What?"
+          isImportant={isWhatWindowVisible}
+          clickHandler={whatButtonHandler}
+        /></div><div>
+        <Dropdown
+          name='Issues'
+          options={[{ value: 'Issue 0', displayText: 'Issue 0' }]}
+          changeHandler={() => {}}
+        /></div>
+      </div>
+
+      {isWhatWindowVisible && (
+        <Window
+          title="What?"
+          dimension={{ width: 400, height: 600 }}
+          source= {{ x: 0, y: 0 }}
+          destination={{ x: 500, y: 300 }}
+        >
+          <div>{Copy.WHAT[0]}</div>
+          <div>{Copy.WHAT[1]}</div>
+        </Window>
       )}
 
       <style global jsx>{`

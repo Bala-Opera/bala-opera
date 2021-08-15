@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import styles from './button.module.scss';
 
 export default function Button({
@@ -7,12 +8,11 @@ export default function Button({
 }: {
   text: string,
   isImportant?: boolean,
-  clickHandler: Function,
+  clickHandler: MouseEventHandler,
 }) {
   const background = isImportant ? styles.important : styles.default;
-  const handleClick = () => clickHandler();
   return (
-    <button className={`${background} ${styles.button}`} onClick={handleClick}>
+    <button className={`${background} ${styles.button}`} onClick={clickHandler}>
       {text}
     </button>
   )

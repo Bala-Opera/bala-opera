@@ -8,6 +8,8 @@ import { Dimension, Position } from '../../common/types/animation'
 
 const positionToStyle = (position: Position) => ({ left: position.x, top: position.y })
 
+// TODO: need to make it so that dimension, source, and destination isn't required or vice versa
+
 export default function Window({
   title,
   dimension,
