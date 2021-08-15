@@ -54,7 +54,7 @@ const _randomizePath = (lowerBound: Position, upperBound: Position, leftOff?: Sn
   updateRemainingEdges(edges, start, lowerBound, upperBound)
   const endingEdge = edges[getRandomInt(0, edges.length)]
   const { randomize } = EDGES[endingEdge]
-  end = randomize(lowerBound, upperBound, 2/3)
+  end = randomize(lowerBound, upperBound, 4/5)
 
   return { start, end }
 }
@@ -133,5 +133,5 @@ const EDGES = {
 }
 
 const findEdge = (position: Position, lowerBound: Position, upperBound: Position) => (
-  Object.keys(EDGES).find((key) => EDGES[key].isEdge(position, lowerBound, upperBound))
+  Object.keys(EDGES).find((key) => EDGES[key].isEdge(position, lowerBound, upperBound)) || 'LEFT'
 )
