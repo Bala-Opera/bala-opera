@@ -4,12 +4,7 @@ import Draggable from 'react-draggable';
 
 import styles from './window.module.scss'
 import Header from '../Header/header'
-
-type Dimension = {
-  width?: number,
-  height? :number,
-}
-type Position = { x: number, y: number }
+import { Dimension, Position } from '../../common/types/animation'
 
 const positionToStyle = (position: Position) => ({ left: position.x, top: position.y })
 
