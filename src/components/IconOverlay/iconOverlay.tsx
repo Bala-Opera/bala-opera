@@ -37,8 +37,6 @@ export default function IconOverlay({
   const iconIndexPool = useRef<Array<number>>(initializePool())
   const mediaSize = useMediaQuery()
 
-  console.log(mediaSize)
-
   const updateIconAnimation = (isPreviousIncluded: boolean = false) => {
     const previousConfig = isPreviousIncluded ? previousAnimation.current : null
     const config = generateAnimationConfig(

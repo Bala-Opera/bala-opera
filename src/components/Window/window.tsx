@@ -16,7 +16,10 @@ type DraggableData = {
 
 const positionToStyle = (position: Position) => ({ left: position.x, top: position.y })
 
-// TODO: need to make it so that dimension, source, and destination isn't required or vice versa
+/*
+TODO:
+- add buttons at the bottom of the what?
+*/
 
 export default function Window({
   title,
@@ -30,70 +33,75 @@ export default function Window({
   children,
 }: {
   title: string,
-  dimension: Dimension,
-  source: Position,
-  destination: Position,
   isOpen: boolean,
+  dimension?: Dimension,
+  source?: Position,
+  destination?: Position,
   isFullscreen?: boolean,
   animationDuration?: number,
   clickHandler: MouseEventHandler,
   children?: React.ReactNode,
 }) {
   const [delta, setDelta] = useState({ x: 0, y: 0 })
+  const canAnimate = dimension && source && destination
+  let windowOpenStyle = useSpring({})
+  let headerStyle = useSpring({})
+  let contentStyle = useSpring({})
 
-  const windowOpenStyle = useSpring({
-    from: {
-      width: 0,
-      height: 0,
-      ...positionToStyle(source),
-      translateX: delta.x,
-      translateY: delta.y,
-    },
-    to: {
-      ...dimension,
-      ...positionToStyle(destination),
-    },
-    reverse: !isOpen,
-    config: { duration: animationDuration },
-  })
-
-  const headerStyle = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1, cursor: 'move' },
-    delay: animationDuration + 300,
-  })
-  const contentStyle = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    delay: animationDuration + 400,
-  })
-
-  console.log(windowOpenStyle)
+  if (canAnimate) {
+    windowOpenStyle = useSpring({
+      from: {
+        width: 0,
+        height: 0,
+        ...positionToStyle(source),
+        translateX: delta.x,
+        translateY: delta.y,
+      },
+      to: {
+        ...dimension,
+        ...positionToStyle(destination),
+      },
+      reverse: !isOpen,
+      config: { duration: animationDuration },
+    })
+    headerStyle = useSpring({
+      from: { opacity: 0 },
+      to: { opacity: 1, cursor: 'move' },
+      delay: animationDuration + 300,
+    })
+    contentStyle = useSpring({
+      from: { opacity: 0 },
+      to: { opacity: 1 },
+      delay: animationDuration + 400,
+    })
+  }
 
   const handleStop = (e: DraggableEvent, data: DraggableData) => {
     const { x, y } = data
     setDelta({ x: -1 * x, y: -1 * y })
   }
 
-  return (
-    <Draggable handle='#header' onStop={handleStop}>
-      <animated.div
-        className={`${styles.window} ${isFullscreen ? styles.fullscreen : ''}`}
-        style={windowOpenStyle}
-      >
-        <animated.div style={headerStyle} id='header'>
-          {isOpen && (
-            <Header title={title} minimizeHandler={clickHandler} />
-          )}
-        </animated.div>
+  return isFullscreen || !canAnimate
+    ? (isOpen && <div className={styles.fullscreen}>
+        <Header title={title} minimizeHandler={clickHandler} />
         <div className={`${styles.content} ${isOpen && styles.contentPadding}`}>
-          {isOpen && (
-            <animated.div style={contentStyle}>
-              {children}
-            </animated.div>
-          )}
+          {children}
         </div>
-      </animated.div>
-    </Draggable>
-  );
+      </div>)
+    : (<Draggable handle='#header' onStop={handleStop}>
+        <animated.div className={styles.window} style={windowOpenStyle}>
+          <animated.div style={headerStyle} id='header'>
+            {isOpen && (
+              <Header title={title} minimizeHandler={clickHandler} />
+            )}
+          </animated.div>
+          <div className={`${styles.content} ${isOpen && styles.contentPadding}`}>
+            {isOpen && (
+              <animated.div style={contentStyle}>
+                {children}
+              </animated.div>
+            )}
+          </div>
+        </animated.div>
+    </Draggable>);
 }

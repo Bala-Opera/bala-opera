@@ -8,6 +8,8 @@ import styles from './index.module.scss'
 import Copy from '../copy/homepage'
 import IconOverlay from '../components/IconOverlay/iconOverlay'
 import useWindowSize from '../common/hooks/useWindowSize'
+import useMediaQuery, { MEDIA_SIZES } from '../common/hooks/useMediaQuery'
+import { Dimension } from '../common/types/animation'
 
 const CONFIG = {
   iconOverlay: {
@@ -17,8 +19,17 @@ const CONFIG = {
       interval: 20000, // 20 seconds
     },
   },
-  whatWindow : {
-    sourcePadding: 64,
+  whatWindow: {
+    title: 'What?',
+    dimension: { width: 929, height: 566 }, // fixed dimension for lg screens
+    getSource: (window: Dimension) => window ? ({
+      x: window.width - 64,
+      y: window.height - 64,
+    }) : null,
+    getDestination: (window: Dimension) => window ? ({
+      x: (window.width - CONFIG.whatWindow.dimension.width) / 2,
+      y: 120,
+    }) : null,
   }
 }
 
@@ -27,6 +38,8 @@ export default function Home() {
   const [hasUserOpenedWhat, setHasUserOpenedWhat] = useState(false)
   const [isWhatOpen, setIsWhatOpen] = useState(false)
   const windowDimension = useWindowSize()
+  const mediaSize = useMediaQuery()
+
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
     setHasUserOpenedWhat(true)
@@ -61,20 +74,12 @@ export default function Home() {
 
       {hasUserOpenedWhat && (
       <Window
-        title="What?"
-        dimension={{ width: 929, height: 566 }}
-        source={windowDimension
-          ? {
-              x: windowDimension.width - CONFIG.whatWindow.sourcePadding,
-              y: windowDimension.height - CONFIG.whatWindow.sourcePadding,
-            }
-          :  { x: 0, y: 0}
-        }
-        destination={windowDimension
-          ? { x: (windowDimension.width / 2) - (929 / 2), y: 120 }
-          : { x: 0, y: 0}
-        }
+        title={CONFIG.whatWindow.title}
+        dimension={CONFIG.whatWindow.dimension}
+        source={CONFIG.whatWindow.getSource(windowDimension)}
+        destination={CONFIG.whatWindow.getDestination(windowDimension)}
         isOpen={isWhatOpen}
+        isFullscreen={mediaSize !== MEDIA_SIZES.lg}
         clickHandler={whatButtonHandler}
       >
         <div className={styles.whatDescription}>
