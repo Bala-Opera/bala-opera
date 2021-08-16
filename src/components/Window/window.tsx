@@ -54,7 +54,6 @@ export default function Window({
       ...positionToStyle(destination),
     },
     reverse: !isOpen,
-    // reset: !isOpen,
     config: { duration: animationDuration },
   })
 

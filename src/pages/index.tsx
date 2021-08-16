@@ -1,6 +1,5 @@
 import Head from 'next/head'
-
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import Button from '../components/Button/button'
 import Dropdown from '../components/Dropdown/dropdown'
@@ -8,7 +7,7 @@ import Window from '../components/Window/window'
 import styles from './index.module.scss'
 import Copy from '../copy/homepage'
 import IconOverlay from '../components/IconOverlay/iconOverlay'
-import { getWindowDimensions } from '../common/utils/dom'
+import useWindowSize from '../common/hooks/useWindowSize'
 
 const CONFIG = {
   iconOverlay: {
@@ -26,20 +25,12 @@ const CONFIG = {
 export default function Home() {
   /* What? */
   const [hasUserOpenedWhat, setHasUserOpenedWhat] = useState(false)
-  const [windowDimension, setWindowDimension] = useState(null)
   const [isWhatOpen, setIsWhatOpen] = useState(false)
+  const windowDimension = useWindowSize()
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
     setHasUserOpenedWhat(true)
   }
-
-  useEffect(() => {
-    setWindowDimension(getWindowDimensions(window))
-    const handleResize = () => {
-      setWindowDimension(getWindowDimensions(window))
-    }
-    window.addEventListener('resize', handleResize)
-  }, [])
 
   return (
     <>

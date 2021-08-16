@@ -7,6 +7,7 @@ import { generateAnimationConfig } from '../../common/animations/floating'
 import { AnimationConfig, Mechanics } from '../../common/types/animation'
 import { getRandomInt } from "../../common/utils/random"
 import { getWindowDimensions } from '../../common/utils/dom'
+import useMediaQuery, { MEDIA_SIZES } from '../../common/hooks/useMediaQuery'
 
 const ICON_DIMENSIONS = {
   lg: { width: 715, height: 402 },
@@ -29,46 +30,20 @@ export default function IconOverlay({
   totalIconCount: number,
   mechanics: Mechanics,
 }) {
-  
-const initializePool = () => Array.from(Array(totalIconCount).keys())
-
-  /* Floating Icon */
-  const [screenSize, setScreenSize] = useState('none')
+  const initializePool = () => Array.from(Array(totalIconCount).keys())
   const [iconIndex, setIconIndex] = useState(null)
   const [iconAnimation, setIconAnimation] = useState(null)
   const previousAnimation = useRef<AnimationConfig>(null)
   const iconIndexPool = useRef<Array<number>>(initializePool())
+  const mediaSize = useMediaQuery()
 
-  const mediaMapping = {
-    sm: {
-      query: '(max-width: 768px)',
-      handler: (e: MediaQueryListEvent) => (e.matches) && setScreenSize('sm'),
-    },
-    md: {
-      query: '(min-width: 768px) and (max-width: 992px)',
-      handler: (e: MediaQueryListEvent) => (e.matches) && setScreenSize('md'),
-    },
-    lg: {
-      query:  '(min-width: 992px)',
-      handler: (e: MediaQueryListEvent) => (e.matches) && setScreenSize('lg'),
-    },
-  }
-
-  const updateIconSizing = () => Object.keys(mediaMapping).map((key) => {
-    const { query, handler } = mediaMapping[key]
-    const media = window.matchMedia(query)
-    media.addEventListener('change', handler)
-    if (media.matches) {
-      setScreenSize(key)
-    }
-    return { media, handler }
-  });
+  console.log(mediaSize)
 
   const updateIconAnimation = (isPreviousIncluded: boolean = false) => {
     const previousConfig = isPreviousIncluded ? previousAnimation.current : null
     const config = generateAnimationConfig(
       mechanics,
-      ICON_DIMENSIONS[screenSize],
+      ICON_DIMENSIONS[mediaSize],
       getWindowDimensions(window),
       previousConfig,
     )
@@ -89,16 +64,7 @@ const initializePool = () => Array.from(Array(totalIconCount).keys())
   }
 
   useEffect(() => {
-    const watchMedias = updateIconSizing()
-    return () => {
-      watchMedias.forEach(({ media, handler }) => {
-        media.removeEventListener('change', handler)
-      })
-    }
-  }, [])
-
-  useEffect(() => {
-    if (screenSize === 'none') return
+    if (mediaSize === MEDIA_SIZES.default) return
     updateIconAnimation()
     updateIconSource()
 
@@ -109,7 +75,7 @@ const initializePool = () => Array.from(Array(totalIconCount).keys())
     return () => {
       clearInterval(interval)
     }
-  }, [screenSize])
+  }, [mediaSize])
 
   const animation = useSpring(iconAnimation)
 
@@ -119,7 +85,7 @@ const initializePool = () => Array.from(Array(totalIconCount).keys())
         id='icon'
         src={`/images/icon-${iconIndex}.png`}
         priority
-        {...ICON_DIMENSIONS[screenSize]}
+        {...ICON_DIMENSIONS[mediaSize]}
         // icon is decorative, so no alt provided
       />
     </animated.div>
