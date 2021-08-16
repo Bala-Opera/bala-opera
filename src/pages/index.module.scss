@@ -66,3 +66,16 @@
     flex-direction: row-reverse;
   }
 }
+
+.whatDescription {
+  color: $white-primary;
+  @include small-body; 
+
+  @include md {
+    @include medium-body; 
+  }
+}
+
+.whatDescription > div {
+  margin-bottom: 32px;
+}

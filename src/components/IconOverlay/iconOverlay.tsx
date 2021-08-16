@@ -6,17 +6,13 @@ import styles from './iconOverlay.module.scss'
 import { generateAnimationConfig } from '../../common/animations/floating'
 import { AnimationConfig, Mechanics } from '../../common/types/animation'
 import { getRandomInt } from "../../common/utils/random"
+import { getWindowDimensions } from '../../common/utils/dom'
 
 const ICON_DIMENSIONS = {
   lg: { width: 715, height: 402 },
   md: { width: 475, height: 276 },
   sm: { width: 256, height: 144 },
   none: { width: 0, height: 0 },
-}
-
-const getWindowDimensions = (window: Window) => {
-  const { innerWidth, innerHeight } = window
-  return { width: innerWidth, height: innerHeight }
 }
 
 const getRandomIndexFromPool = (pool: Array<number>) => {
