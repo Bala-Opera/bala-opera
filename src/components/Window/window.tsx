@@ -68,11 +68,13 @@ export default function Window({
       from: { opacity: 0 },
       to: { opacity: 1, cursor: 'move' },
       delay: animationDuration + 300,
+      reverse: !isOpen,
     })
     contentStyle = useSpring({
       from: { opacity: 0 },
       to: { opacity: 1 },
       delay: animationDuration + 400,
+      reverse: !isOpen,
     })
   }
 

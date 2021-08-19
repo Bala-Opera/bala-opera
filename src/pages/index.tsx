@@ -21,7 +21,7 @@ const CONFIG = {
   },
   whatWindow: {
     title: 'What?',
-    dimension: { width: 929, height: 566 }, // fixed dimension for lg screens
+    dimension: { width: 929, height: 614 }, // fixed dimension for lg screens
     getSource: (window: Dimension) => window ? ({
       x: window.width - 64,
       y: window.height - 64,
@@ -30,7 +30,15 @@ const CONFIG = {
       x: (window.width - CONFIG.whatWindow.dimension.width) / 2,
       y: 120,
     }) : null,
-  }
+  },
+  whatSocial: {
+    url: 'https://www.instagram.com/balaopera/',
+    text: '@bala_opera',
+  },
+  whatMailingList: { // 40px padding
+    text: 'Join Mailing List',
+    placeholder: 'Your email here',
+  },
 }
 
 export default function Home() {
@@ -43,6 +51,9 @@ export default function Home() {
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
     setHasUserOpenedWhat(true)
+  }
+  const socialButtonHandler = () => {
+    window.open(CONFIG.whatSocial.url, '_blank').focus();
   }
 
   return (
@@ -85,6 +96,16 @@ export default function Home() {
         <div className={styles.whatDescription}>
           <div>{Copy.WHAT[0]}</div>
           <div>{Copy.WHAT[1]}</div>
+        </div>
+        <div className={styles.whatFooter}>
+          <Button
+            text={CONFIG.whatSocial.text}
+            clickHandler={socialButtonHandler}
+          />
+          <Button
+            text={CONFIG.whatMailingList.text}
+            clickHandler={() => { console.log('Join!') }}
+          />
         </div>
       </Window>)}
 

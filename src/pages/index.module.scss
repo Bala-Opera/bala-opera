@@ -79,3 +79,32 @@
 .whatDescription > div {
   margin-bottom: 32px;
 }
+
+.whatFooter {
+  position: fixed;
+  display: inline-flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 16px;
+
+  @include md {
+    padding: 24px;
+  }
+
+  @include lg {
+    padding: 0;
+    position: relative;
+    flex-direction: row-reverse;
+    margin-top: 36px;
+  }
+}
+
+.whatFooter > Button:first-child {
+  @include lg {
+    order: 1;
+  }
+}

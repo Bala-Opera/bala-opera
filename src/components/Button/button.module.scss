@@ -24,3 +24,7 @@
 .button:hover {
   opacity: 0.9;
 }
+
+.button:active {
+  @include important;
+}
