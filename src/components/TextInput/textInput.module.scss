@@ -2,13 +2,31 @@
 @import '../../styles/colors.module.scss';
 @import '../../styles/fonts.module.scss';
 
+.container {
+  padding: 24px 0;
+  @include md {
+    padding: 32px 16px;
+  }
+  @include lg {
+    padding: 0px;
+  }
+}
+
 .input {
   border: 1px solid #FFF;
   padding: 12px 24px;
   caret-color: $blue-primary;
+  width: 210px;
+  height: 50px;
+
   @include small-label;
   @include md {
     @include medium-label;
+    width: 410px;
+    height: 53px;
+  }
+  @include lg {
+    width: 257px;
   }
 }
 
@@ -16,10 +34,15 @@
   cursor: pointer;
   border: 1px solid #FFF;
   padding: 12px;
+  width: 94px;
+  height: 50px;  
+
   @include default;
   @include small-label;
-  @include md {
+  @include md { 
     @include medium-label;
+    width: 111px;
+    height: 53px;
   }
 }
 

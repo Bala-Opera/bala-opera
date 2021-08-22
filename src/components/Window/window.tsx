@@ -16,11 +16,6 @@ type DraggableData = {
 
 const positionToStyle = (position: Position) => ({ left: position.x, top: position.y })
 
-/*
-TODO:
-- add buttons at the bottom of the what?
-*/
-
 export default function Window({
   title,
   dimension,

@@ -1,15 +1,18 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import Button from '../components/Button/button'
 import Dropdown from '../components/Dropdown/dropdown'
+import TextInput from '../components/TextInput/textInput'
 import Window from '../components/Window/window'
+import IconOverlay from '../components/IconOverlay/iconOverlay'
+
 import styles from './index.module.scss'
 import Copy from '../copy/homepage'
-import IconOverlay from '../components/IconOverlay/iconOverlay'
 import useWindowSize from '../common/hooks/useWindowSize'
 import useMediaQuery, { MEDIA_SIZES } from '../common/hooks/useMediaQuery'
 import { Dimension } from '../common/types/animation'
+import { server } from '../config/server'
 
 const CONFIG = {
   iconOverlay: {
@@ -35,16 +38,62 @@ const CONFIG = {
     url: 'https://www.instagram.com/balaopera/',
     text: '@bala_opera',
   },
-  whatMailingList: { // 40px padding
+  whatMailingList: {
+    id: 'mailingListButton',
     text: 'Join Mailing List',
     placeholder: 'Your email here',
+    getDimension: (mediaSize: string) => {
+      const dimensions = {
+        lg: { width: 438, height: 122 },
+        md: { width: 608, height: 163 },
+        sm: { width: 346, height: 125 },
+      }
+      return dimensions[mediaSize]
+    },
+    getSource: (document: HTMLDocument, mediaSize: string) => {
+      const target = document.querySelector(`#${CONFIG.whatMailingList.id}`)
+      if (target) {
+        const { left, top, width, height } = target.getBoundingClientRect()
+        const x = left + width / 2
+        const y = top + height / 2
+        const mappingFunctions = {
+          lg: { x, y: y - 100 },
+          md: { x, y: y - 100 },
+          sm: { x: x - 20, y: y - 100 },
+        }
+        return mappingFunctions[mediaSize]
+      }
+      console.log(document.body.clientWidth, document.body.clientHeight)
+      return { width: document.body.clientWidth, height: document.body.clientHeight }
+    },
+    getDestination: (document: HTMLDocument, mediaSize: string) => {
+      const target = document.querySelector(`#${CONFIG.whatMailingList.id}`)
+      if (target) {
+        const { left, top } = target.getBoundingClientRect()
+        const mappingFunctions = {
+          lg: { x: left - 150, y: top - 200 },
+          md: { x: left - 450, y: top - 250 },
+          sm: { x: left - 220, y: top - 220 },
+        }
+        return mappingFunctions[mediaSize]
+      }
+      return { width: document.body.clientWidth, height: document.body.clientHeight }
+    }
   },
+}
+const STATUS = {
+  none: 'NONE',
+  success: 'SUCCESS',
+  error: 'ERROR'
 }
 
 export default function Home() {
-  /* What? */
   const [hasUserOpenedWhat, setHasUserOpenedWhat] = useState(false)
   const [isWhatOpen, setIsWhatOpen] = useState(false)
+  const [hasUserOpenedMailingList, setHasUserOpenedMailingList] = useState(false)
+  const [isMailingListOpen, setIsMailingListOpen] = useState(false)
+  const [isSubmittingMailingList, setIsSubmittingMailingList] = useState(false)
+  const [mailingListStatus, setMailingListStatus] = useState(STATUS.none)
   const windowDimension = useWindowSize()
   const mediaSize = useMediaQuery()
 
@@ -52,8 +101,44 @@ export default function Home() {
     setIsWhatOpen(!isWhatOpen)
     setHasUserOpenedWhat(true)
   }
+  const mailingListWindowButtonHandler = () => {
+    setIsMailingListOpen(!isMailingListOpen)
+    setHasUserOpenedMailingList(true)
+  }
   const socialButtonHandler = () => {
     window.open(CONFIG.whatSocial.url, '_blank').focus();
+  }
+
+  const addToMailingList = async (email: string) => {
+    const response = await fetch(`${server}/api/mailing-list`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: `{ "email": "${email}" }`,
+    })
+    setIsSubmittingMailingList(true)
+
+    response.json().then(res => {
+      if (res.data) {
+        setMailingListStatus(STATUS.success)
+      } else {
+        setMailingListStatus(STATUS.error)
+      }
+    }).catch(error => {
+      setMailingListStatus(STATUS.error)
+    }).finally(() => {
+      setIsSubmittingMailingList(false)
+      setMailingListStatus(STATUS.none)
+    })
+  }
+
+  let mailingListSource = { x: 0, y: 0 }
+  let mailingListDestination = { x: 0, y: 0 }
+  if (hasUserOpenedMailingList) {
+    mailingListSource = CONFIG.whatMailingList.getSource(document, mediaSize)
+    mailingListDestination = CONFIG.whatMailingList.getDestination(document, mediaSize)
   }
 
   return (
@@ -98,16 +183,45 @@ export default function Home() {
           <div>{Copy.WHAT[1]}</div>
         </div>
         <div className={styles.whatFooter}>
-          <Button
-            text={CONFIG.whatSocial.text}
-            clickHandler={socialButtonHandler}
-          />
-          <Button
-            text={CONFIG.whatMailingList.text}
-            clickHandler={() => { console.log('Join!') }}
-          />
+          <div>
+            <Button
+              text={CONFIG.whatSocial.text}
+              clickHandler={socialButtonHandler}
+            />
+          </div>
+          <div id={CONFIG.whatMailingList.id}>
+            <Button
+              text={CONFIG.whatMailingList.text}
+              clickHandler={mailingListWindowButtonHandler}
+              isImportant={isMailingListOpen}
+            />
+          </div>
         </div>
       </Window>)}
+
+      {hasUserOpenedMailingList && (
+        <Window
+          title={CONFIG.whatMailingList.text}
+          isOpen={isMailingListOpen}
+          dimension={CONFIG.whatMailingList.getDimension(mediaSize)}
+          source={mailingListSource}
+          destination={mailingListDestination}
+          clickHandler={mailingListWindowButtonHandler}
+        >
+          <TextInput
+            name={CONFIG.whatMailingList.text}
+            placeholder={CONFIG.whatMailingList.placeholder}
+            submitHandler={addToMailingList}
+            isSubmitting={isSubmittingMailingList}
+            isSuccess={mailingListStatus === STATUS.success}
+            isError={mailingListStatus === STATUS.error}
+          />
+        </Window>
+      )}
+
+      <video playsInline autoPlay muted loop poster="./videos/homepage-1.png" className={styles.background}>
+        <source src="./videos/homepage-1.mp4" type="video/mp4" />
+      </video>
 
       <style global jsx>{`
         html, body {

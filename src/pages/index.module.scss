@@ -103,8 +103,19 @@
   }
 }
 
-.whatFooter > Button:first-child {
+.whatFooter > div:first-child {
   @include lg {
     order: 1;
   }
+}
+
+.background {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -999;
+  pointer-events: none;
 }
