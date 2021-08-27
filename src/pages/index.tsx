@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import Button from '../components/Button/button'
 import Dropdown from '../components/Dropdown/dropdown'
@@ -13,8 +13,12 @@ import useWindowSize from '../common/hooks/useWindowSize'
 import useMediaQuery, { MEDIA_SIZES } from '../common/hooks/useMediaQuery'
 import { Dimension } from '../common/types/animation'
 import { server } from '../config/server'
+import { getRandomInt, createIndexArray } from '../common/utils/random'
 
 const CONFIG = {
+  background: {
+    totalVideos: 33,
+  },
   iconOverlay: {
     totalIconCount: 11, // icon-0 to icon-10
     mechanics: {
@@ -63,7 +67,6 @@ const CONFIG = {
         }
         return mappingFunctions[mediaSize]
       }
-      console.log(document.body.clientWidth, document.body.clientHeight)
       return { width: document.body.clientWidth, height: document.body.clientHeight }
     },
     getDestination: (document: HTMLDocument, mediaSize: string) => {
@@ -81,6 +84,7 @@ const CONFIG = {
     }
   },
 }
+
 const STATUS = {
   none: 'NONE',
   success: 'SUCCESS',
@@ -88,12 +92,16 @@ const STATUS = {
 }
 
 export default function Home() {
+  const initVideoSources = () => createIndexArray(CONFIG.background.totalVideos)
+
   const [hasUserOpenedWhat, setHasUserOpenedWhat] = useState(false)
   const [isWhatOpen, setIsWhatOpen] = useState(false)
   const [hasUserOpenedMailingList, setHasUserOpenedMailingList] = useState(false)
   const [isMailingListOpen, setIsMailingListOpen] = useState(false)
   const [isSubmittingMailingList, setIsSubmittingMailingList] = useState(false)
   const [mailingListStatus, setMailingListStatus] = useState(STATUS.none)
+  const [videoSources, setVideoSources] = useState(initVideoSources())
+  const nextVideo = useRef(null)
   const windowDimension = useWindowSize()
   const mediaSize = useMediaQuery()
 
@@ -140,6 +148,45 @@ export default function Home() {
     mailingListSource = CONFIG.whatMailingList.getSource(document, mediaSize)
     mailingListDestination = CONFIG.whatMailingList.getDestination(document, mediaSize)
   }
+
+  const getNextVideo = () => {
+    const index = getRandomInt(0, videoSources.length)
+    const source = videoSources.splice(index, 1)[0]
+    if (videoSources.length) {
+      setVideoSources(videoSources)
+    } else {
+      setVideoSources(initVideoSources())
+    }
+    return `./videos/homepage-${source}.mp4`
+  }
+  const playVideo = (videoSource?: string) => {
+    if (!videoSource) {
+      videoSource = getNextVideo()
+    }
+    const video = document.querySelector('#backgroundVideo') as HTMLVideoElement
+    video.setAttribute('src', videoSource)
+    video.play()
+  }
+  const loadVideo = async () => {
+    const video = document.querySelector('#preloadVideo') as HTMLVideoElement
+    const source = getNextVideo()
+    video.setAttribute('src', source)
+    video.load()
+    nextVideo.current = source
+  }
+  const videoEndedHandler = () => {
+    playVideo(nextVideo.current)
+    loadVideo()
+  }
+  
+  useEffect(() => {
+    playVideo()
+    loadVideo()
+    document.querySelector('#backgroundVideo').addEventListener('ended', videoEndedHandler, false);
+    return () => {
+      document.querySelector('#backgroundVideo').removeEventListener('ended', videoEndedHandler, false);
+    }
+  }, [])
 
   return (
     <>
@@ -219,9 +266,8 @@ export default function Home() {
         </Window>
       )}
 
-      <video playsInline autoPlay muted loop poster="./videos/homepage-1.png" className={styles.background}>
-        <source src="./videos/homepage-1.mp4" type="video/mp4" />
-      </video>
+      <video playsInline muted className={styles.background} id="backgroundVideo" />
+      <video muted className={styles.preload} id="preloadVideo" />
 
       <style global jsx>{`
         html, body {
