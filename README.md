@@ -9,6 +9,19 @@ $ git clone https://github.com/daniellehu/bala-opera.git
 $ cd bala-opera/src
 ```
 
+There are some files not committed to the repository that you'll have to manually add:
+1. Local environment file
+    - You'll need access to the secrets in GCP (message me to be added to project)
+    ```
+    $ cd bala-opera/src/
+    $ cp .env.local.template .env.local
+    ```
+
+2. Videos for homepage background (work in progress to make this process better)
+    - You'll need access to the drive folder where the videos are stored
+    - Will also need to place them in `src/public/videos` (create the directory)
+    - Add the files in and rename to match `./videos/homepage-{a number [0,32]}.mp4`
+
 ### Running Locally
 ```
 $ npm install
