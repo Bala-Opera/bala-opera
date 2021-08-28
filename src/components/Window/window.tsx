@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import { useSpring, animated } from 'react-spring'
+import { useState, MouseEventHandler } from 'react'
+import { useSpring, useTransition, animated } from 'react-spring'
 import Draggable, { DraggableEvent } from 'react-draggable'
 
 import styles from './window.module.scss'
 import Header from '../Header/header'
 import { Dimension, Position } from '../../common/types/animation'
-import { MouseEventHandler } from 'react'
 
 type DraggableData = {
   node: HTMLElement,
@@ -43,6 +42,19 @@ export default function Window({
   let headerStyle = useSpring({})
   let contentStyle = useSpring({})
 
+  const applySlideOpen = useTransition(isOpen, {
+    from: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
+    enter: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
+    leave: { opacity: 0, transform: 'translate3d(0, 0%, 0)' },
+    reset: true,
+  })
+  const applySlideClosed = useTransition(isOpen, {
+    from: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
+    enter: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
+    leave: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
+    reset: true,
+  })
+
   if (canAnimate) {
     windowOpenStyle = useSpring({
       from: {
@@ -73,18 +85,24 @@ export default function Window({
     })
   }
 
+  const FullScreen = (style) => (
+    <animated.div className={styles.fullscreen} style={{ ...style }}>
+      <div className={styles.fullscreen}>
+        <Header title={title} minimizeHandler={clickHandler} />
+        <div className={`${styles.content} ${isOpen && styles.contentPadding}`}>
+          {children}
+        </div>
+      </div>
+    </animated.div>
+    )
+
   const handleStop = (e: DraggableEvent, data: DraggableData) => {
     const { x, y } = data
     setDelta({ x: -1 * x, y: -1 * y })
   }
 
   return isFullscreen || !canAnimate
-    ? (isOpen && <div className={styles.fullscreen}>
-        <Header title={title} minimizeHandler={clickHandler} />
-        <div className={`${styles.content} ${isOpen && styles.contentPadding}`}>
-          {children}
-        </div>
-      </div>)
+    ? (isOpen ? applySlideOpen(FullScreen) : applySlideClosed(FullScreen))
     : (<Draggable handle='#header' onStop={handleStop}>
         <animated.div className={styles.window} style={windowOpenStyle}>
           <animated.div style={headerStyle} id='header'>

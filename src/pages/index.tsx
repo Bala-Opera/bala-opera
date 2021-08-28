@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react'
 
 import Button from '../components/Button/button'
 import Dropdown from '../components/Dropdown/dropdown'
@@ -25,6 +26,12 @@ const CONFIG = {
       duration: 15000, // 15 seconds
       interval: 20000, // 20 seconds
     },
+  },
+  issues: {
+    getPath: (name: string) => (`/issue/${name}`),
+    options: [
+      { value: '0', displayText: 'Issue 0', link: '/issue/0' },
+    ],
   },
   whatWindow: {
     title: 'What?',
@@ -104,6 +111,7 @@ export default function Home() {
   const nextVideo = useRef(null)
   const windowDimension = useWindowSize()
   const mediaSize = useMediaQuery()
+  const router = useRouter()
 
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
@@ -149,6 +157,12 @@ export default function Home() {
     mailingListDestination = CONFIG.whatMailingList.getDestination(document, mediaSize)
   }
 
+  const handleIssueSelection = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    event.preventDefault()
+    router.push(CONFIG.issues.getPath(value))
+  }
+
   const getNextVideo = () => {
     const index = getRandomInt(0, videoSources.length)
     const source = videoSources.splice(index, 1)[0]
@@ -182,9 +196,10 @@ export default function Home() {
   useEffect(() => {
     playVideo()
     loadVideo()
-    document.querySelector('#backgroundVideo').addEventListener('ended', videoEndedHandler, false);
+    const backgroundVideo = document.querySelector('#backgroundVideo')
+    backgroundVideo.addEventListener('ended', videoEndedHandler, false);
     return () => {
-      document.querySelector('#backgroundVideo').removeEventListener('ended', videoEndedHandler, false);
+      backgroundVideo.removeEventListener('ended', videoEndedHandler, false);
     }
   }, [])
 
@@ -210,8 +225,8 @@ export default function Home() {
         /></div><div>
         <Dropdown
           name='Issues'
-          options={[{ value: 'Issue 0', displayText: 'Issue 0' }]}
-          changeHandler={() => {}}
+          options={CONFIG.issues.options}
+          changeHandler={handleIssueSelection}
         /></div>
       </div>
 

@@ -6,6 +6,12 @@ import UpArrow from '../../public/images/up.svg'
 
 type Option = { value: string, displayText: string };
 
+const Option = (option: Option) => (
+  <option className={`${styles.option} ${styles.default}`} value={option.value}>
+    {option.displayText}
+  </option>
+)
+
 export default function Dropdown({
   name,
   options,
@@ -31,16 +37,10 @@ export default function Dropdown({
         onClick={toggleOpen}
         onChange={changeHandler}
         className={styles.default}
+        defaultValue=""
       >
-        {options.map((option) => (
-          <option
-            key={option.value}
-            className={`${styles.option} ${styles.default}`}
-            value={option.value}
-          >
-            {option.displayText}
-          </option>
-        ))}
+        <option value="" disabled style={{ display: 'none' }}>{`Issue${options.length > 1 ? 's' : ''}`}</option>
+        {options.map((option) => <Option key={option.value} {...option} />)}
       </select>
       <div className={`${styles.default} ${styles.arrowContainer}`}>
         {doesArrowPointDown ? <DownArrow /> : <UpArrow />}
