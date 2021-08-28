@@ -11,7 +11,7 @@ type DraggableData = {
   x: number, y: number,
   deltaX: number, deltaY: number,
   lastX: number, lastY: number
-};
+}
 
 const positionToStyle = (position: Position) => ({ left: position.x, top: position.y })
 
@@ -23,6 +23,7 @@ export default function Window({
   isOpen,
   isFullscreen = false,
   animationDuration = 400,
+  isFade = false,
   clickHandler,
   children,
 }: {
@@ -33,6 +34,7 @@ export default function Window({
   destination?: Position,
   isFullscreen?: boolean,
   animationDuration?: number,
+  isFade?: boolean,
   clickHandler: MouseEventHandler,
   children?: React.ReactNode,
 }) {
@@ -42,18 +44,32 @@ export default function Window({
   let headerStyle = useSpring({})
   let contentStyle = useSpring({})
 
-  const applySlideOpen = useTransition(isOpen, {
-    from: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
-    enter: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
-    leave: { opacity: 0, transform: 'translate3d(0, 0%, 0)' },
-    reset: true,
-  })
-  const applySlideClosed = useTransition(isOpen, {
-    from: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
-    enter: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
-    leave: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
-    reset: true,
-  })
+  const applyOpen = useTransition(isOpen, isFade
+    ? {
+        from: { opacity: 0, },
+        enter: { opacity: 1, },
+        leave: { opacity: 1, },
+        reset: true,
+      }
+    : {
+        from: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
+        enter: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
+        leave: { opacity: 0, transform: 'translate3d(0, 0%, 0)' },
+        reset: true,
+      })
+  const applyClosed = useTransition(isOpen, isFade
+    ? {
+        from: { opacity: 0, },
+        enter: { opacity: 1, },
+        leave: { opacity: 1, },
+        reset: true,
+      }
+    : {
+        from: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
+        enter: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
+        leave: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
+        reset: true,
+      })
 
   if (canAnimate) {
     windowOpenStyle = useSpring({
@@ -102,7 +118,7 @@ export default function Window({
   }
 
   return isFullscreen || !canAnimate
-    ? (isOpen ? applySlideOpen(FullScreen) : applySlideClosed(FullScreen))
+    ? (isOpen ? applyOpen(FullScreen) : applyClosed(FullScreen))
     : (<Draggable handle='#header' onStop={handleStop}>
         <animated.div className={styles.window} style={windowOpenStyle}>
           <animated.div style={headerStyle} id='header'>

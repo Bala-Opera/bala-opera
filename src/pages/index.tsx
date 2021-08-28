@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react'
 
 import Button from '../components/Button/button'
