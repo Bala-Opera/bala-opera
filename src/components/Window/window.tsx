@@ -52,12 +52,14 @@ export default function Window({
         enter: { opacity: 1, },
         leave: { opacity: 1, },
         reset: true,
+        config: { duration: animationDuration },
       }
     : {
         from: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
         enter: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
         leave: { opacity: 0, transform: 'translate3d(0, 0%, 0)' },
         reset: true,
+        config: { duration: animationDuration },
       })
   const applyClosed = useTransition(isOpen, isFade
     ? {
@@ -65,12 +67,14 @@ export default function Window({
         enter: { opacity: 0, },
         leave: { opacity: 0, },
         reset: true,
+        config: { duration: animationDuration },
       }
     : {
         from: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
         enter: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
         leave: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
         reset: true,
+        config: { duration: animationDuration },
       })
 
   if (canAnimate) {

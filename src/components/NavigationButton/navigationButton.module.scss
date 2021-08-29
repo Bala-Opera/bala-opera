@@ -1,0 +1,45 @@
+@import '../../styles/breakpoints.module.scss';
+@import '../../styles/colors.module.scss';
+@import '../../styles/fonts.module.scss';
+
+.navigationButton {
+  display: inline-flex;
+  justify-content: space-between;
+  height: 44px;
+  @include md {
+    height: 52px;
+  }
+}
+
+.navigationButton:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.navigationText {
+  margin: 0;
+  padding: 14px;
+  position: relative;
+  color: $white-primary;
+  @include medium-label;
+  border: 1px solid $white-primary;
+}
+
+.arrowContainer {
+  border: 1px solid $white-primary;
+  padding: 15px;
+  position: relative;
+  display: inline-block;
+
+  @include md {
+    padding: 17px;
+  }
+}
+
+.important {
+  @include important;
+}
+
+.default {
+  @include default;
+}

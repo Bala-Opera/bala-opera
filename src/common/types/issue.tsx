@@ -19,6 +19,7 @@ export type Content =
 }
 
 export type Data = {
+  id: string,
   path: string,
   title: string,
   displayTitle: string,

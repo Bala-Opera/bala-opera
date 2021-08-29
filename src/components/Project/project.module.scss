@@ -3,9 +3,9 @@
 @import '../../styles/fonts.module.scss';
 
 .project {
-  padding: 80px 0;
+  padding: 80px 0 60px;
   @include lg {
-    padding: 120px;
+    padding: 120px 0 80px;
   }
 }
 
@@ -33,4 +33,37 @@
   @include lg {
     margin-bottom: 30px;
   }
+}
+
+.links {
+  margin-top: 60px;
+  margin-bottom: 30px;
+  text-align: center;
+  @include small-body;
+  @include md {
+    margin-top: 150px;
+    @include medium-body;
+  }
+}
+.link {
+  color: $cyan-secondary;
+}
+.link:hover {
+  opacity: 0.9;
+}
+.separator {
+  color: $gray-primary;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  margin-bottom: 80px;
+}
+
+.button {
+  flex: 1;
+}
+.nextButton {
+  text-align: end;
 }

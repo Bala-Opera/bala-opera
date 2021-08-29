@@ -12,7 +12,7 @@
 
 .button {
   text-align: center;
-  border: solid 1px #FFF;
+  border: solid 1px $white-primary;
   padding: 12px 16px;
   cursor: pointer;
   @include small-label;
