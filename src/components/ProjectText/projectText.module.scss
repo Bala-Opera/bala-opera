@@ -1,0 +1,12 @@
+@import '../../styles/breakpoints.module.scss';
+@import '../../styles/colors.module.scss';
+@import '../../styles/fonts.module.scss';
+
+.text {
+  text-align: center;
+  color: $white-primary;
+  @include medium-body;
+  @include md {
+    @include big-body;
+  }
+}

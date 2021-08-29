@@ -77,15 +77,16 @@ $colors: (1: $green-primary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta-s
 }
 
 .button {
-  margin-top: 97px;
+  margin-top: 57px;
   position: relative;
   width: 100%;
   text-align: center;
   @include md {
-    position: fixed;
-    bottom: 64px;
+    margin-top: 34px;
+    margin-bottom: 120px;
   }
   @include lg {
-    bottom: 80px;
+    margin-top: 64px;
+    margin-bottom: 120px;
   }
 }
