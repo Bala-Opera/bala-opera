@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react'
 
 import Button from '../components/Button/button'
@@ -36,7 +35,7 @@ const CONFIG = {
   },
   whatWindow: {
     title: 'What?',
-    dimension: { width: 929, height: 614 }, // fixed dimension for lg screens
+    dimension: { width: 929, height: 584 }, // fixed dimension for lg screens
     getSource: (window: Dimension) => window ? ({
       x: window.width - 64,
       y: window.height - 64,
@@ -56,7 +55,7 @@ const CONFIG = {
     placeholder: 'Your email here',
     getDimension: (mediaSize: string) => {
       const dimensions = {
-        lg: { width: 438, height: 122 },
+        lg: { width: 458, height: 122 },
         md: { width: 608, height: 163 },
         sm: { width: 346, height: 125 },
       }

@@ -6,6 +6,12 @@
 }
 
 .content {
+  background-color: $black-secondary;
+  height: 100%;
+  width: 100%;
+}
+
+.scrollableContent {
   overflow-y: auto;
   background-color: $black-secondary;
   height: 100%;

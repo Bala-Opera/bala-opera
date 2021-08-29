@@ -24,6 +24,7 @@ export default function Window({
   isFullscreen = false,
   animationDuration = 400,
   isFade = false,
+  isScrollable = false,
   clickHandler,
   children,
 }: {
@@ -35,6 +36,7 @@ export default function Window({
   isFullscreen?: boolean,
   animationDuration?: number,
   isFade?: boolean,
+  isScrollable?: boolean,
   clickHandler: MouseEventHandler,
   children?: React.ReactNode,
 }) {
@@ -59,9 +61,9 @@ export default function Window({
       })
   const applyClosed = useTransition(isOpen, isFade
     ? {
-        from: { opacity: 0, },
-        enter: { opacity: 1, },
-        leave: { opacity: 1, },
+        from: { opacity: 1, },
+        enter: { opacity: 0, },
+        leave: { opacity: 0, },
         reset: true,
       }
     : {
@@ -105,7 +107,7 @@ export default function Window({
     <animated.div className={styles.fullscreen} style={{ ...style }}>
       <div className={styles.fullscreen}>
         <Header title={title} minimizeHandler={clickHandler} />
-        <div className={`${styles.content} ${isOpen && styles.contentPadding}`}>
+        <div className={`${isOpen && styles.contentPadding} ${isScrollable ? styles.scrollableContent : styles.content}`}>
           {children}
         </div>
       </div>
@@ -126,7 +128,8 @@ export default function Window({
               <Header title={title} minimizeHandler={clickHandler} />
             )}
           </animated.div>
-          <div className={`${styles.content} ${isOpen && styles.contentPadding}`}>
+          <div className={
+            `${isOpen && styles.contentPadding} ${isScrollable ? styles.scrollableContent : styles.content}`}>
             {isOpen && (
               <animated.div style={contentStyle}>
                 {children}

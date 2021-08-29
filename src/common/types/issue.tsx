@@ -11,10 +11,11 @@ export type Link = {
   href: string,
 }
 
-export type Content = {
+export type Content = 
+{
   id: string,
   Component: typeof ProjectText | typeof ProjectImage,
-  props: object,
+  props: any,
 }
 
 export type Data = {
