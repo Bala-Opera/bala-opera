@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 import useMediaQuery, { MEDIA_SIZES } from '../../common/hooks/useMediaQuery'
-import LeftArrow from '../../public/images/left.svg'
-import RightArrow from '../../public/images/right.svg'
+import LeftArrow from '../../public/images/icons/left.svg'
+import RightArrow from '../../public/images/icons/right.svg'
 import styles from './navigationButton.module.scss'
 
 export default function NavigationButton({

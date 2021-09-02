@@ -15,6 +15,7 @@ const ICON_DIMENSIONS = {
   sm: { width: 256, height: 144 },
   none: { width: 0, height: 0 },
 }
+const GET_ICON_PATH = (iconId: string) => `/images/icons/icon-${iconId}.png`
 
 const getRandomIndexFromPool = (pool: Array<number>) => {
   const copy = [...pool]
@@ -81,7 +82,7 @@ export default function IconOverlay({
     <animated.div className={styles.animation} style={animation}>
       <Image
         id='icon'
-        src={`/images/icon-${iconIndex}.png`}
+        src={GET_ICON_PATH(iconIndex)}
         priority
         {...ICON_DIMENSIONS[mediaSize]}
         // icon is decorative, so no alt provided

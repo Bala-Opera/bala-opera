@@ -19,6 +19,7 @@ import { getRandomInt, createIndexArray } from '../common/utils/random'
 const CONFIG = {
   background: {
     totalVideos: 33,
+    getPath: (videoId: number) => `./videos/homepage/homepage-${videoId}.mp4`
   },
   iconOverlay: {
     totalIconCount: 11, // icon-0 to icon-10
@@ -171,7 +172,7 @@ export default function Home() {
     } else {
       setVideoSources(initVideoSources())
     }
-    return `./videos/homepage-${source}.mp4`
+    return CONFIG.background.getPath(source)
   }
   const playVideo = (videoSource?: string) => {
     if (!videoSource) {

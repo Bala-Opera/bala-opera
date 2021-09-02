@@ -1,4 +1,7 @@
 module.exports = {
+  images: {
+    domains: ['localhost'],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -12,7 +15,6 @@ module.exports = {
       net: 'empty',
       tls: 'empty',
     }
-
     return config;
   }
 };

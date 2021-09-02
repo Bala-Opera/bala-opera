@@ -1,8 +1,8 @@
 import { ChangeEventHandler, useState } from 'react'
 import styles from './dropdown.module.scss'
 
-import DownArrow from '../../public/images/down.svg'
-import UpArrow from '../../public/images/up.svg'
+import DownArrow from '../../public/images/icons/down.svg'
+import UpArrow from '../../public/images/icons/up.svg'
 
 type Option = { value: string, displayText: string };
 
