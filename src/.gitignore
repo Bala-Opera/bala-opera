@@ -31,5 +31,3 @@ yarn-error.log*
 
 # videos
 /public/videos/
-/public/fonts/NON-Natural-Grotesk-Regular.otf
-/public/images/issues/
