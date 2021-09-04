@@ -9,7 +9,14 @@ export default function ProjectImage({
 }) {
   return (
     <div className={styles.outer}>
-      <Image loader={() => src} src={src} layout="fill" objectFit="contain" className={styles.image} />
+      <Image
+        loader={() => src}
+        src={src}
+        layout="fill"
+        objectFit="contain"
+        loading="eager"
+        className={styles.image}
+      />
     </div>
   )
 }
