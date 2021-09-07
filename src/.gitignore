@@ -31,3 +31,6 @@ yarn-error.log*
 
 # videos
 /public/videos/
+!/public/videos/homepage-0.mp4
+!/public/videos/homepage-1.mp4
+!/public/videos/homepage-2.mp4

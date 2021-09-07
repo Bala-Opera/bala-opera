@@ -18,7 +18,7 @@ import { getRandomInt, createIndexArray } from '../common/utils/random'
 
 const CONFIG = {
   background: {
-    totalVideos: 33,
+    totalVideos: 3, // 33
     getPath: (videoId: number) => `./videos/homepage/homepage-${videoId}.mp4`
   },
   iconOverlay: {
@@ -62,7 +62,7 @@ const CONFIG = {
       }
       return dimensions[mediaSize]
     },
-    getSource: (document: HTMLDocument, mediaSize: string) => {
+    getSource: (document: Document, mediaSize: string) => {
       const target = document.querySelector(`#${CONFIG.whatMailingList.id}`)
       if (target) {
         const { left, top, width, height } = target.getBoundingClientRect()
@@ -77,7 +77,7 @@ const CONFIG = {
       }
       return { width: document.body.clientWidth, height: document.body.clientHeight }
     },
-    getDestination: (document: HTMLDocument, mediaSize: string) => {
+    getDestination: (document: Document, mediaSize: string) => {
       const target = document.querySelector(`#${CONFIG.whatMailingList.id}`)
       if (target) {
         const { left, top } = target.getBoundingClientRect()
@@ -165,8 +165,11 @@ export default function Home() {
   }
 
   const getNextVideo = () => {
-    const index = getRandomInt(0, videoSources.length)
-    const source = videoSources.splice(index, 1)[0]
+    // const index = getRandomInt(0, videoSources.length) // RANDOM VIDEO
+    const index = 0 // SEQUENTIAL VIDEO
+    let source = videoSources.splice(index, 1)[0]
+    if (source === undefined)
+      source = 0
     if (videoSources.length) {
       setVideoSources(videoSources)
     } else {
