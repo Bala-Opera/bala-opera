@@ -14,7 +14,7 @@ import useWindowSize from '../common/hooks/useWindowSize'
 import useMediaQuery, { MEDIA_SIZES } from '../common/hooks/useMediaQuery'
 import { Dimension } from '../common/types/animation'
 import { server } from '../config/server'
-import { getRandomInt, createIndexArray } from '../common/utils/random'
+import { createIndexArray } from '../common/utils/random'
 
 const CONFIG = {
   background: {
@@ -89,7 +89,15 @@ const CONFIG = {
         return mappingFunctions[mediaSize]
       }
       return { width: document.body.clientWidth, height: document.body.clientHeight }
-    }
+    },
+    getErrorDimension: (mediaSize: string) => {
+      const dimensions = {
+        lg: { width: 458, height: 210 },
+        md: { width: 608, height: 210 },
+        sm: { width: 346, height: 194 },
+      }
+      return dimensions[mediaSize]
+    },
   },
 }
 
@@ -102,6 +110,7 @@ const STATUS = {
 export default function Home() {
   const initVideoSources = () => createIndexArray(CONFIG.background.totalVideos)
 
+  /// [hasUserOpenedWhat] is used to keep animation open for closing animation
   const [hasUserOpenedWhat, setHasUserOpenedWhat] = useState(false)
   const [isWhatOpen, setIsWhatOpen] = useState(false)
   const [hasUserOpenedMailingList, setHasUserOpenedMailingList] = useState(false)
@@ -116,11 +125,20 @@ export default function Home() {
 
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
-    setHasUserOpenedWhat(true)
+    if (isWhatOpen) {
+      setTimeout(() => setHasUserOpenedWhat(false), 500)
+    } else {
+      setHasUserOpenedWhat(true)
+    }
   }
   const mailingListWindowButtonHandler = () => {
+    setMailingListStatus(STATUS.none)
     setIsMailingListOpen(!isMailingListOpen)
-    setHasUserOpenedMailingList(true)
+    if (isMailingListOpen) {
+      setTimeout(() => setHasUserOpenedMailingList(false), 500)
+    } else {
+      setHasUserOpenedMailingList(true)
+    }
   }
   const socialButtonHandler = () => {
     window.open(CONFIG.whatSocial.url, '_blank').focus();
@@ -147,7 +165,6 @@ export default function Home() {
       setMailingListStatus(STATUS.error)
     }).finally(() => {
       setIsSubmittingMailingList(false)
-      setMailingListStatus(STATUS.none)
     })
   }
 
@@ -269,19 +286,26 @@ export default function Home() {
         <Window
           title={CONFIG.whatMailingList.text}
           isOpen={isMailingListOpen}
-          dimension={CONFIG.whatMailingList.getDimension(mediaSize)}
+          dimension={mailingListStatus === STATUS.error
+            ? CONFIG.whatMailingList.getErrorDimension(mediaSize)
+            : CONFIG.whatMailingList.getDimension(mediaSize)}
           source={mailingListSource}
           destination={mailingListDestination}
           clickHandler={mailingListWindowButtonHandler}
         >
-          <TextInput
-            name={CONFIG.whatMailingList.text}
-            placeholder={CONFIG.whatMailingList.placeholder}
-            submitHandler={addToMailingList}
-            isSubmitting={isSubmittingMailingList}
-            isSuccess={mailingListStatus === STATUS.success}
-            isError={mailingListStatus === STATUS.error}
-          />
+          {mailingListStatus === STATUS.success
+          ? <p className={styles.successMailing}>You've joined our mailing list.</p>
+          : <>
+              <TextInput
+                name={CONFIG.whatMailingList.text}
+                placeholder={CONFIG.whatMailingList.placeholder}
+                submitHandler={addToMailingList}
+                isSubmitting={isSubmittingMailingList}
+              />
+              {mailingListStatus === STATUS.error &&
+              <p className={styles.errorMailing}>Your email could not be added. Please try again.</p>}
+            </>
+          }
         </Window>
       )}
 

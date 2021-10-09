@@ -123,3 +123,45 @@
 .preload {
   display: none;
 }
+
+.successMailing {
+  color: $gray-primary;
+  @include small-body; 
+  margin: 24px 0;
+
+  @include md {
+    @include medium-body;
+  }
+  @include lg {
+    margin: 12px 0;
+  }
+}
+
+.errorMailing {
+  color: $pink-primary;
+  @include small-body; 
+  margin: 0;
+
+  @include md {
+    @include medium-body;
+    margin-left: 16px;
+  }
+  @include lg {
+    margin: 24px 0;
+  }
+
+  opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 500ms;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

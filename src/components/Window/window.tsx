@@ -41,7 +41,7 @@ export default function Window({
   children?: React.ReactNode,
 }) {
   const [delta, setDelta] = useState({ x: 0, y: 0 })
-  const canAnimate = dimension && source && destination
+  const canAnimate = source && destination && dimension
   let windowOpenStyle = useSpring({})
   let headerStyle = useSpring({})
   let contentStyle = useSpring({})
@@ -51,14 +51,12 @@ export default function Window({
         from: { opacity: 0, },
         enter: { opacity: 1, },
         leave: { opacity: 1, },
-        reset: true,
         config: { duration: animationDuration },
       }
     : {
         from: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
         enter: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
         leave: { opacity: 0, transform: 'translate3d(0, 0%, 0)' },
-        reset: true,
         config: { duration: animationDuration },
       })
   const applyClosed = useTransition(isOpen, isFade
@@ -66,14 +64,12 @@ export default function Window({
         from: { opacity: 1, },
         enter: { opacity: 0, },
         leave: { opacity: 0, },
-        reset: true,
         config: { duration: animationDuration },
       }
     : {
         from: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
         enter: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
         leave: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
-        reset: true,
         config: { duration: animationDuration },
       })
 
