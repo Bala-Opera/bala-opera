@@ -16,6 +16,7 @@
   height: 100%;
   width: 88px;
   font-size: 24px;
+  font-weight: 400;
   @include medium-label;
 
   @include md {
@@ -68,11 +69,11 @@
 }
 
 .whatDescription {
-  color: $white-primary;
+  color: $gray-primary;
   @include small-body; 
 
   @include md {
-    @include medium-body; 
+    @include medium-body;
   }
 }
 
