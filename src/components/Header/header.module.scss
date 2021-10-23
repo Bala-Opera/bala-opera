@@ -27,18 +27,25 @@
 .minimize {
   width: 44px;
   height: 44px;
-  font-size: 24px;
   border: none;
   cursor: pointer;
 
   @include md {
     width: 52px;
     height: 52px;
-    font-size: 36px;
   }
   @include default;
 }
 
 .minimize:hover {
-  opacity: 0.9;
+  @include important;
+
+  .minimizeIcon {
+    fill: $yellow-primary;
+  }
 }
+
+.minimizeIcon {
+  fill: $blue-primary;
+}
+
