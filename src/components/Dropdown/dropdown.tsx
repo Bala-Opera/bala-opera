@@ -1,9 +1,6 @@
 import { ChangeEventHandler, useState } from 'react'
 import styles from './dropdown.module.scss'
 
-import DownArrow from '../../public/images/icons/down.svg'
-import UpArrow from '../../public/images/icons/up.svg'
-
 type Option = { value: string, displayText: string };
 
 const Option = (option: Option) => (
@@ -36,15 +33,12 @@ export default function Dropdown({
         name={name}
         onClick={toggleOpen}
         onChange={changeHandler}
-        className={styles.default}
+        className={`${styles.select} ${doesArrowPointDown ? styles.arrowDown : styles.arrowUp}`}
         defaultValue=""
       >
         <option value="" disabled style={{ display: 'none' }}>{`Issue${options.length > 1 ? 's' : ''}`}</option>
         {options.map((option) => <Option key={option.value} {...option} />)}
       </select>
-      <div className={`${styles.default} ${styles.arrowContainer}`}>
-        {doesArrowPointDown ? <DownArrow /> : <UpArrow />}
-      </div>
     </div>
   )
 }
