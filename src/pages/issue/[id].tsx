@@ -33,24 +33,29 @@ export default function Issue({ name, overview } : {
       isFullscreen
     >
       <div className={styles.container}>
-        <div className={styles.concept}>
-          <h3>[  CONCEPT  ]</h3>
-          <p>{overview.concept}</p>
+        <div className={styles.content}>
+          <div className={styles.concept}>
+            <h3>[  CONCEPT  ]</h3>
+            <p>{overview.concept}</p>
+          </div>
+          <div className={styles.line}>
+            ---------------------------------------------------------------------------------------------------
+          </div>
+          <div className={styles.participants}>
+            <h3>[  PARTICIPANTS  ]</h3>
+            <p>
+              {overview.participants.map((participant, index) => (
+                <span key={participant} className={styles[`color-${index + 1}`]}>
+                  {index > 0 ? (<span className={styles.separator}> / </span>) : ''}{participant}
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
-        <div className={styles.participants}>
-          <h3>[  PARTICIPANTS  ]</h3>
-          <p>
-            {overview.participants.map((participant, index) => (
-              <span key={participant} className={styles[`color-${index + 1}`]}>
-                {index > 0 ? (<span className={styles.separator}> / </span>) : ''}{participant}
-              </span>
-            ))}
-          </p>
-        </div>
-      </div>
-      <div className={styles.button}>
+        <div className={styles.button}>
           <Button text="Enter" clickHandler={()=>console.log('enters')} />
         </div>
+      </div>
     </Window>
   )
 }

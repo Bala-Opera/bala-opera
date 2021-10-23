@@ -3,63 +3,80 @@
 @import '../../styles/fonts.module.scss';
 
 .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
   @include small-label;
   padding: 0 18px;
+  max-width: 1280px;
+  width: 100%;
+  margin: auto 0;
 
   @include md {
     @include medium-label;
     padding: 0 24px;
   }
+
   @include lg {
     padding: 0 152px;
-    padding-top: 25px;
   }
 }
 
 .concept {
-  padding: 47px 0;
-  border-bottom: 3pt $gray-primary dotted;
-  @include md {
-    padding: 72px 0;
-  }
   @include lg {
-    padding: 80px 0;
     display: flex;
   }
 }
 .concept > h3 {
   color: $white-primary;
+  font-weight: 400;
+  @include medium-body;
   @include lg {
     flex: 2;
   }
 }
 .concept > p {
   color: $gray-primary;
+  font-weight: 400;
+  @include medium-body;
   @include lg {
     flex: 3;
   }
 }
 
 .participants {
-  padding: 47px 0;
-  @include md {
-    padding: 72px 0;
-  }
   @include lg {
-    padding: 80px 0;
     display: flex;
   }
 }
 .participants > h3 {
   color: $white-primary;
+  font-weight: 400;
+  @include medium-body;
   @include lg {
     flex: 2;
   }
 }
 .participants > p {
+  font-weight: 400;
+  @include medium-body;
   @include lg {
     flex: 3;
   }
+}
+
+.line {
+  @include medium-body;
+  color: $gray-primary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  margin: 12px 0;
 }
 
 $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta-secondary, 5: $cyan-secondary, 6: $mustard-primary, 7: $green-primary);
@@ -72,21 +89,12 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 }
 
 .separator {
-  color: $white-primary;
+  color: $gray-primary;
   padding: 0 6px;
 }
 
 .button {
-  margin-top: 57px;
-  position: relative;
   width: 100%;
+  margin-bottom: 100px;
   text-align: center;
-  @include md {
-    margin-top: 34px;
-    margin-bottom: 120px;
-  }
-  @include lg {
-    margin-top: 64px;
-    margin-bottom: 120px;
-  }
 }
