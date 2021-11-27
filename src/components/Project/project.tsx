@@ -43,7 +43,7 @@ export default function Project({
             data.links.map((link, index) => (
               <>
                 {index > 0 && <span key={`/${link.href}`} className={styles.separator}> / </span>}
-                <a key={link.href} className={styles.link} href={link.href}>{link.displayName}</a>
+                <a key={link.href} className={styles.link} href={link.href} target="_blank">{link.displayName}</a>
               </>
             ))
           }

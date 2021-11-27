@@ -23,8 +23,8 @@ export default {
         { id: 'text', Component: ProjectText, props: { text: 'This is a dramatized portrayal of how it felt to be 25 yet still sad to hear that my mama threw away all my toys, my dear peach-fuzzed Calico Critter babies.' }, },
       ],
       links: [
-        { displayName: 'Website', href: 'https://google.com' },
-        { displayName: 'Instagram', href: 'https://instagram.com' },
+        { displayName: 'Website', href: 'http://ogskinman.com/' },
+        { displayName: 'Instagram', href: 'https://www.instagram.com/og.skinman/' },
       ],
     },
     'WCC': {
@@ -38,8 +38,8 @@ export default {
              { Component: ProjectVideo, props: { src: `${server}/videos/issue/0/wcc.mp4`, type: 'video/mp4' }},
           ],
           links: [
-            { displayName: 'Website', href: 'https://google.com' },
-            { displayName: 'Instagram', href: 'https://instagram.com' },
+            { displayName: 'Website', href: 'https://wccsnapshots.com' },
+            { displayName: 'Instagram', href: 'https://www.instagram.com/weicchung/?utm_medium=copy_link' },
           ],
     },
     'Helen Shu': {
@@ -52,8 +52,8 @@ export default {
             { id: 'image', Component: ProjectImage, props: { src: `${server}/images/issues/0/helen.jpeg` }, },
           ],
           links: [
-            { displayName: 'Website', href: 'https://google.com' },
-            { displayName: 'Instagram', href: 'https://instagram.com' },
+            { displayName: 'Website', href: 'https://www.shuhelen.com/' },
+            { displayName: 'Instagram', href: 'https://www.instagram.com/suspiciousasianwoman/' },
           ],
     },
     'Ty Van De Zande': {
@@ -66,8 +66,8 @@ export default {
             { id: 'image', Component: ProjectImage, props: { src: `${server}/images/issues/0/ty.png`, } },
           ],
           links: [
-            { displayName: 'Website', href: 'https://google.com' },
-            { displayName: 'Instagram', href: 'https://instagram.com' },
+            { displayName: 'Website', href: 'https://www.bliss.moda/' },
+            { displayName: 'Instagram', href: 'https://www.instagram.com/segel.bliss/' },
           ],
     },
     'Jessica Tsai': {
@@ -83,8 +83,8 @@ export default {
             { id: 'image-4', Component: ProjectImage, props: { src: `${server}/images/issues/0/jessica-4.jpg`, }, },
           ],
           links: [
-            { displayName: 'Website', href: 'https://google.com' },
-            { displayName: 'Instagram', href: 'https://instagram.com' },
+            { displayName: 'Website', href: 'https://www.thejcwt.com/' },
+            { displayName: 'Instagram', href: 'https://www.instagram.com/jcwtthe/' },
           ],
     },
     'Sharon Yu': {
@@ -98,8 +98,8 @@ export default {
             { id: 'image-2', Component: ProjectImage, props: { src: `${server}/images/issues/0/sharon-2.png`, }, },
           ],
           links: [
-            { displayName: 'Website', href: 'https://google.com' },
-            { displayName: 'Instagram', href: 'https://instagram.com' },
+            { displayName: 'Website', href: 'http://www.sharonyu.com/' },
+            { displayName: 'Instagram', href: 'https://www.instagram.com/_sharonyu/' },
           ],
     },
     'Rhea Nayyar': {
@@ -113,8 +113,8 @@ export default {
             { id: 'image-2', Component: ProjectImage, props: { src: `${server}/images/issues/0/rhea-2.jpg`, }, },
           ],
           links: [
-            { displayName: 'Website', href: 'https://google.com' },
-            { displayName: 'Instagram', href: 'https://instagram.com' },
+            { displayName: 'Website', href: 'https://www.rhea-nayyar.com/' },
+            { displayName: 'Instagram', href: 'https://www.instagram.com/sicksadshawty/' },
           ],
     },
   }
