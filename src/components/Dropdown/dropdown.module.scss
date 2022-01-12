@@ -58,3 +58,17 @@
   background-position: right;
   background-repeat: no-repeat;
 }
+
+.arrowDown:hover {
+  background-image: url('../../public/images/icons/dropdown-down-active.png');
+  background-size: 52px;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+.arrowUp:hover {
+  background-image: url('../../public/images/icons/dropdown-up-active.png');
+  background-size: 52px;
+  background-position: right;
+  background-repeat: no-repeat;
+}
