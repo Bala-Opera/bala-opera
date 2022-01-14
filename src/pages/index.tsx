@@ -14,11 +14,11 @@ import useWindowSize from '../common/hooks/useWindowSize'
 import useMediaQuery, { MEDIA_SIZES } from '../common/hooks/useMediaQuery'
 import { Dimension } from '../common/types/animation'
 import { server } from '../config/server'
-import { createIndexArray } from '../common/utils/random'
+import { createIndexArray, getRandomInt } from '../common/utils/random'
 
 const CONFIG = {
   background: {
-    totalVideos: 3, // 33
+    totalVideos: 5,
     getPath: (videoId: number) => `./videos/homepage/homepage-${videoId}.mp4`
   },
   iconOverlay: {
@@ -118,7 +118,6 @@ export default function Home() {
   const [isSubmittingMailingList, setIsSubmittingMailingList] = useState(false)
   const [mailingListStatus, setMailingListStatus] = useState(STATUS.none)
   const [videoSources, setVideoSources] = useState(initVideoSources())
-  const nextVideo = useRef(null)
   const windowDimension = useWindowSize()
   const mediaSize = useMediaQuery()
   const router = useRouter()
@@ -182,8 +181,8 @@ export default function Home() {
   }
 
   const getNextVideo = () => {
-    // const index = getRandomInt(0, videoSources.length) // RANDOM VIDEO
-    const index = 0 // SEQUENTIAL VIDEO
+    const index = getRandomInt(0, videoSources.length) // RANDOM VIDEO
+    // const index = 0 // SEQUENTIAL VIDEO
     let source = videoSources.splice(index, 1)[0]
     if (source === undefined)
       source = 0
@@ -202,26 +201,9 @@ export default function Home() {
     video.setAttribute('src', videoSource)
     video.play()
   }
-  const loadVideo = async () => {
-    const video = document.querySelector('#preloadVideo') as HTMLVideoElement
-    const source = getNextVideo()
-    video.setAttribute('src', source)
-    video.load()
-    nextVideo.current = source
-  }
-  const videoEndedHandler = () => {
-    playVideo(nextVideo.current)
-    loadVideo()
-  }
   
   useEffect(() => {
-    playVideo()
-    loadVideo()
-    const backgroundVideo = document.querySelector('#backgroundVideo')
-    backgroundVideo.addEventListener('ended', videoEndedHandler, false);
-    return () => {
-      backgroundVideo.removeEventListener('ended', videoEndedHandler, false);
-    }
+    // playVideo()
   }, [])
 
   return (
@@ -309,8 +291,7 @@ export default function Home() {
         </Window>
       )}
 
-      <video playsInline muted className={styles.background} id="backgroundVideo" />
-      <video muted className={styles.preload} id="preloadVideo" />
+      {/* <video playsInline muted loop className={styles.background} id="backgroundVideo" /> */}
 
       <style global jsx>{`
         html, body {
