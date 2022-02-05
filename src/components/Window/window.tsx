@@ -1,10 +1,10 @@
-import { useState, MouseEventHandler } from 'react'
-import { useSpring, useTransition, animated } from 'react-spring'
-import Draggable, { DraggableEvent } from 'react-draggable'
+import { useState, useEffect, MouseEventHandler } from 'react'
+import { useSpring, useTransition, animated, config } from 'react-spring'
 
 import styles from './window.module.scss'
 import Header from '../Header/header'
 import { Dimension, Position } from '../../common/types/animation'
+import DragMove from './DragMove'
 
 type DraggableData = {
   node: HTMLElement,
@@ -42,7 +42,7 @@ export default function Window({
 }) {
   const [delta, setDelta] = useState({ x: 0, y: 0 })
   const canAnimate = source && destination && dimension
-  let windowOpenStyle = useSpring({})
+
   let headerStyle = useSpring({})
   let contentStyle = useSpring({})
 
@@ -72,23 +72,30 @@ export default function Window({
         leave: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
         config: { duration: animationDuration },
       })
+  const applyOpenWindow = useTransition(isOpen, {
+    key: 0,
+    from: { width: 0, height: 0, ...positionToStyle(source) },
+    enter: { ...dimension, ...positionToStyle(destination) },
+    config: { ...config.molasses, duration: animationDuration },
+  })
+  const applyCloseWindow = useTransition(isOpen, {
+    key: 0,
+    from: {
+      ...dimension,
+      left: delta.x === 0 ? destination.x : delta.x,
+      top: delta.y === 0 ? destination.y : delta.y,
+    },
+    enter: {
+      ...dimension,
+      left: delta.x === 0 ? destination.x : delta.x,
+      top: delta.y === 0 ? destination.y : delta.y,
+    },
+    update: { width: 0, height: 0, ...positionToStyle(source), },
+    leave: { width: 0, height: 0, ...positionToStyle(source), },
+    config: { duration: animationDuration,  },
+  })
 
   if (canAnimate) {
-    windowOpenStyle = useSpring({
-      from: {
-        width: 0,
-        height: 0,
-        ...positionToStyle(source),
-        translateX: delta.x,
-        translateY: delta.y,
-      },
-      to: {
-        ...dimension,
-        ...positionToStyle(destination),
-      },
-      reverse: !isOpen,
-      config: { duration: animationDuration },
-    })
     headerStyle = useSpring({
       from: { opacity: 0 },
       to: { opacity: 1, cursor: 'move' },
@@ -112,17 +119,27 @@ export default function Window({
         </div>
       </div>
     </animated.div>
-    )
+  )
 
-  const handleStop = (e: DraggableEvent, data: DraggableData) => {
-    const { x, y } = data
-    setDelta({ x: -1 * x, y: -1 * y })
-  }
+  const [translate, setTranslate] = useState({
+    x: 0,
+    y: 0
+  });
 
-  return isFullscreen || !canAnimate
-    ? (isOpen ? applyOpen(FullScreen) : applyClosed(FullScreen))
-    : (<Draggable handle='#header' onStop={handleStop}>
-        <animated.div className={styles.window} style={windowOpenStyle}>
+  const handleDragMove = (e) => {
+    setTranslate({
+      x: translate.x + e.movementX,
+      y: translate.y + e.movementY
+    });
+  };
+
+  const Windowed = (style) => (
+    // <Draggable handle='#header' onStop={handleStop}>
+      <DragMove onDragMove={handleDragMove}>
+        <div style={{
+              transform: `translateX(${translate.x}px) translateY(${translate.y}px)`
+            }}>
+        <animated.div className={styles.window} style={style}>
           <animated.div style={headerStyle} id='header'>
             {isOpen && (
               <Header title={title} minimizeHandler={clickHandler} />
@@ -137,5 +154,37 @@ export default function Window({
             )}
           </div>
         </animated.div>
-    </Draggable>);
+        </div>
+      </DragMove>
+    // </Draggable>
+  )
+
+  const ClosingWindow = (style) => (
+    <animated.div className={styles.window} style={{ ...style, transform: `translateX(${translate.x}px) translateY(${translate.y}px)` }}>
+      <animated.div style={headerStyle} id='header'>
+        {/* <Header title={title} minimizeHandler={clickHandler} /> */}
+      </animated.div>
+      <div className={
+        `${isScrollable ? styles.scrollableContent : styles.content}`}>
+        {/* <animated.div style={contentStyle}>
+          {children}
+        </animated.div> */}
+      </div>
+    </animated.div>
+  )
+
+  useEffect(() => {
+    console.log(delta);
+  }, [delta])
+
+  const handleStop = (e: DraggableEvent, data: DraggableData) => {
+    if (document.getElementById('header')) {
+      const { x, y } = document.getElementById('header').getBoundingClientRect()
+      setDelta({ x, y })
+    }
+  }
+
+  return isFullscreen || !canAnimate
+    ? (isOpen ? applyOpen(FullScreen) : applyClosed(FullScreen))
+    : (isOpen ? applyOpenWindow(Windowed) : applyCloseWindow(ClosingWindow));
 }
