@@ -8,6 +8,7 @@ import { AnimationConfig, Mechanics } from '../../common/types/animation'
 import { getRandomInt } from "../../common/utils/random"
 import { getWindowDimensions } from '../../common/utils/dom'
 import useMediaQuery, { MEDIA_SIZES } from '../../common/hooks/useMediaQuery'
+import { bucket } from '../../config/server'
 
 const ICON_DIMENSIONS = {
   lg: { width: 715, height: 402 },
@@ -15,7 +16,7 @@ const ICON_DIMENSIONS = {
   sm: { width: 256, height: 144 },
   none: { width: 0, height: 0 },
 }
-const GET_ICON_PATH = (iconId: string) => `/images/icons/icon-${iconId}.png`
+const GET_ICON_PATH = (iconId: string) => `${bucket}/images/icons/icon-${iconId}.png`
 
 const getRandomIndexFromPool = (pool: Array<number>) => {
   const copy = [...pool]

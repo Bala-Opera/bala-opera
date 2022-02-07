@@ -2,7 +2,7 @@ import ProjectText from "../../components/ProjectText/projectText"
 import ProjectImage from "../../components/ProjectImage/projectImage"
 import ProjectVideo from "../../components/ProjectVideo/projectVideo"
 
-import { server } from "../../config/server"
+import { bucket } from "../../config/server"
 
 const basePath = '/issue/0'
 
@@ -35,7 +35,7 @@ export default {
           author: 'Wei-Cheng Chung',
           content: [
              { id: 'text', Component: ProjectText, props: { text: 'Sometimes it strikes me realizing the similarity between the COVID situation and my childhood: to live without any other options but the long and dull waiting. Can’t imagine experiencing both of them at the same time.' }, },
-             { Component: ProjectVideo, props: { src: `${server}/videos/issue/0/wcc.mp4`, type: 'video/mp4' }},
+             { Component: ProjectVideo, props: { src: `${bucket}/videos/issue/0/wcc.mp4`, type: 'video/mp4' }},
           ],
           links: [
             { displayName: 'Website', href: 'https://wccsnapshots.com' },
@@ -49,7 +49,7 @@ export default {
           displayTitle: 'Recreational Buddhist Listens to Kanho Yakushiji 10 Times A Day',
           author: 'Helen Shu',
           content: [
-            { id: 'image', Component: ProjectImage, props: { src: `${server}/images/issues/0/helen.jpeg` }, },
+            { id: 'image', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/helen.jpeg` }, },
           ],
           links: [
             { displayName: 'Website', href: 'https://www.shuhelen.com/' },
@@ -63,7 +63,7 @@ export default {
           displayTitle: 'With Ya',
           author: 'Ty Van De Zande',
           content: [
-            { id: 'image', Component: ProjectImage, props: { src: `${server}/images/issues/0/ty.png`, } },
+            { id: 'image', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/ty.png`, } },
           ],
           links: [
             { displayName: 'Website', href: 'https://www.bliss.moda/' },
@@ -77,10 +77,10 @@ export default {
           displayTitle: 'Be Our Guest',
           author: 'Jessica Tsai',
           content: [
-            { id: 'image-1', Component: ProjectImage, props: { src: `${server}/images/issues/0/jessica-1.jpg`, }, },
-            { id: 'image-2', Component: ProjectImage, props: { src: `${server}/images/issues/0/jessica-2.jpg`, }, },
-            { id: 'image-3', Component: ProjectImage, props: { src: `${server}/images/issues/0/jessica-3.jpg`, }, },
-            { id: 'image-4', Component: ProjectImage, props: { src: `${server}/images/issues/0/jessica-4.jpg`, }, },
+            { id: 'image-1', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-1.jpg`, }, },
+            { id: 'image-2', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-2.jpg`, }, },
+            { id: 'image-3', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-3.jpg`, }, },
+            { id: 'image-4', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-4.jpg`, }, },
           ],
           links: [
             { displayName: 'Website', href: 'https://www.thejcwt.com/' },
@@ -94,8 +94,8 @@ export default {
           displayTitle: 'Rested on Water',
           author: 'Sharon Yu',
           content: [
-            { id: 'image-1', Component: ProjectImage, props: { src: `${server}/images/issues/0/sharon-1.png`, }, },
-            { id: 'image-2', Component: ProjectImage, props: { src: `${server}/images/issues/0/sharon-2.png`, }, },
+            { id: 'image-1', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/sharon-1.png`, }, },
+            { id: 'image-2', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/sharon-2.png`, }, },
           ],
           links: [
             { displayName: 'Website', href: 'http://www.sharonyu.com/' },
@@ -109,8 +109,8 @@ export default {
           displayTitle: 'It Only Gets Different (For Allison)',
           author: 'Rhea Nayyar',
           content: [
-            { id: 'image-1', Component: ProjectImage, props: { src: `${server}/images/issues/0/rhea-1.jpg`, }, },
-            { id: 'image-2', Component: ProjectImage, props: { src: `${server}/images/issues/0/rhea-2.jpg`, }, },
+            { id: 'image-1', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/rhea-1.jpg`, }, },
+            { id: 'image-2', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/rhea-2.jpg`, }, },
           ],
           links: [
             { displayName: 'Website', href: 'https://www.rhea-nayyar.com/' },

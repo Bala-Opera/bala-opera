@@ -1,6 +1,9 @@
 module.exports = {
   images: {
-    domains: ['localhost'],
+    domains: [
+      'localhost',
+      'bala-opera.s3.amazonaws.com',
+    ],
   },
   webpack(config) {
     config.module.rules.push({

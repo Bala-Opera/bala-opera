@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { useState, useEffect, useRef, ChangeEvent } from 'react'
+import React, { useState, useEffect, ChangeEvent } from 'react'
 
 import Button from '../components/Button/button'
 import Dropdown from '../components/Dropdown/dropdown'
@@ -13,13 +13,13 @@ import Copy from '../copy/homepage'
 import useWindowSize from '../common/hooks/useWindowSize'
 import useMediaQuery, { MEDIA_SIZES } from '../common/hooks/useMediaQuery'
 import { Dimension } from '../common/types/animation'
-import { server } from '../config/server'
+import { server, bucket } from '../config/server'
 import { createIndexArray, getRandomInt } from '../common/utils/random'
 
 const CONFIG = {
   background: {
     totalVideos: 5,
-    getPath: (videoId: number) => `./videos/homepage/homepage-${videoId}.mp4`
+    getPath: (videoId: number) => `${bucket}/videos/homepage/homepage-${videoId}.mp4`
   },
   iconOverlay: {
     totalIconCount: 11, // icon-0 to icon-10
@@ -181,8 +181,8 @@ export default function Home() {
   }
 
   const getNextVideo = () => {
-    const index = getRandomInt(0, videoSources.length) // RANDOM VIDEO
-    // const index = 0 // SEQUENTIAL VIDEO
+    const index = getRandomInt(1, videoSources.length + 1) // RANDOM VIDEO
+    // const index = 1 // SEQUENTIAL VIDEO
     let source = videoSources.splice(index, 1)[0]
     if (source === undefined)
       source = 0
@@ -203,7 +203,7 @@ export default function Home() {
   }
   
   useEffect(() => {
-    // playVideo()
+    playVideo()
   }, [])
 
   return (
@@ -291,7 +291,7 @@ export default function Home() {
         </Window>
       )}
 
-      {/* <video playsInline muted loop className={styles.background} id="backgroundVideo" /> */}
+      <video playsInline muted loop className={styles.background} id="backgroundVideo" />
 
       <style global jsx>{`
         html, body {
