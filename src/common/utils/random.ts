@@ -5,5 +5,5 @@ export function getRandomInt(min: number, max: number) { // [min, max)
 }
 
 export function createIndexArray (total: number) {
-  return Array.from(Array(total).keys())
+  return Array.from(Array(total).keys()).map(number => number + 1)
 }

@@ -181,7 +181,7 @@ export default function Home() {
   }
 
   const getNextVideo = () => {
-    const index = getRandomInt(1, videoSources.length + 1) // RANDOM VIDEO
+    const index = getRandomInt(0, videoSources.length) // RANDOM VIDEO
     // const index = 1 // SEQUENTIAL VIDEO
     let source = videoSources.splice(index, 1)[0]
     if (source === undefined)
