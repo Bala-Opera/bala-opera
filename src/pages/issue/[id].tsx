@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 import Window from '../../components/Window/window'
 import Button from '../../components/Button/button'
+import MobileLoading from '../../components/MobileLoading/mobileLoading'
 
 import styles from './issue.module.scss'
 import Issue_0 from '../../copy/issue/0'
@@ -16,29 +17,41 @@ type Overview = {
   participants: Array<string>,
 }
 
+type IssueView = "info" | "rotate" | "project"
+
 export default function Issue({ name, overview } : {
   name: string,
   overview: Overview,
 }) {
-  const [inOverview, setInOverview] = useState(false)
+  const [issueState, setIssueState] = useState<IssueView>("info")
   const [isOpen, setIsOpen] = useState(true)
   const router = useRouter()
+  const windowDimension = useBrowserSize()
+  const tooNarrow = windowDimension && windowDimension.width < 540
+
   const handleMinimize = () => {
     setIsOpen(false)
     setTimeout(() => router.back(), 200)
   }
   const handleEnter = () => {
-    setInOverview(true)
+    setIssueState(tooNarrow ? "rotate" : "project")
   }
 
-  const windowDimension = useBrowserSize()
+  useEffect(() => {
+    if (issueState === "rotate" && !tooNarrow) {
+      setIssueState("project")
+    }
+  }, [issueState, tooNarrow])
 
-  if (inOverview) {
+  if (issueState === "rotate" || (issueState === "project" && tooNarrow)) {
+    return <MobileLoading />
+  }
+  if (issueState === "project") {
     return (
       <div>
         <OverviewGraphics width={windowDimension.width} height={windowDimension.height}/>
         <div style={{position:"absolute", left: 0, bottom: 0, margin: 32}}>
-          <Button text="Exit" clickHandler={() => setInOverview(false)}/>
+          <Button text="Exit" clickHandler={() => setIssueState("info")}/>
         </div>
       </div>
     )
@@ -342,7 +355,7 @@ const OverviewGraphics = ({width, height}) => {
           onMouseLeave={() => setHoverId(-1)}
           onClick={() => router.push(Issue_0_entries[i][1].path)}
           transform={`matrix(0.866044 0.499967 -0.866044 0.499967 ${xy})`}
-          y="7.49951" width="198.001" height="198.001" rx="16.7392" stroke="#FFFF99" stroke-width="15"/>
+          y="7.49951" width="198.001" height="198.001" rx="16.7392" stroke="#FFFF99" strokeWidth="15"/>
         ))
       }
     </g>
