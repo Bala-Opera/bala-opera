@@ -98,3 +98,19 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
   margin-bottom: 100px;
   text-align: center;
 }
+
+.glowhole {
+  pointer-events: all;
+  cursor: pointer;
+  opacity: 0;
+  &.hover {
+    opacity: 1;
+  }
+}
+
+.menulink {
+  text-decoration: none;
+  &.hover {
+    text-shadow: 0px 0px 10px #ffff80;
+  }
+}
