@@ -50,6 +50,7 @@ export default function Issue({ name, overview } : {
       clickHandler={handleMinimize}
       isOpen={isOpen}
       isFullscreen
+      isScrollable
     >
       <div className={styles.container}>
         <div className={styles.content}>
