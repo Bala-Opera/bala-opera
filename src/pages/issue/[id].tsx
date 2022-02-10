@@ -467,23 +467,20 @@ const OverviewGraphics = ({width, height}) => {
     </svg>
 
     {isSlidingMenu && (
-      <div style={{position:"absolute", top: 0, right: 0, display: "flex", alignItems: "flex-start"}}>
-        <div style={{padding: 14, backgroundColor: "#111111"}} onClick={() => setMenuOpen(!menuOpen)}>
-          <svg width="16" height="16" viewBox="-3 0 16 16" fill="white">
-            {menuOpen ? (
-              <path d="M9.43982 8.00047L2.27084 0.280029L0.56543 1.98544L6.07921 8.00047L0.56543 14.0155L2.27084 15.7209L9.43982 8.00047Z"/>
-            ) : (
-              <path d="M9.43982 1.98544L7.73441 0.280029L0.56543 8.00047L7.73441 15.7209L9.43982 14.0155L3.92603 8.00047L9.43982 1.98544Z"/>
-            )}
-          </svg>
-        </div>
-        <div style={{
-          backgroundColor: "#111111",
-          height: "100vh",
-          width: menuOpen ? "auto" : 0,
-          overflowX: "hidden"
-        }}>
-          {menu}
+      <div style={{position: "absolute", top: 0, left: 0, bottom: 0, right: 0, overflowX: "hidden"}}>
+        <div className={`${styles.drawer} ${menuOpen ? "" : styles.closed}`} style={{position:"absolute", top: 0, right: 0, display: "flex", alignItems: "flex-start"}}>
+          <div style={{padding: 14, backgroundColor: "#111111"}} onClick={() => setMenuOpen(!menuOpen)}>
+            <svg width="16" height="16" viewBox="-3 0 16 16" fill="white">
+              {menuOpen ? (
+                <path d="M9.43982 8.00047L2.27084 0.280029L0.56543 1.98544L6.07921 8.00047L0.56543 14.0155L2.27084 15.7209L9.43982 8.00047Z"/>
+              ) : (
+                <path d="M9.43982 1.98544L7.73441 0.280029L0.56543 8.00047L7.73441 15.7209L9.43982 14.0155L3.92603 8.00047L9.43982 1.98544Z"/>
+              )}
+            </svg>
+          </div>
+          <div className={styles.menudrawer}>
+            {menu}
+          </div>
         </div>
       </div>
     )}

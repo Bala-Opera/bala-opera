@@ -98,6 +98,19 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
   text-align: center;
 }
 
+.drawer {
+  transition: transform 500ms ease;
+  &.closed {
+    transform: translate(calc(100% - 44px), 0);
+  }
+}
+
+.menudrawer {
+  background-color: #111111;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
 .glowhole {
   pointer-events: all;
   cursor: pointer;
