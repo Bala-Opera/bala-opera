@@ -101,17 +101,22 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 .drawer {
   transition: transform 500ms ease;
   &.closed {
-    transform: translate(calc(100% - 44px), 0);
+    transform: translateX(calc(100% - 44px));
   }
 }
 
+.menulink {
+  transition: all 200ms;
+}
 .menudrawer {
   background-color: #111111;
   height: 100vh;
   overflow-x: hidden;
+  pointer-events: all;
 }
 
 .glowhole {
+  transition: opacity 200ms;
   pointer-events: all;
   cursor: pointer;
   opacity: 0;
@@ -124,5 +129,137 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
   text-decoration: none;
   &.hover {
     text-shadow: 0px 0px 10px #ffff80;
+  }
+}
+
+.staticmenu {
+  width: 568px;
+  height: 712px;
+  transform: translate(var(--dx), var(--dy));
+}
+
+.drawerButton {
+  padding: 14px;
+  background-color: #111111;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.enter {
+  .exitbutton {
+    opacity: 0;
+  }
+  .staticmenu {
+    span {
+      opacity: 0;
+    }
+    width: 100vw;
+    height: 100vh;
+    transform: none;
+  }
+}
+.enterActive {
+  .exitbutton {
+    opacity: 1;
+  }
+  .staticmenu {
+    span {
+      opacity: 1;
+    }
+    transition: all 500ms cubic-bezier(.1,.02,.06,1) 200ms;
+    width: 568px;
+    height: 712px;
+    transform: translate(var(--dx), var(--dy));
+  }
+  .staticmenu span, .exitbutton {
+    transition: opacity 200ms ease 700ms;
+  }
+}
+.windowwrapper {
+  transition: opacity 200ms;
+}
+.exit {
+  &.windowwrapper {
+    opacity: 0;
+  }
+}
+
+.drawerButtonAnimation {
+  animation: enter 700ms cubic-bezier(.1,.02,.06,1);
+  position: absolute;
+  background-color: #111111;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes enter {
+  0% {
+    opacity: 1;
+    width: 100vw;
+    height: 100vh;
+  }
+  30% {
+    opacity: 1;
+    width: 100vw;
+    height: 100vh;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.bobbing {
+  animation: bob 2s alternate infinite ease-in-out calc(var(--bobDelay) * 0.2s);
+}
+
+@keyframes bob {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(+10px);
+  }
+}
+
+.bgRotate {
+  transform-origin:  736px 648px;
+
+  animation: rotateBg 5s infinite linear;
+}
+
+@keyframes rotateBg {
+  to {
+    transform: rotate(6.792deg);
+  }
+}
+
+.sparkle {
+  opacity: 0;
+  transform-origin: 5px 5px;
+  animation:
+    sparkleOpacity calc(var(--sparkle) * 130ms + 2s) alternate infinite ease-in-out calc(var(--sparkle) * 0.2s + 200ms),
+    sparkleRotation calc(var(--sparkle) * 100ms + 2s) infinite linear
+  ;
+}
+
+@keyframes sparkleOpacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes sparkleRotation {
+  100% {
+    transform: rotate(1turn);
   }
 }
