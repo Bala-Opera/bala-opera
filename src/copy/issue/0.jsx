@@ -21,6 +21,7 @@ export default {
       author: 'Cindy Hsu',
       content: [
         { id: 'text', Component: ProjectText, props: { text: 'This is a dramatized portrayal of how it felt to be 25 yet still sad to hear that my mama threw away all my toys, my dear peach-fuzzed Calico Critter babies.' }, },
+        { Component: ProjectVideo, props: { src: `${bucket}/videos/issue/0/cindy.mp4`, type: 'video/mp4' }},
       ],
       links: [
         { displayName: 'Website', href: 'http://ogskinman.com/' },
