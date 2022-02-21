@@ -1,64 +1,59 @@
 // @import 'fonts.module.scss';
 
 $regular: 'NON-Natural-Grotesk-Regular';
-$backup-regular: 'SpaceGrotesk-Regular'; // https://fonts.google.com/specimen/Space+Grotesk
 
 @mixin medium-logo {
-  font-family: $regular, $backup-regular;
+  font-family: $regular;
   font-size: 32px;
   line-height: 40px;
 }
 
 @mixin small-logo {
-  font-family: $regular, $backup-regular;
+  font-family: $regular;
   font-size: 28px;
   line-height: 40px;
 }
 
 @mixin big-label {
-  font-family: $regular, $backup-regular;
+  font-family: $regular;
   font-size: 48px;
   line-height: 60px;
 }
 
 @mixin medium-label {
-  font-family: $regular, $backup-regular;
+  font-family: $regular;
   font-size: 24px;
   line-height: 28px;
 }
 
 @mixin small-label {
-  font-family: $regular, $backup-regular;
+  font-family: $regular;
   font-size: 20px;
   line-height: 24px;
 }
 
 @mixin big-body {
-  font-family: $regular, $backup-regular;
+  font-family: $regular;
   font-size: 48px;
   line-height: 68px;
 }
 
 @mixin medium-body {
-  font-family: $regular, $backup-regular;
+  font-family: $regular;
   font-size: 24px;
   line-height: 36px;
 }
 
 @mixin small-body {
-  font-family: $regular, $backup-regular;
+  font-family: $regular;
   font-size: 20px;
   line-height: 28px;
 }
 
 @font-face {
   font-family: 'NON-Natural-Grotesk-Regular';
-  src: url('../public/fonts/NON-Natural-Grotesk-Regular.otf');
-}
-
-@font-face {
-  font-family: 'SpaceGrotesk-Regular';
-  src: url('../public/fonts/otf/SpaceGrotesk-Regular.otf') format('otf'),
-       url('../public/fonts/ttf/SpaceGrotesk-Regular.ttf') format('woff'),
-       url('../public/fonts/woff2/SpaceGrotesk-Regular.woff2')  format('truetype'),
+  src: url('../public/fonts/ttf/NON-Natural-Grotesk-Regular.ttf'),
+      url('../public/fonts/otf/NON-Natural-Grotesk-Regular.otf'),
+      url('../public/fonts/woff2/NON-Natural-Grotesk-Regular.woff'),
+      url('../public/fonts/woff2/NON-Natural-Grotesk-Regular.woff2');
 }
