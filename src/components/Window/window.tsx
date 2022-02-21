@@ -18,6 +18,7 @@ export default function Window({
   animationDuration = 400,
   isFade = false,
   isScrollable = false,
+  hasContentPadding = true,
   clickHandler,
   children,
 }: {
@@ -30,6 +31,7 @@ export default function Window({
   animationDuration?: number,
   isFade?: boolean,
   isScrollable?: boolean,
+  hasContentPadding?: boolean,
   clickHandler: MouseEventHandler,
   children?: React.ReactNode,
 }) {
@@ -103,11 +105,13 @@ export default function Window({
     })
   }
 
+  const contentPaddingStyle = hasContentPadding ? styles.contentPadding : ''
+
   const FullScreen = (style) => (
     <animated.div className={styles.fullscreen} style={{ ...style }}>
       <div className={styles.fullscreen}>
         <Header title={title} minimizeHandler={clickHandler} />
-        <div className={`${isOpen && styles.contentPadding} ${isScrollable ? styles.scrollableContent : styles.content}`}>
+        <div className={`${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
           {children}
         </div>
       </div>
@@ -125,7 +129,7 @@ export default function Window({
             )}
           </animated.div>
           <div className={
-            `${isOpen && styles.contentPadding} ${isScrollable ? styles.scrollableContent : styles.content}`}>
+            `${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
             {isOpen && (
               <animated.div style={contentStyle}>
                 {children}

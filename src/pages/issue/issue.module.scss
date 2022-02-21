@@ -13,7 +13,6 @@
 .content {
   @include small-label;
   padding: 0 18px;
-  max-width: 1280px;
   width: 100%;
   margin: auto 0;
 
@@ -24,6 +23,10 @@
 
   @include lg {
     padding: 0 152px;
+  }
+
+  @include max {
+    max-width: 1280px;
   }
 }
 

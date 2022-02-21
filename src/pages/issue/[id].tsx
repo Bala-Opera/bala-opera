@@ -31,6 +31,7 @@ export default function Issue({ name, overview } : {
       clickHandler={handleMinimize}
       isOpen={isOpen}
       isFullscreen
+      hasContentPadding={false}
     >
       <div className={styles.container}>
         <div className={styles.content}>
