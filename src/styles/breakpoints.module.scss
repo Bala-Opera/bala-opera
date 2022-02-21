@@ -41,6 +41,7 @@ $screen-max: 1473px;
   }
 }
 
+// Max width from specs
 @mixin max {
   @media (min-width: #{$screen-max}) {
       @content;

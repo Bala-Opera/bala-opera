@@ -1,8 +1,10 @@
 import ProjectText from "../../components/ProjectText/projectText"
 import ProjectImage from "../../components/ProjectImage/projectImage"
 import ProjectVideo from "../../components/ProjectVideo/projectVideo"
+import FavoriteWaterEssay from "./FavoriteWaterEssay"
 
 import { bucket } from "../../config/server"
+import ProjectSpace from "../../components/ProjectSpace/projectSpace"
 
 const basePath = '/issue/0'
 
@@ -20,7 +22,7 @@ export default {
       displayTitle: 'INCINERATED!!!',
       author: 'Cindy Hsu',
       content: [
-        { id: 'text', Component: ProjectText, props: { text: 'This is a dramatized portrayal of how it felt to be 25 yet still sad to hear that my mama threw away all my toys, my dear peach-fuzzed Calico Critter babies.' }, },
+        { id: 'text', Component: ProjectText, props: { customStyles: { margin: '160px 0' }, text: 'This is a dramatized portrayal of how it felt to be 25 yet still sad to hear that my mama threw away all my toys, my dear peach-fuzzed Calico Critter babies.' }, },
         { Component: ProjectVideo, props: { src: `${bucket}/videos/issue/0/cindy.mp4`, type: 'video/mp4' }},
       ],
       links: [
@@ -35,8 +37,8 @@ export default {
           displayTitle: 'Breaking free from Control',
           author: 'Wei-Cheng Chung',
           content: [
-             { id: 'text', Component: ProjectText, props: { text: 'Sometimes it strikes me realizing the similarity between the COVID situation and my childhood: to live without any other options but the long and dull waiting. Can’t imagine experiencing both of them at the same time.' }, },
-             { Component: ProjectVideo, props: { src: `${bucket}/videos/issue/0/wcc.mp4`, type: 'video/mp4' }},
+             { id: 'text', Component: ProjectText, props: { customStyles: { margin: '160px 0' }, text: 'Sometimes it strikes me realizing the similarity between the COVID situation and my childhood: to live without any other options but the long and dull waiting. Can’t imagine experiencing both of them at the same time.' }, },
+             { Component: ProjectVideo, props: { customStyles: { width: '60%' }, src: `${bucket}/videos/issue/0/wcc.mp4`, type: 'video/mp4' }},
           ],
           links: [
             { displayName: 'Website', href: 'https://wccsnapshots.com' },
@@ -50,7 +52,7 @@ export default {
           displayTitle: 'Recreational Buddhist Listens to Kanho Yakushiji 10 Times A Day',
           author: 'Helen Shu',
           content: [
-            { id: 'image', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/helen.jpeg` }, },
+            { id: 'image', Component: ProjectImage, props: { customStyles: { margin: '160px auto' }, src: `${bucket}/images/issues/0/helen.jpeg` }, },
           ],
           links: [
             { displayName: 'Website', href: 'https://www.shuhelen.com/' },
@@ -64,7 +66,7 @@ export default {
           displayTitle: 'With Ya',
           author: 'Ty Van De Zande',
           content: [
-            { id: 'image', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/ty.png`, } },
+            { id: 'image', Component: ProjectImage, props: { customStyles: { margin: '160px auto' }, src: `${bucket}/images/issues/0/ty.png`, } },
           ],
           links: [
             { displayName: 'Website', href: 'https://www.bliss.moda/' },
@@ -78,6 +80,7 @@ export default {
           displayTitle: 'Be Our Guest',
           author: 'Jessica Tsai',
           content: [
+            { id: 'space', Component: ProjectSpace },
             { id: 'image-1', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-1.jpg`, }, },
             { id: 'image-2', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-2.jpg`, }, },
             { id: 'image-3', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-3.jpg`, }, },
@@ -95,8 +98,10 @@ export default {
           displayTitle: 'Rested on Water',
           author: 'Sharon Yu',
           content: [
-            { id: 'image-1', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/sharon-1.png`, }, },
-            { id: 'image-2', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/sharon-2.png`, }, },
+            { id: 'space', Component: ProjectSpace },
+            { id: 'essay', Component: FavoriteWaterEssay },
+            // { id: 'image-1', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/sharon-1.png`, }, },
+            // { id: 'image-2', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/sharon-2.png`, }, },
           ],
           links: [
             { displayName: 'Website', href: 'http://www.sharonyu.com/' },
@@ -110,6 +115,7 @@ export default {
           displayTitle: 'It Only Gets Different (For Allison)',
           author: 'Rhea Nayyar',
           content: [
+            { id: 'space', Component: ProjectSpace },
             { id: 'image-1', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/rhea-1.jpg`, }, },
             { id: 'image-2', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/rhea-2.jpg`, }, },
           ],

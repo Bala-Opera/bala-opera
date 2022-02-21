@@ -37,7 +37,6 @@
 }
 .concept > h3 {
   color: $white-primary;
-  font-weight: 400;
   @include medium-body;
   @include lg {
     flex: 2;
@@ -45,7 +44,6 @@
 }
 .concept > p {
   color: $gray-primary;
-  font-weight: 400;
   @include medium-body;
   @include lg {
     flex: 3;
@@ -59,14 +57,12 @@
 }
 .participants > h3 {
   color: $white-primary;
-  font-weight: 400;
   @include medium-body;
   @include lg {
     flex: 2;
   }
 }
 .participants > p {
-  font-weight: 400;
   @include medium-body;
   @include lg {
     flex: 3;

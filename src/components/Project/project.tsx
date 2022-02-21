@@ -27,6 +27,7 @@ export default function Project({
       isFullscreen
       isFade
       isScrollable
+      hasContentPadding={false}
     >
       <div className={styles.project}>
         <h3 className={styles.displayTitle}>{data.displayTitle}</h3>
