@@ -17,11 +17,6 @@ There are some files not committed to the repository that you'll have to manuall
       $ cp .env.local.template .env.local
       ```
 
-2. Videos for homepage background (work in progress to make this process better)
-    - You'll need access to the drive folder where the videos are stored
-    - Will also need to place them in `src/public/videos` (create the directory)
-    - Add the files in and rename to match `./videos/homepage-{a number [0,32]}.mp4`
-
 ### Running Locally
 ```
 $ npm install

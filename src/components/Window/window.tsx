@@ -1,17 +1,10 @@
 import { useState, MouseEventHandler } from 'react'
 import { useSpring, useTransition, animated } from 'react-spring'
-import Draggable, { DraggableEvent } from 'react-draggable'
 
 import styles from './window.module.scss'
 import Header from '../Header/header'
+import DragMove from './DragMove'
 import { Dimension, Position } from '../../common/types/animation'
-
-type DraggableData = {
-  node: HTMLElement,
-  x: number, y: number,
-  deltaX: number, deltaY: number,
-  lastX: number, lastY: number
-}
 
 const positionToStyle = (position: Position) => ({ left: position.x, top: position.y })
 
@@ -25,6 +18,7 @@ export default function Window({
   animationDuration = 400,
   isFade = false,
   isScrollable = false,
+  hasContentPadding = true,
   clickHandler,
   children,
 }: {
@@ -37,14 +31,22 @@ export default function Window({
   animationDuration?: number,
   isFade?: boolean,
   isScrollable?: boolean,
+  hasContentPadding?: boolean,
   clickHandler: MouseEventHandler,
   children?: React.ReactNode,
 }) {
-  const [delta, setDelta] = useState({ x: 0, y: 0 })
+  const [translate, setTranslate] = useState({ x: 0, y: 0 })
   const canAnimate = source && destination && dimension
   let windowOpenStyle = useSpring({})
   let headerStyle = useSpring({})
   let contentStyle = useSpring({})
+
+  const handleDragMove = (e) => {
+    setTranslate({
+      x: translate.x + e.movementX,
+      y: translate.y + e.movementY,
+    })
+  }
 
   const applyOpen = useTransition(isOpen, isFade
     ? {
@@ -79,8 +81,8 @@ export default function Window({
         width: 0,
         height: 0,
         ...positionToStyle(source),
-        translateX: delta.x,
-        translateY: delta.y,
+        translateX: -translate.x,
+        translateY: -translate.y,
       },
       to: {
         ...dimension,
@@ -103,39 +105,36 @@ export default function Window({
     })
   }
 
+  const contentPaddingStyle = hasContentPadding ? styles.contentPadding : ''
+
   const FullScreen = (style) => (
     <animated.div className={styles.fullscreen} style={{ ...style }}>
       <div className={styles.fullscreen}>
         <Header title={title} minimizeHandler={clickHandler} />
-        <div className={`${isOpen && styles.contentPadding} ${isScrollable ? styles.scrollableContent : styles.content}`}>
+        <div className={`${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
           {children}
         </div>
       </div>
     </animated.div>
     )
 
-  const handleStop = (e: DraggableEvent, data: DraggableData) => {
-    const { x, y } = data
-    setDelta({ x: -1 * x, y: -1 * y })
-  }
-
   return isFullscreen || !canAnimate
     ? (isOpen ? applyOpen(FullScreen) : applyClosed(FullScreen))
-    : (<Draggable handle='#header' onStop={handleStop}>
-        <animated.div className={styles.window} style={windowOpenStyle}>
+    : (<animated.div className={styles.window} style={{ ...windowOpenStyle, transform: `translateX(${translate.x}px) translateY(${translate.y}px)` }}>
           <animated.div style={headerStyle} id='header'>
             {isOpen && (
-              <Header title={title} minimizeHandler={clickHandler} />
+              <DragMove onDragMove={handleDragMove}>
+                <Header title={title} minimizeHandler={clickHandler} />
+              </DragMove>
             )}
           </animated.div>
           <div className={
-            `${isOpen && styles.contentPadding} ${isScrollable ? styles.scrollableContent : styles.content}`}>
+            `${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
             {isOpen && (
               <animated.div style={contentStyle}>
                 {children}
               </animated.div>
             )}
           </div>
-        </animated.div>
-    </Draggable>);
+        </animated.div>)
 }

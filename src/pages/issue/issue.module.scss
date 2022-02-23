@@ -12,7 +12,6 @@
 .content {
   @include small-label;
   padding: 0 18px;
-  max-width: 1280px;
   width: 100%;
   margin: auto 0;
 
@@ -24,6 +23,10 @@
   @include lg {
     padding: 0 152px;
   }
+
+  @include max {
+    max-width: 1280px;
+  }
 }
 
 .concept {
@@ -33,7 +36,6 @@
 }
 .concept > h3 {
   color: $white-primary;
-  font-weight: 400;
   @include medium-body;
   @include lg {
     flex: 2;
@@ -41,7 +43,6 @@
 }
 .concept > p {
   color: $gray-primary;
-  font-weight: 400;
   @include medium-body;
   @include lg {
     flex: 3;
@@ -55,14 +56,12 @@
 }
 .participants > h3 {
   color: $white-primary;
-  font-weight: 400;
   @include medium-body;
   @include lg {
     flex: 2;
   }
 }
 .participants > p {
-  font-weight: 400;
   @include medium-body;
   @include lg {
     flex: 3;

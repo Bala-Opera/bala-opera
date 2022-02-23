@@ -1,0 +1,26 @@
+@import '../../styles/breakpoints.module.scss';
+@import '../../styles/colors.module.scss';
+@import '../../styles/fonts.module.scss';
+
+.body {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  color: $white-primary;
+  @include small-body;
+  @include md {
+    @include medium-body;
+  }
+}
+
+.body > div:first-child {
+  margin-top: 0;
+}
+
+.body > div {
+  margin: 36px 0;
+}
+
+.body > span {
+  display: block;
+}

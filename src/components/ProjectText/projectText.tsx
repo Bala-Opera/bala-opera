@@ -1,7 +1,13 @@
 import styles from './projectText.module.scss'
 
-export default function ProjectText({ text } : { text: string }) {
+export default function ProjectText({
+  text,
+  customStyles,
+} : {
+  text: string,
+  customStyles?: Object,
+}) {
   return (
-    <p className={styles.text}>{text}</p>
+    <p style={customStyles} className={styles.text}>{text}</p>
   )
 }
