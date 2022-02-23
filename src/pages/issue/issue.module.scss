@@ -107,6 +107,7 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 
 .menulink {
   transition: all 200ms;
+  cursor: pointer;
 }
 .menudrawer {
   background-color: #111111;
@@ -230,6 +231,11 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 
   animation: rotateBg 5s infinite linear;
 }
+.transitionStripes {
+  transform-origin: center;
+  // THIS CAUSES A LOT OF LAG!!
+  // animation: rotateBg 1s infinite linear;
+}
 
 @keyframes rotateBg {
   to {
@@ -261,5 +267,153 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 @keyframes sparkleRotation {
   100% {
     transform: rotate(1turn);
+  }
+}
+
+.holeCrack {
+  animation: holeIn 300ms linear;
+}
+
+@keyframes holeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.holeLaser {
+  animation: laserUp 1000ms 300ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes laserUp {
+  100% {
+    transform: translateY(-1800px);
+  }
+}
+
+.laserCover {
+  animation-fill-mode: both;
+  animation: laserCoverDown 1500ms linear;
+}
+
+@keyframes laserCoverDown {
+  0% {
+    transform: translateY(-1080px);
+  }
+  70% {
+    transform: translateY(-1080px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.ring {
+  will-change: transform;
+  transform-origin: center;
+  transform: scale(var(--ringScale));
+  animation: ringIn 2000ms calc(var(--ringIndex) * 150ms + 1500ms);
+  animation-fill-mode: both;
+}
+
+@keyframes ringIn {
+  0% {
+    transform: scale(0.9) translateX(calc(var(--ringDir) * 2500px));
+  }
+  60% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(var(--ringScale));
+  }
+}
+
+.ringPulse {
+  will-change: transform;
+  transform-origin: center;
+  animation: pulsate 2s infinite calc(var(--ringIndex) * 40ms + 3500ms);
+  animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.circleMask {
+  transform-origin: center;
+  animation: expand 1500ms 1700ms;
+  animation-fill-mode: both;
+}
+
+@keyframes expand {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ringContainer {
+  --maxRadius: (100vw + 100vh) / 1.3;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+.shadowCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  --radius: calc(var(--maxRadius) * var(--scroll) + 60px * (1 - var(--scroll)));
+  width: var(--radius);
+  height: var(--radius);
+  border-radius: 100%;
+  box-shadow: 0 0 50px 50px black;
+  background: black;
+}
+
+.scrollDown {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color:white;
+  background: black;
+  border: 1px solid white;
+  font-size: 1.5em;
+  padding: 12px;
+  font-family: "NON-Natural-Grotesk-Regular";
+}
+
+.shadowCircle, .scrollDown {
+  transition: opacity 2000ms 1700ms;
+}
+
+.enter {
+  .shadowCircle, .scrollDown {
+    opacity: 0;
+  }
+}
+.enterActive {
+  .shadowCircle, .scrollDown {
+    opacity: 1;
   }
 }
