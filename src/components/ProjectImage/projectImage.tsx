@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Image from 'next/image'
 
 import styles from './projectImage.module.scss'
@@ -17,6 +18,7 @@ export default function ProjectImage({
         objectFit="contain"
         loading="eager"
         className={styles.image}
+        placeholder="blur"
       />
     </div>
   )
