@@ -1,7 +1,7 @@
+// @ts-nocheck
 import { CSSTransition } from 'react-transition-group'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 
 import Window from '../../components/Window/window'
 import Button from '../../components/Button/button'
@@ -10,8 +10,7 @@ import MobileLoading from '../../components/MobileLoading/mobileLoading'
 import styles from './issue.module.scss'
 import Issue_0 from '../../copy/issue/0'
 import useBrowserSize from '../../common/hooks/useWindowSize'
-import { getWindowDimensions } from '../../common/utils/dom'
-import { animated, useSpring, useSprings } from 'react-spring'
+import { animated, useSprings } from 'react-spring'
 
 const ISSUES = [Issue_0]
 
@@ -20,7 +19,7 @@ type Overview = {
   participants: Array<string>,
 }
 
-type IssueView = {state:"info"} | {state:"rotate"} | {state:"project", transitionTo?: number }
+type IssueView = {state: "info" | "rotate" | "project", transitionTo?: number }
 
 export default function Issue({ name, overview } : {
   name: string,
