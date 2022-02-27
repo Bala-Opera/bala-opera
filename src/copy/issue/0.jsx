@@ -85,6 +85,7 @@ export default {
             { id: 'image-2', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-2.jpg`, }, },
             { id: 'image-3', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-3.jpg`, }, },
             { id: 'image-4', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-4.jpg`, }, },
+            { id: 'image-5', Component: ProjectImage, props: { src: `${bucket}/images/issues/0/jessica-5.jpg`, }, },
           ],
           links: [
             { displayName: 'Website', href: 'https://www.thejcwt.com/' },

@@ -19,7 +19,7 @@ export default function NavigationButton({
   const isBackTextHidden = mediaSize === MEDIA_SIZES.md || mediaSize === MEDIA_SIZES.sm
 
   return (
-    <Link href={href}>
+    <Link href={href} replace>
       <div className={styles.navigationButton}>
           {!isBackButton && !isNextTextHidden && <p className={styles.navigationText}>{text}</p>}
 
