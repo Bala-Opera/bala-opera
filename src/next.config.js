@@ -1,23 +1,18 @@
-module.exports = {
+const nextConfig = {
   images: {
     domains: [
       'localhost',
       'bala-opera.s3.amazonaws.com',
     ],
   },
-  webpack(config) {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"]
     });
 
-    config.node = {
-      ...config.node,
-      fs: 'empty',
-      child_process: 'empty',
-      net: 'empty',
-      tls: 'empty',
-    }
-    return config;
-  }
-};
+    return config
+  },
+}
+
+module.exports = nextConfig;
