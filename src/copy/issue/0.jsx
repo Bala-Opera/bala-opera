@@ -25,7 +25,7 @@ export default {
         { id: 'space-1', Component: ProjectSpace },
         { id: 'text', Component: ProjectText, props: { text: 'This is a dramatized portrayal of how it felt to be 25 yet still sad to hear that my mama threw away all my toys, my dear peach-fuzzed Calico Critter babies.' }, },
         { id: 'space-2', Component: ProjectSpace },
-        { Component: ProjectVideo, props: { src: `${bucket}/videos/issue/0/cindy.mp4`, type: 'video/mp4' } },
+        { id: 'video', Component: ProjectVideo, props: { src: `${bucket}/videos/issue/0/cindy.mp4`, type: 'video/mp4' } },
       ],
       links: [
         { displayName: 'Website', href: 'http://ogskinman.com/' },
@@ -42,7 +42,7 @@ export default {
         { id: 'space-1', Component: ProjectSpace },
         { id: 'text', Component: ProjectText, props: { text: 'Sometimes it strikes me realizing the similarity between the COVID situation and my childhood: to live without any other options but the long and dull waiting. Can’t imagine experiencing both of them at the same time.' }, },
         { id: 'space-2', Component: ProjectSpace },
-        { Component: ProjectVideo, props: { customStyles: { width: '60%' }, src: `${bucket}/videos/issue/0/wcc.mp4`, type: 'video/mp4' } },
+        { id: 'video', Component: ProjectVideo, props: { customStyles: { width: '60%' }, src: `${bucket}/videos/issue/0/wcc.mp4`, type: 'video/mp4' } },
       ],
       links: [
         { displayName: 'Website', href: 'https://wccsnapshots.com' },

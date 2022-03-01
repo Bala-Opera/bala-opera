@@ -12,9 +12,17 @@
 }
 
 .navigationButton:hover {
-  opacity: 0.9;
   cursor: pointer;
+
+  .arrowContainer {
+    @include important;
+  }
+  .arrow > path {
+    fill: $yellow-primary;
+  }
 }
+
+
 
 .navigationText {
   margin: 0;
