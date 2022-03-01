@@ -108,7 +108,7 @@ export default function Window({
   const contentPaddingStyle = hasContentPadding ? styles.contentPadding : ''
 
   const FullScreen = (style) => (
-    <div className={styles.fullscreen}>
+    <div style={{ position: isScrollable ? 'relative' : 'fixed' }} className={styles.fullscreen}>
       <Header title={title} minimizeHandler={clickHandler} />
       <div className={`${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
         <animated.div style={{ ...style, height: '100%', overflow: 'auto' }}>{children}</animated.div>

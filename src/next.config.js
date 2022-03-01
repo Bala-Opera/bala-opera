@@ -1,3 +1,4 @@
+const { withPlaiceholder } = require("@plaiceholder/next");
 const nextConfig = {
   images: {
     domains: [
@@ -15,4 +16,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig;
+module.exports = withPlaiceholder(nextConfig);

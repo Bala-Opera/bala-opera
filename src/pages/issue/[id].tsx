@@ -82,7 +82,6 @@ export default function Issue({ name, overview }: {
             clickHandler={handleMinimize}
             isOpen={isOpen}
             isFullscreen
-            isScrollable
             hasContentPadding={false}
           >
             <div className={styles.container}>
@@ -92,7 +91,7 @@ export default function Issue({ name, overview }: {
                   <p>{overview.concept}</p>
                 </div>
                 <div className={styles.line}>
-                  ---------------------------------------------------------------------------------------------------
+                  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 </div>
                 <div className={styles.participants}>
                   <h3>[  PARTICIPANTS  ]</h3>
