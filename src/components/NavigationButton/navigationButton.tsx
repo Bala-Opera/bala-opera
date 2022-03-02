@@ -5,7 +5,7 @@ import styles from './navigationButton.module.scss'
 
 const LeftArrow = (props) => (
   <svg
-    class={styles.arrow}
+    className={styles.arrow}
     width={10}
     height={16}
     fill="none"
@@ -23,7 +23,7 @@ const LeftArrow = (props) => (
 
 const RightArrow = (props) => (
   <svg
-    class={styles.arrow}
+    className={styles.arrow}
     width={10}
     height={16}
     fill="none"

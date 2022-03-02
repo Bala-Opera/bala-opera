@@ -296,6 +296,7 @@ export default function Home() {
       <style global jsx>{`
         html, body {
           overflow: hidden;
+          position: absolute;
         }
       `}</style>
     </>
