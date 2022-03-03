@@ -15,7 +15,7 @@ export default function Window({
   destination,
   isOpen,
   isFullscreen = false,
-  animationDuration = 400,
+  animationDuration = 150,
   isFade = false,
   isScrollable = false,
   hasContentPadding = true,
