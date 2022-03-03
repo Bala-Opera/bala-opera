@@ -203,7 +203,7 @@ export default function Home() {
   }
   
   useEffect(() => {
-    playVideo()
+    // playVideo()
   }, [])
 
   return (
