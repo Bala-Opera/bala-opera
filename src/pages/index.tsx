@@ -125,7 +125,7 @@ export default function Home() {
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
     if (isWhatOpen) {
-      setTimeout(() => setHasUserOpenedWhat(false), 500)
+      setTimeout(() => setHasUserOpenedWhat(false), 260)
     } else {
       setHasUserOpenedWhat(true)
     }
@@ -134,7 +134,7 @@ export default function Home() {
     setMailingListStatus(STATUS.none)
     setIsMailingListOpen(!isMailingListOpen)
     if (isMailingListOpen) {
-      setTimeout(() => setHasUserOpenedMailingList(false), 500)
+      setTimeout(() => setHasUserOpenedMailingList(false), 260)
     } else {
       setHasUserOpenedMailingList(true)
     }
@@ -274,6 +274,7 @@ export default function Home() {
           source={mailingListSource}
           destination={mailingListDestination}
           clickHandler={mailingListWindowButtonHandler}
+          animationDuration={100}
         >
           {mailingListStatus === STATUS.success
           ? <p className={styles.successMailing}>You've joined our mailing list.</p>

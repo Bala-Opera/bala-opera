@@ -182,7 +182,7 @@ export default {
             priority: true,
             width: '100%',
             dimensions: { width: 4778, height: 3573 },
-            src: `${bucket}/images/issues/0/rhea-1.jpg`,
+            src: `${bucket}/images/issues/0/rhea-1.png`,
             blurDataURL: 'data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAYACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQFBgcI/8QALBAAAQMDAwEGBwEAAAAAAAAAAQIDBAUREgAGITEHExQiQWFCUVJxgZGhov/EABYBAQEBAAAAAAAAAAAAAAAAAAMCBP/EAB4RAAICAgIDAAAAAAAAAAAAAAECAAMRIQQTEjFx/9oADAMBAAIRAxEAPwDobclXk0vw4ixW5CncrhbhRiB68A6WibieeiBx2ElLh+FLmSfwbaS3siU5U6YIrq20hLmWLmN+B7azfsjMimqk0uZILjDynJEZLivMk94rNKfb1/esHcwuZSdCbTQDSrj3NDlb3caOLVNW4u9gAVcm9uoHz0UfdEqr1NUGXTjDUlGdl5Zf0DWdbneTJrC6eumoAitpeM97EoKitSktAW5+o3Nre+rD2bu9/WQlyQmQ+w2pl1YSR5r5gG5NzitJuOOdJ2knAMh6ClYcjRlt30ZqPBuwac5OIzSUocwKSQOvB41Qo4rzExTyNtPdLC8g8f4++jRpTw6XbsYb+mSnIsVPAHUWr0eXU3luyNtSUOKSEKKJziAQOgISANTHZRSHYM58tUpNNjIycUO8U4XVqtdRUoXJ4Hro0aVqUUZAhmxiME6n/9k='
           },
         },

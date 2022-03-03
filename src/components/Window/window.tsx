@@ -126,9 +126,9 @@ export default function Window({
               </DragMove>
             )}
           </animated.div> */}
-          <DragMove onDragMove={handleDragMove}>
-                <Header title={title} minimizeHandler={clickHandler} />
-              </DragMove>
+          {isOpen && <DragMove onDragMove={handleDragMove}>
+            <Header title={title} minimizeHandler={clickHandler} />
+          </DragMove>}
           <div className={
             `${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
             {isOpen && (
