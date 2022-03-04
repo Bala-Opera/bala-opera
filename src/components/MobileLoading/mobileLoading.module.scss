@@ -22,11 +22,12 @@
   flex-direction: column;
   @include small-label;
   font-size: 4vh;
+  line-height: 42px;
 }
 
 .header {
   @include default;
-  padding: 12px 16px;
+  padding: 24px 16px 16px;
   margin: 0;
 }
 

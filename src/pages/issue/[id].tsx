@@ -157,7 +157,8 @@ const OverviewGraphics = ({ width, height, setTransitionTo, transitionTo }) => {
   const aspect = height / width
   const viewBox = [lerp(200, 0, w), lerp(320, 0, h) - 400 * Math.max(0, aspect - 1), Math.max(1160, width), Math.max(700, height)]
 
-  let isSlidingMenu = width < 608 || height < 930 || (height < 970 && width < 1100)
+  // let isSlidingMenu = width < 608 || height < 930 || (height < 970 && width < 1100)
+  let isSlidingMenu = width < 768 || height < 930
   // isSlidingMenu = false
 
   const menuStyle = {
