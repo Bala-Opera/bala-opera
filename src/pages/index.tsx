@@ -205,7 +205,7 @@ export default function Home() {
     video.setAttribute('src', videoSource)
     video.play()
   }
-  
+
   useEffect(() => {
     // playVideo()
   }, [])
@@ -225,11 +225,11 @@ export default function Home() {
 
       <div className={styles.footer}>
         <div>
-        <Button
-          text="What?"
-          isImportant={isWhatOpen}
-          clickHandler={whatButtonHandler}
-        /></div>
+          <Button
+            text="What?"
+            isImportant={isWhatOpen}
+            clickHandler={whatButtonHandler}
+          /></div>
         {/* <div>
         <Dropdown
           name='Issues'
@@ -243,35 +243,35 @@ export default function Home() {
       </div>
 
       {hasUserOpenedWhat && (
-      <Window
-        title={CONFIG.whatWindow.title}
-        dimension={CONFIG.whatWindow.dimension}
-        source={CONFIG.whatWindow.getSource(windowDimension)}
-        destination={CONFIG.whatWindow.getDestination(windowDimension)}
-        isOpen={isWhatOpen}
-        isFullscreen={mediaSize !== MEDIA_SIZES.lg}
-        clickHandler={whatButtonHandler}
-      >
-        <div className={styles.whatDescription}>
-          <div>{Copy.WHAT[0]}</div>
-          <div>{Copy.WHAT[1]}</div>
-        </div>
-        <div className={styles.whatFooter}>
-          <div>
-            <Button
-              text={CONFIG.whatSocial.text}
-              clickHandler={socialButtonHandler}
-            />
+        <Window
+          title={CONFIG.whatWindow.title}
+          dimension={CONFIG.whatWindow.dimension}
+          source={CONFIG.whatWindow.getSource(windowDimension)}
+          destination={CONFIG.whatWindow.getDestination(windowDimension)}
+          isOpen={isWhatOpen}
+          isFullscreen={mediaSize !== MEDIA_SIZES.lg}
+          clickHandler={whatButtonHandler}
+        >
+          <div className={styles.whatDescription}>
+            <div>{Copy.WHAT[0]}</div>
+            <div>{Copy.WHAT[1]}</div>
           </div>
-          <div id={CONFIG.whatMailingList.id}>
-            <Button
-              text={CONFIG.whatMailingList.text}
-              clickHandler={mailingListWindowButtonHandler}
-              isImportant={isMailingListOpen}
-            />
+          <div className={styles.whatFooter}>
+            <div>
+              <Button
+                text={CONFIG.whatSocial.text}
+                clickHandler={socialButtonHandler}
+              />
+            </div>
+            <div id={CONFIG.whatMailingList.id}>
+              <Button
+                text={CONFIG.whatMailingList.text}
+                clickHandler={mailingListWindowButtonHandler}
+                isImportant={isMailingListOpen}
+              />
+            </div>
           </div>
-        </div>
-      </Window>)}
+        </Window>)}
 
       {hasUserOpenedMailingList && (
         <Window
@@ -286,8 +286,8 @@ export default function Home() {
           animationDuration={100}
         >
           {mailingListStatus === STATUS.success
-          ? <p className={styles.successMailing}>You've joined our mailing list.</p>
-          : <>
+            ? <p className={styles.successMailing}>You've joined our mailing list.</p>
+            : <>
               <TextInput
                 name={CONFIG.whatMailingList.text}
                 placeholder={CONFIG.whatMailingList.placeholder}
@@ -295,7 +295,7 @@ export default function Home() {
                 isSubmitting={isSubmittingMailingList}
               />
               {mailingListStatus === STATUS.error &&
-              <p className={styles.errorMailing}>Your email could not be added. Please try again.</p>}
+                <p className={styles.errorMailing}>Your email could not be added. Please try again.</p>}
             </>
           }
         </Window>
