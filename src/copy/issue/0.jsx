@@ -82,7 +82,7 @@ export default {
         {
           id: 'image', Component: ProjectImage, props: {
             priority: true,
-            dimensions: { width: 2400, height: 2400 },
+            dimensions: { width: 1200, height: 1200 },
             src: `${bucket}/images/issues/0/ty.png`,
             blurDataURL: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAC4jAAAuIwF4pT92AAABx0lEQVQYlQG8AUP+AP/Wuf/00f/rxP/nvv/ctf/NqP/Xov/3sf/9sP/rn//4qv/anQD/xpD/y4/5t3v/3qj/1qH/z5j/1ZH/1JT/4pX/247/1Yf2sGgA/8V++bBt655Q/75/+rl38bN3/8h79sl4/8hw/9p5/9V/8ahXAP/Jhfesa+eZT//AhP/LlPa2iPrAiv/UkP/Gfv/Bffu5d+2cTwDypWf2rHb2qnL7s3z2q2z/uYH+vHnzs3bmoWTypWrqmWbUdz8A4olR8ap+2Jx3pmpIyoBO55Na45Zf7p1i5ItV03BF2X1Yy2I4ANySZdSedYpuVVpfXJuDbZ12VaBpUYFRP61jSbllSb5oSclmOgDRlGych2tVVlFEX5QCOVQyQ0lsaFc/MShnSTi0bEyqUiuqSSoAkmVBUFVNASM5ACZDABw2ADVJOVt1KTdLPEZJZko3nlAoqkwsACMbFllJQWU9AAARIwA1TAA4TAAaKQArSzkzPBcYEXo9IrxYMQAmKiqzQAubAABlSwkAIiwERSYAJic9IwChFwB5OABCJRyGOSUAnXU+rzcAvkwovlQAKDUEAEIxHlYBtkUApycAoRcAhVAAXToRH4jbsSJUndoAAAAASUVORK5CYII='
           }
@@ -181,7 +181,7 @@ export default {
           id: 'image-1', Component: ProjectImage, props: {
             priority: true,
             width: '100%',
-            dimensions: { width: 4778, height: 3573 },
+            dimensions: { width: 1433, height: 1072 },
             src: `${bucket}/images/issues/0/rhea-1.png`,
             blurDataURL: 'data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAYACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQFBgcI/8QALBAAAQMDAwEGBwEAAAAAAAAAAQIDBAUREgAGITEHExQiQWFCUVJxgZGhov/EABYBAQEBAAAAAAAAAAAAAAAAAAMCBP/EAB4RAAICAgIDAAAAAAAAAAAAAAECAAMRIQQTEjFx/9oADAMBAAIRAxEAPwDobclXk0vw4ixW5CncrhbhRiB68A6WibieeiBx2ElLh+FLmSfwbaS3siU5U6YIrq20hLmWLmN+B7azfsjMimqk0uZILjDynJEZLivMk94rNKfb1/esHcwuZSdCbTQDSrj3NDlb3caOLVNW4u9gAVcm9uoHz0UfdEqr1NUGXTjDUlGdl5Zf0DWdbneTJrC6eumoAitpeM97EoKitSktAW5+o3Nre+rD2bu9/WQlyQmQ+w2pl1YSR5r5gG5NzitJuOOdJ2knAMh6ClYcjRlt30ZqPBuwac5OIzSUocwKSQOvB41Qo4rzExTyNtPdLC8g8f4++jRpTw6XbsYb+mSnIsVPAHUWr0eXU3luyNtSUOKSEKKJziAQOgISANTHZRSHYM58tUpNNjIycUO8U4XVqtdRUoXJ4Hro0aVqUUZAhmxiME6n/9k='
           },
@@ -189,8 +189,8 @@ export default {
         { id: 'space-2', Component: ProjectSpace, props: { heights: { lg: 160, sm: 60 }} },
         {
           id: 'image-2', Component: ProjectImage, props: {
-            dimensions: { width: 3024, height: 3752 },
-            src: `${bucket}/images/issues/0/rhea-2.jpg`,
+            dimensions: { width: 1058, height: 1313 },
+            src: `${bucket}/images/issues/0/rhea-2.png`,
             blurDataURL: 'data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgABoDASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAABQQGBwP/xAAqEAACAgIBAwQBAwUAAAAAAAABAgMEBREABhIhEzFBYSIHMqEUQnGR8P/EABcBAQEBAQAAAAAAAAAAAAAAAAQCAQP/xAAgEQABBAIBBQAAAAAAAAAAAAABAAIDERIhBEFRYaHR/9oADAMBAAIRAxEAPwDQrsiVcdkcjYsTRwUou5o4YQ7OD48bI88iW81h6eNTI2cneekIg8pWBFMLEBu2QFthteda+ePUh3V8kjSekJDHH3qATot9/X+vjlY6kx9e/kZbFbB4S7uNS72K3e7mIN6jFVO3b9igH5U+eAxtgrRv0lsoOJdsdvKs9vA0Jmkjgy8sknps6qVI7tDZ0fb/AL64CkMjorCaXRGx+fOWJy7z9bNZvYC7VTIBooHjuiVYj2EgTRgDX92tFgp3xKshFeIDWgo9/wDHOebHi4za10b4zTwqZ+rVK/k8JVx2KM39bdykUcQRu0FuyQ6J+PAP88R6fwePwXTcuMCSrdMZa3Y9VlklJPkCT90evYa+t788Y6hp3p2oti7lerZrWxO0liIyKV9N0IAHkH8h5/ngOQsdXTVuySTAo8RHa8plmay7H22qqUHvs+fB+uSbvSdx5IwzGQfVLyebrdPV3zMMclpEtRV/TiRgwEmlBYtsHQJGzruJB++PmJ4yUJO18czLI9L9SdRZCpDl8pjKuJjuJNYp42FoopnBBkkca/JyANFt7+tc0z1t/tVlX4G/bl0OiLMGiqX/2Q=='
           },
         },
