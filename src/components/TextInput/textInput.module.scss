@@ -13,6 +13,7 @@
 }
 
 .input {
+  box-sizing: border-box;
   border: 1px solid $white-primary;
   padding: 12px 24px;
   caret-color: $blue-primary;
@@ -31,6 +32,7 @@
 }
 
 .submit {
+  box-sizing: border-box;
   vertical-align: bottom; // for firefox
   cursor: pointer;
   border: 1px solid $white-primary;

@@ -11,7 +11,7 @@
 }
 
 .button {
-  inset: 0;
+  box-sizing: border-box;
   text-align: center;
   border: solid 1px $white-primary;
   padding: 14px 16px 8px;

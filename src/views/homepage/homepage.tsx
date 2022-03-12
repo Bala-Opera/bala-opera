@@ -127,7 +127,8 @@ export default function Home() {
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
     if (isWhatOpen) {
-      setTimeout(() => setHasUserOpenedWhat(false), 260)
+      const delay = mediaSize === MEDIA_SIZES.lg ? 260 : 0
+      setTimeout(() => setHasUserOpenedWhat(false), delay)
     } else {
       setHasUserOpenedWhat(true)
     }

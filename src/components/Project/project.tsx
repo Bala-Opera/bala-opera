@@ -13,7 +13,7 @@ export default function Project({
 }) {
   const navigate = useNavigate()
   const handleMinimize = () => {
-    setTimeout(() => navigate(`/issue/${issueId}`, { state: { enter: 'rotate' }}), 200)
+    navigate(`/issue/${issueId}`, { state: { enter: 'rotate' }})
   }
 
   return (
