@@ -1,5 +1,13 @@
 const { withPlaiceholder } = require("@plaiceholder/next");
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/:any*',
+        destination: '/',
+      },
+    ];
+  },
   images: {
     domains: [
       'localhost',

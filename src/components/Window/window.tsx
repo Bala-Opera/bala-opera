@@ -1,4 +1,4 @@
-import { useState, MouseEventHandler } from 'react'
+import { useState, useEffect, useRef, MouseEventHandler } from 'react'
 import { useSpring, useTransition, animated } from 'react-spring'
 
 import styles from './window.module.scss'
@@ -7,6 +7,8 @@ import DragMove from './DragMove'
 import { Dimension, Position } from '../../common/types/animation'
 
 const positionToStyle = (position: Position) => ({ left: position.x, top: position.y })
+const MAX_HEADER_SCROLL = 500
+const VISIBLE_HEADER_LIMIT = 200
 
 export default function Window({
   title,
@@ -16,7 +18,6 @@ export default function Window({
   isOpen,
   isFullscreen = false,
   animationDuration = 200,
-  isFade = false,
   isScrollable = false,
   hasContentPadding = true,
   clickHandler,
@@ -29,17 +30,38 @@ export default function Window({
   destination?: Position,
   isFullscreen?: boolean,
   animationDuration?: number,
-  isFade?: boolean,
   isScrollable?: boolean,
   hasContentPadding?: boolean,
   clickHandler: MouseEventHandler,
   children?: React.ReactNode,
 }) {
   const [translate, setTranslate] = useState({ x: 0, y: 0 })
+  const [lastY, setLastY] = useState(null)
   const canAnimate = source && destination && dimension
   let windowOpenStyle = useSpring({})
-  let headerStyle = useSpring({})
   let contentStyle = useSpring({})
+  const headerRef = useRef(null)
+
+  useEffect(() => {
+    const handleHeader = () => {
+      if (isScrollable) {
+      const currentScroll = window.scrollY
+      const isSlidingDown = lastY < currentScroll
+
+        if (isSlidingDown && currentScroll > VISIBLE_HEADER_LIMIT) { // slide up
+          headerRef?.current?.classList?.remove(styles.slideDownAnimation)
+          headerRef?.current?.classList?.add(styles.slideUpAnimation)
+        } else if (!isSlidingDown && currentScroll <= VISIBLE_HEADER_LIMIT) { // slide down
+          headerRef?.current?.classList?.remove(styles.slideUpAnimation)
+          headerRef?.current?.classList?.add(styles.slideDownAnimation)
+        }
+      }
+      setLastY(window.scrollY)
+    }
+    window.addEventListener("scroll", handleHeader)
+
+    return () => window.removeEventListener("scroll", handleHeader)
+  }, [lastY, isScrollable])
 
   const handleDragMove = (e) => {
     setTranslate({
@@ -48,30 +70,18 @@ export default function Window({
     })
   }
 
-  const applyOpen = useTransition(isOpen, isFade
-    ? {
+  const applyFadeIn = useTransition(isOpen, {
         from: { opacity: 0, },
         enter: { opacity: 1, },
         leave: { opacity: 1, },
-        config: { duration: animationDuration },
-      }
-    : {
-        from: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
-        enter: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
-        leave: { opacity: 0, transform: 'translate3d(0, 0%, 0)' },
+        delay: 200,
         config: { duration: animationDuration },
       })
-  const applyClosed = useTransition(isOpen, isFade
-    ? {
+  const applyFadeOut = useTransition(isOpen, {
         from: { opacity: 1, },
         enter: { opacity: 0, },
         leave: { opacity: 0, },
-        config: { duration: animationDuration },
-      }
-    : {
-        from: { opacity: 1, transform: 'translate3d(0, 0%, 0)' },
-        enter: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
-        leave: { opacity: 0, transform: 'translate3d(0, 150%, 0)' },
+        delay: 200,
         config: { duration: animationDuration },
       })
 
@@ -91,12 +101,6 @@ export default function Window({
       reverse: !isOpen,
       config: { duration: animationDuration },
     })
-    headerStyle = useSpring({
-      from: { opacity: 0 },
-      to: { opacity: 1, cursor: 'move' },
-      delay: animationDuration,
-      reverse: !isOpen,
-    })
     contentStyle = useSpring({
       from: { opacity: 0 },
       to: { opacity: 1 },
@@ -109,7 +113,9 @@ export default function Window({
 
   const FullScreen = (style) => (
     <div style={{ position: isScrollable ? 'relative' : 'fixed' }} className={styles.fullscreen}>
-      <Header title={title} minimizeHandler={clickHandler} />
+      <div className={`${styles.header} ${styles.slideDownAnimation}`} ref={headerRef}>
+        {lastY < MAX_HEADER_SCROLL ? <Header title={title} minimizeHandler={clickHandler} /> : <div className={styles.invisibleHeader}></div>}
+      </div>
       <div className={`${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
         <animated.div style={{ ...style, height: '100%', overflow: 'auto' }}>{children}</animated.div>
       </div>
@@ -117,15 +123,8 @@ export default function Window({
   )
 
   return isFullscreen || !canAnimate
-    ? (isOpen ? applyOpen(FullScreen) : applyClosed(FullScreen))
+    ? (isOpen ? applyFadeIn(FullScreen) : applyFadeOut(FullScreen))
     : (<animated.div className={styles.window} style={{ ...windowOpenStyle, transform: `translateX(${translate.x}px) translateY(${translate.y}px)` }}>
-          {/* <animated.div style={headerStyle} id='header'>
-            {isOpen && (
-              <DragMove onDragMove={handleDragMove}>
-                <Header title={title} minimizeHandler={clickHandler} />
-              </DragMove>
-            )}
-          </animated.div> */}
           {isOpen && <DragMove onDragMove={handleDragMove}>
             <Header title={title} minimizeHandler={clickHandler} />
           </DragMove>}

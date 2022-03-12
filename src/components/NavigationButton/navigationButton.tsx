@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 
 import useMediaQuery, { MEDIA_SIZES } from '../../common/hooks/useMediaQuery'
 import styles from './navigationButton.module.scss'
@@ -53,7 +53,7 @@ export default function NavigationButton({
   const isBackTextHidden = mediaSize === MEDIA_SIZES.md || mediaSize === MEDIA_SIZES.sm
 
   return (
-    <Link href={href} replace>
+    <Link to={href} style={{ textDecoration: 'none' }}>
       <div className={styles.navigationButton}>
           {!isBackButton && !isNextTextHidden && <p className={styles.navigationText}>{text}</p>}
 
