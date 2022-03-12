@@ -10,6 +10,7 @@ export default function useBrowserSize() {
       setWindowDimension(getWindowDimensions(window))
     }
     window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return windowDimension

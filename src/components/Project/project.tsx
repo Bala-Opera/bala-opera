@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Window from '../Window/window'
 import NavigationButton from '../NavigationButton/navigationButton'
@@ -11,11 +11,9 @@ export default function Project({
 } : {
   issueId: string, data: Data, previousProject?: Link, nextProject?: Link,
 }) {
-  const [isOpen, setIsOpen] = useState(true)
-  const router = useRouter()
+  const navigate = useNavigate()
   const handleMinimize = () => {
-    setIsOpen(false)
-    setTimeout(() => router.push(`/issue/${issueId}`), 200)
+    setTimeout(() => navigate(`/issue/${issueId}`, { state: { enter: 'rotate' }}), 200)
   }
 
   return (
@@ -23,10 +21,9 @@ export default function Project({
       key={data.title}
       title={data.title}
       clickHandler={handleMinimize}
-      isOpen={isOpen}
+      isOpen
       animationDuration={500}
       isFullscreen
-      isFade
       isScrollable
       hasContentPadding={false}
     >
