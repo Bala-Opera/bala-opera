@@ -20,6 +20,7 @@
   @include md {
     @include medium-label;
   }
+  border-radius: 0;
 }
 
 .button:hover {
