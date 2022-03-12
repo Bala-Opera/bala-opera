@@ -33,15 +33,17 @@
 }
 .concept > h3 {
   color: $white-primary;
-  @include medium-body;
+  @include small-body;
   @include lg {
+    @include medium-body;
     flex: 2;
   }
 }
 .concept > p {
   color: $gray-primary;
-  @include medium-body;
+  @include small-body;
   @include lg {
+    @include medium-body;
     flex: 3;
   }
 }
@@ -53,20 +55,25 @@
 }
 .participants > h3 {
   color: $white-primary;
-  @include medium-body;
+  @include small-body;
   @include lg {
+    @include medium-body;
     flex: 2;
   }
 }
 .participants > p {
-  @include medium-body;
+  @include small-body;
   @include lg {
+    @include medium-body;
     flex: 3;
   }
 }
 
 .line {
-  @include medium-body;
+  @include small-body;
+  @include lg {
+    @include medium-body;
+  }
   color: $gray-primary;
   white-space: nowrap;
   overflow: hidden;

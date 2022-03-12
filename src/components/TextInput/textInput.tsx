@@ -56,6 +56,7 @@ export default function TextInput({
       <input
         className={styles.submit}
         type="submit"
+        value="Submit"
         onClick={submitChangeHandler}
         disabled={isSubmitting}
       />

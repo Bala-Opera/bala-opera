@@ -251,7 +251,7 @@ export default function Home() {
           dimension={CONFIG.whatWindow.dimension}
           source={CONFIG.whatWindow.getSource(windowDimension)}
           destination={CONFIG.whatWindow.getDestination(windowDimension)}
-          isOpen={isWhatOpen}
+          isOpen={mediaSize !== MEDIA_SIZES.lg ? true : isWhatOpen}
           isFullscreen={mediaSize !== MEDIA_SIZES.lg}
           clickHandler={whatButtonHandler}
         >

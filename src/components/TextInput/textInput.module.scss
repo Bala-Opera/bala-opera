@@ -31,6 +31,7 @@
 }
 
 .submit {
+  vertical-align: bottom; // for firefox
   cursor: pointer;
   border: 1px solid $white-primary;
   padding: 12px;
