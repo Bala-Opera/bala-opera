@@ -38,12 +38,12 @@ const CONFIG = {
     title: 'What?',
     dimension: { width: 929, height: 584 }, // fixed dimension for lg screens
     getSource: (window: Dimension) => window ? ({
-      x: window.width - 64,
-      y: window.height - 64,
+      x: window.width / 2,
+      y: window.height,
     }) : null,
     getDestination: (window: Dimension) => window ? ({
       x: (window.width - CONFIG.whatWindow.dimension.width) / 2,
-      y: 120,
+      y: (window.height - CONFIG.whatWindow.dimension.height) / 2,
     }) : null,
   },
   whatSocial: {
@@ -62,34 +62,14 @@ const CONFIG = {
       }
       return dimensions[mediaSize]
     },
-    getSource: (document: Document, mediaSize: string) => {
-      const target = document.querySelector(`#${CONFIG.whatMailingList.id}`)
-      if (target) {
-        const { left, top, width, height } = target.getBoundingClientRect()
-        const x = left + width / 2
-        const y = top + height / 2
-        const mappingFunctions = {
-          lg: { x, y: y - 100 },
-          md: { x, y: y - 100 },
-          sm: { x: x - 20, y: y - 100 },
-        }
-        return mappingFunctions[mediaSize]
-      }
-      return { width: document.body.clientWidth, height: document.body.clientHeight }
-    },
-    getDestination: (document: Document, mediaSize: string) => {
-      const target = document.querySelector(`#${CONFIG.whatMailingList.id}`)
-      if (target) {
-        const { left, top } = target.getBoundingClientRect()
-        const mappingFunctions = {
-          lg: { x: left - 150, y: top - 200 },
-          md: { x: left - 450, y: top - 250 },
-          sm: { x: left - 220, y: top - 220 },
-        }
-        return mappingFunctions[mediaSize]
-      }
-      return { width: document.body.clientWidth, height: document.body.clientHeight }
-    },
+    getSource: (window: Dimension) => window ? ({
+      x: window.width / 2,
+      y: window.height,
+    }) : null,
+    getDestination: (window: Dimension, mediaSize: string) => window ? ({
+      x: (window.width - CONFIG.whatMailingList.getDimension(mediaSize).width) / 2,
+      y: (window.height - CONFIG.whatMailingList.getDimension(mediaSize).height) / 2,
+    }) : null,
     getErrorDimension: (mediaSize: string) => {
       const dimensions = {
         lg: { width: 458, height: 210 },
@@ -121,13 +101,14 @@ export default function Home() {
   const [showIssueTransition, setShowIssueTransition] = useState(false)
   const windowDimension = useWindowSize()
   const mediaSize = useMediaQuery()
-  
   const navigate = useNavigate()
+
+  const isWhatFullscreen = mediaSize !== MEDIA_SIZES.lg || windowDimension?.height < CONFIG.whatWindow.dimension.height + 100
 
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
     if (isWhatOpen) {
-      const delay = mediaSize === MEDIA_SIZES.lg ? 260 : 0
+      const delay = !isWhatFullscreen ? 260 : 0
       setTimeout(() => setHasUserOpenedWhat(false), delay)
     } else {
       setHasUserOpenedWhat(true)
@@ -173,8 +154,8 @@ export default function Home() {
   let mailingListSource = { x: 0, y: 0 }
   let mailingListDestination = { x: 0, y: 0 }
   if (hasUserOpenedMailingList) {
-    mailingListSource = CONFIG.whatMailingList.getSource(document, mediaSize)
-    mailingListDestination = CONFIG.whatMailingList.getDestination(document, mediaSize)
+    mailingListSource = CONFIG.whatMailingList.getSource(windowDimension)
+    mailingListDestination = CONFIG.whatMailingList.getDestination(windowDimension, mediaSize)
   }
 
   // until there's more issues, just make it a button for Issue 0
@@ -252,8 +233,8 @@ export default function Home() {
           dimension={CONFIG.whatWindow.dimension}
           source={CONFIG.whatWindow.getSource(windowDimension)}
           destination={CONFIG.whatWindow.getDestination(windowDimension)}
-          isOpen={mediaSize !== MEDIA_SIZES.lg ? true : isWhatOpen}
-          isFullscreen={mediaSize !== MEDIA_SIZES.lg}
+          isOpen={isWhatFullscreen ? true : isWhatOpen}
+          isFullscreen={isWhatFullscreen}
           clickHandler={whatButtonHandler}
         >
           <div className={styles.whatDescription}>

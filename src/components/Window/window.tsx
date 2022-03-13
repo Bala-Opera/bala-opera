@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, MouseEventHandler } from 'react'
 import { useSpring, useTransition, animated } from 'react-spring'
+import Draggable from "react-draggable"
 
 import styles from './window.module.scss'
 import Header from '../Header/header'
-import DragMove from './DragMove'
 import { Dimension, Position } from '../../common/types/animation'
 
 const positionToStyle = (position: Position) => ({ left: position.x, top: position.y })
@@ -124,10 +124,11 @@ export default function Window({
 
   return isFullscreen || !canAnimate
     ? (isOpen ? applyFadeIn(FullScreen) : applyFadeOut(FullScreen))
-    : (<animated.div className={styles.window} style={{ ...windowOpenStyle, transform: `translateX(${translate.x}px) translateY(${translate.y}px)` }}>
-          {isOpen && <DragMove onDragMove={handleDragMove}>
-            <Header title={title} minimizeHandler={clickHandler} />
-          </DragMove>}
+    : (<Draggable handle="#header" onDrag={handleDragMove}>
+        <animated.div className={styles.window} style={{ ...windowOpenStyle, transform: `translateX(${translate.x}px) translateY(${translate.y}px)` }}>
+          {isOpen &&
+            <div id="header"><Header title={title} minimizeHandler={clickHandler} /></div>
+          }
           <div className={
             `${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
             {isOpen && (
@@ -136,5 +137,6 @@ export default function Window({
               </animated.div>
             )}
           </div>
-        </animated.div>)
+        </animated.div>
+      </Draggable>)
 }
