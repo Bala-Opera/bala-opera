@@ -213,7 +213,7 @@ export default function Home() {
       <IconOverlay {...CONFIG.iconOverlay} />
 
       <div className={styles.footer}>
-        <div style={{ margin: isGapAdjusted ? '16px 0' : 0 }}>
+        <div style={{ margin: isGapAdjusted && mediaSize === MEDIA_SIZES.sm ? '16px 0' : 0 }}>
           <Button
             text="What?"
             isImportant={isWhatOpen}
