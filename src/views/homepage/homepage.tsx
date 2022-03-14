@@ -12,6 +12,7 @@ import styles from './homepage.module.scss'
 import Copy from '../../copy/homepage'
 import useWindowSize from '../../common/hooks/useWindowSize'
 import useMediaQuery, { MEDIA_SIZES } from '../../common/hooks/useMediaQuery'
+import useDeviceType, { DEVICE_TYPES } from '../../common/hooks/useDeviceType';
 import { Dimension } from '../../common/types/animation'
 import { server, bucket } from '../../config/server'
 import { createIndexArray, getRandomInt } from '../../common/utils/random'
@@ -102,7 +103,10 @@ export default function Home() {
   const windowDimension = useWindowSize()
   const mediaSize = useMediaQuery()
   const navigate = useNavigate()
+  const deviceType = useDeviceType()
 
+  // gap css trait isn't working on table or mobile, adjust with margin
+  const isGapAdjusted = deviceType === DEVICE_TYPES.tablet || deviceType === DEVICE_TYPES.mobile
   const isWhatFullscreen = mediaSize !== MEDIA_SIZES.lg || windowDimension?.height < CONFIG.whatWindow.dimension.height + 100
 
   const whatButtonHandler = () => {
@@ -209,7 +213,7 @@ export default function Home() {
       <IconOverlay {...CONFIG.iconOverlay} />
 
       <div className={styles.footer}>
-        <div>
+        <div style={{ margin: isGapAdjusted ? '16px 0' : 0 }}>
           <Button
             text="What?"
             isImportant={isWhatOpen}
@@ -243,13 +247,13 @@ export default function Home() {
               <div>{Copy.WHAT[1]}</div>
             </div>
             <div className={styles.whatFooter}>
-              <div>
+              <div style={{ margin: isGapAdjusted ? '16px 0' : 0 }}>
                 <Button
                   text={CONFIG.whatSocial.text}
                   clickHandler={socialButtonHandler}
                 />
               </div>
-              <div id={CONFIG.whatMailingList.id}>
+              <div id={CONFIG.whatMailingList.id} >
                 <Button
                   text={CONFIG.whatMailingList.text}
                   clickHandler={mailingListWindowButtonHandler}

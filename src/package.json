@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "ngrok": "ngrok http 3000"
   },
   "dependencies": {
     "@plaiceholder/next": "^2.3.0",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/node": "^16.4.2",
     "@types/react": "^17.0.15",
+    "ngrok": "^4.3.1",
     "typescript": "^4.3.5"
   }
 }

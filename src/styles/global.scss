@@ -14,3 +14,10 @@ img {
   max-width: 100%;
   display: block;
 }
+
+input, textarea {
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
