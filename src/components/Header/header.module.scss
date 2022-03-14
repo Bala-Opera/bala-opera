@@ -10,6 +10,11 @@
   cursor: -moz-grab;
   cursor: -webkit-grab;
 
+  min-height: 44px;
+  @include md {
+    min-height: 52px;
+  }
+
   @include small-label;
   @include md {
     @include medium-label;
@@ -36,14 +41,14 @@
 }
 
 .minimize {
-  width: 44px;
-  min-height: 44px;
-  border: none;
   cursor: pointer;
   border: 1px solid $white-primary;
+  height: auto;
+  margin: 0;
+
+  width: 44px;
   @include md {
     width: 52px;
-    min-height: 52px;
   }
   @include lg {
     border: 0.5px solid $white-primary;
