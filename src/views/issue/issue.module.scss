@@ -12,17 +12,17 @@
 
 .content {
   @include small-label;
-  padding: 0 18px;
+  padding: 24px 18px;
   width: 100%;
   margin: auto 0;
 
   @include md {
     @include medium-label;
-    padding: 0 24px;
+    padding: 48px 24px;
   }
 
   @include lg {
-    padding: 0 152px;
+    padding: 64px 152px;
   }
 }
 
@@ -97,7 +97,10 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 
 .button {
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 64px;
+  @include lg {
+    margin-bottom: 100px;
+  }
   text-align: center;
 }
 

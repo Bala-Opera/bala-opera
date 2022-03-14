@@ -18,7 +18,6 @@ export default function Window({
   isOpen,
   isFullscreen = false,
   animationDuration = 200,
-  isScrollable = false,
   hasContentPadding = true,
   clickHandler,
   children,
@@ -30,7 +29,6 @@ export default function Window({
   destination?: Position,
   isFullscreen?: boolean,
   animationDuration?: number,
-  isScrollable?: boolean,
   hasContentPadding?: boolean,
   clickHandler: MouseEventHandler,
   children?: React.ReactNode,
@@ -42,26 +40,19 @@ export default function Window({
   let contentStyle = useSpring({})
   const headerRef = useRef(null)
 
-  useEffect(() => {
-    const handleHeader = () => {
-      if (isScrollable) {
-      const currentScroll = window.scrollY
-      const isSlidingDown = lastY < currentScroll
+  const handleHeaderScroll = (e) => {
+    const currentScroll = e.target.scrollTop
+    const isSlidingDown = lastY < currentScroll
 
-        if (isSlidingDown && currentScroll > VISIBLE_HEADER_LIMIT) { // slide up
-          headerRef?.current?.classList?.remove(styles.slideDownAnimation)
-          headerRef?.current?.classList?.add(styles.slideUpAnimation)
-        } else if (!isSlidingDown && currentScroll <= VISIBLE_HEADER_LIMIT) { // slide down
-          headerRef?.current?.classList?.remove(styles.slideUpAnimation)
-          headerRef?.current?.classList?.add(styles.slideDownAnimation)
-        }
-      }
-      setLastY(window.scrollY)
+    if (isSlidingDown && currentScroll > VISIBLE_HEADER_LIMIT) { // slide up
+      headerRef?.current?.classList?.remove(styles.slideDownAnimation)
+      headerRef?.current?.classList?.add(styles.slideUpAnimation)
+    } else if (!isSlidingDown && currentScroll <= VISIBLE_HEADER_LIMIT) { // slide down
+      headerRef?.current?.classList?.remove(styles.slideUpAnimation)
+      headerRef?.current?.classList?.add(styles.slideDownAnimation)
     }
-    window.addEventListener("scroll", handleHeader)
-
-    return () => window.removeEventListener("scroll", handleHeader)
-  }, [lastY, isScrollable])
+    setLastY(currentScroll)
+  }
 
   const handleDragMove = (e) => {
     setTranslate({
@@ -112,25 +103,27 @@ export default function Window({
   const contentPaddingStyle = hasContentPadding ? styles.contentPadding : ''
 
   const FullScreen = (style) => (
-    <div style={{ position: isScrollable ? 'relative' : 'fixed' }} className={styles.fullscreen}>
+    <div className={styles.fullscreen} onScroll={handleHeaderScroll}>
       <div className={`${styles.header} ${styles.slideDownAnimation}`} ref={headerRef}>
-        {lastY < MAX_HEADER_SCROLL ? <Header title={title} minimizeHandler={clickHandler} /> : <div className={styles.invisibleHeader}></div>}
+        {lastY < MAX_HEADER_SCROLL
+          ? <Header title={title} minimizeHandler={clickHandler} />
+          : <div className={styles.invisibleHeader}></div>}
       </div>
-      <div className={`${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
-        <animated.div style={{ ...style, height: '100%', overflow: 'auto' }}>{children}</animated.div>
+      <div className={`${isOpen && contentPaddingStyle} ${styles.scrollableContent}`}>
+        <animated.div style={{ ...style, flexGrow: 1 }}>{children}</animated.div>
       </div>
     </div>
   )
 
   return isFullscreen || !canAnimate
     ? (isOpen ? applyFadeIn(FullScreen) : applyFadeOut(FullScreen))
-    : (<Draggable handle="#header" onDrag={handleDragMove}>
+    : (<Draggable handle="#header" onDrag={handleDragMove} cancel="#minimize">
         <animated.div className={styles.window} style={{ ...windowOpenStyle, transform: `translateX(${translate.x}px) translateY(${translate.y}px)` }}>
           {isOpen &&
             <div id="header"><Header title={title} minimizeHandler={clickHandler} /></div>
           }
           <div className={
-            `${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
+            `${isOpen && contentPaddingStyle} ${styles.content}`}>
             {isOpen && (
               <animated.div style={contentStyle}>
                 {children}

@@ -67,6 +67,13 @@
   }
 }
 
+.whatContent {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+
 .whatDescription {
   color: $gray-primary;
   @include small-body; 
@@ -81,7 +88,6 @@
 }
 
 .whatFooter {
-  position: fixed;
   display: inline-flex;
   flex-direction: column-reverse;
   align-items: flex-end;

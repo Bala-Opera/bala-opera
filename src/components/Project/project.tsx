@@ -24,7 +24,6 @@ export default function Project({
       isOpen
       animationDuration={500}
       isFullscreen
-      isScrollable
       hasContentPadding={false}
     >
       <div className={styles.project}>

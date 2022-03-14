@@ -237,23 +237,25 @@ export default function Home() {
           isFullscreen={isWhatFullscreen}
           clickHandler={whatButtonHandler}
         >
-          <div className={styles.whatDescription}>
-            <div>{Copy.WHAT[0]}</div>
-            <div>{Copy.WHAT[1]}</div>
-          </div>
-          <div className={styles.whatFooter}>
-            <div>
-              <Button
-                text={CONFIG.whatSocial.text}
-                clickHandler={socialButtonHandler}
-              />
+          <div className={styles.whatContent}>
+            <div className={styles.whatDescription}>
+              <div>{Copy.WHAT[0]}</div>
+              <div>{Copy.WHAT[1]}</div>
             </div>
-            <div id={CONFIG.whatMailingList.id}>
-              <Button
-                text={CONFIG.whatMailingList.text}
-                clickHandler={mailingListWindowButtonHandler}
-                isImportant={isMailingListOpen}
-              />
+            <div className={styles.whatFooter}>
+              <div>
+                <Button
+                  text={CONFIG.whatSocial.text}
+                  clickHandler={socialButtonHandler}
+                />
+              </div>
+              <div id={CONFIG.whatMailingList.id}>
+                <Button
+                  text={CONFIG.whatMailingList.text}
+                  clickHandler={mailingListWindowButtonHandler}
+                  isImportant={isMailingListOpen}
+                />
+              </div>
             </div>
           </div>
         </Window>)}

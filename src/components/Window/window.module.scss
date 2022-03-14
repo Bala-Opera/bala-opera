@@ -12,13 +12,16 @@
 }
 
 .scrollableContent {
-  overflow-y: auto;
   background-color: $black-secondary;
-  height: 100%;
+  position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .contentPadding {
+  flex: 1;
   padding: 16px;
 
   @include md {
@@ -30,6 +33,11 @@
 }
 
 .fullscreen {
+  display: flex;
+  flex-direction: column;
+
+  overflow: auto;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;

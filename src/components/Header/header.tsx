@@ -17,7 +17,7 @@ export default function Header({
   return (
     <div className={styles.header}>
       <p className={styles.text}>{title}</p>
-      <button className={styles.minimize} onClick={minimizeHandler}>
+      <button className={styles.minimize} onClick={minimizeHandler} id='minimize'>
         <MinimizeIcon />
       </button>
     </div>
