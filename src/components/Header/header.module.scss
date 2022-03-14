@@ -32,17 +32,21 @@
   @include md {
     padding: 12px 24px;
   }
+  flex-grow: 1;
 }
 
 .minimize {
   width: 44px;
+  min-height: 44px;
   border: none;
   cursor: pointer;
-  border: 0.5px solid $white-primary;
-
+  border: 1px solid $white-primary;
   @include md {
     width: 52px;
-    height: 52px;
+    min-height: 52px;
+  }
+  @include lg {
+    border: 0.5px solid $white-primary;
   }
   @include default;
 }
