@@ -17,9 +17,6 @@
   -moz-appearance: none;
   cursor: pointer;
   @include small-label;
-  @include md {
-    @include medium-label;
-  }
 }
 
 .dropdown select:active, .dropdown select:focus {

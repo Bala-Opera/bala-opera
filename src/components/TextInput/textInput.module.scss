@@ -22,7 +22,6 @@
 
   @include small-label;
   @include md {
-    @include medium-label;
     width: 410px;
     height: 53px;
   }
@@ -42,8 +41,7 @@
 
   @include default;
   @include small-label;
-  @include md { 
-    @include medium-label;
+  @include md {
     width: 111px;
     height: 53px;
   }

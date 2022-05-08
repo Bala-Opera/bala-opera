@@ -8,9 +8,6 @@
   text-align: left;
   color: $white-primary;
   @include small-body;
-  @include md {
-    @include medium-body;
-  }
 }
 
 .body > div:first-child {

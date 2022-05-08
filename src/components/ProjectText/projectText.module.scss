@@ -6,8 +6,5 @@
   margin: 0;
   text-align: center;
   color: $white-primary;
-  @include medium-body;
-  @include md {
-    @include big-body;
-  }
+  @include small-body;
 }

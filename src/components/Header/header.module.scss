@@ -16,9 +16,6 @@
   }
 
   @include small-label;
-  @include md {
-    @include medium-label;
-  }
 }
 
 .header:active {
@@ -35,7 +32,7 @@
   
   padding: 10px 16px;
   @include md {
-    padding: 12px 24px;
+    padding: 14px 24px;
   }
   flex-grow: 1;
 }

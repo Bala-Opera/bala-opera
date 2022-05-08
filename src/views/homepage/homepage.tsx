@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React, { useState, useEffect, ChangeEvent } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 
 import Button from '../../components/Button/button'
@@ -37,7 +37,7 @@ const CONFIG = {
   },
   whatWindow: {
     title: 'What?',
-    dimension: { width: 929, height: 584 }, // fixed dimension for lg screens
+    dimension: { width: 929, height: 442 }, // fixed dimension for lg screens
     getSource: (window: Dimension) => window ? ({
       x: window.width / 2,
       y: window.height,

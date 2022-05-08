@@ -19,9 +19,6 @@
   color: $white-primary;
   margin-bottom: 16px;
   @include medium-label;
-  @include md {
-    @include big-label;
-  }
 }
 
 .author {
@@ -30,9 +27,6 @@
   text-align: center;
   color: $white-primary;
   @include medium-label;
-  @include md {
-    @include big-label;
-  }
 }
 
 .links {
@@ -41,7 +35,6 @@
   @include small-body;
   @include md {
     margin-top: 150px;
-    @include medium-body;
   }
 }
 .link {

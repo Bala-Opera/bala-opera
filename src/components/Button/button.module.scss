@@ -15,10 +15,7 @@
   text-align: center;
   border: solid 1px $white-primary;
   cursor: pointer;
-  @include small-label;
-  @include md {
-    @include medium-label;
-  }
+  @include small-body;
 }
 
 .desktopPadding {
@@ -42,9 +39,6 @@
   border: solid 1px $white-primary;
   padding: 14px 16px 8px;
   cursor: pointer;
-  @include small-label;
-  @include md {
-    @include medium-label;
-  }
+  @include small-body;
   @include disabled;
 }

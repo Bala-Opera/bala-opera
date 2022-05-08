@@ -152,7 +152,8 @@ const OverviewGraphics = ({ width, height, setTransitionTo, transitionTo }) => {
   const menuStyle = {
     color: "white",
     fontFamily: "NON-Natural-Grotesk-Regular",
-    fontSize: 24,
+    fontSize: "20px",
+    lineHeight: "28px",
     padding: isSlidingMenu ? "1.2em" : "2em",
     lineHeight: isSlidingMenu ? "1.8em" : (height < 1024 && width < 1500) ? "1.6em" : "2em"
   }

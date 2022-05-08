@@ -75,10 +75,6 @@
 .whatDescription {
   color: $gray-primary;
   @include small-body; 
-
-  @include md {
-    @include medium-body;
-  }
 }
 
 .whatDescription > div {
@@ -140,9 +136,6 @@
   @include small-body; 
   margin: 24px 0;
 
-  @include md {
-    @include medium-body;
-  }
   @include lg {
     margin: 12px 0;
   }
@@ -154,7 +147,6 @@
   margin: 0;
 
   @include md {
-    @include medium-body;
     margin-left: 16px;
   }
   @include lg {
