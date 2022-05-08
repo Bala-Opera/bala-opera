@@ -12,22 +12,20 @@
   left: 0;
   top: 0;
   margin: 0;
-  padding: 64px 24px 32px 36px;
+  padding: 64px 24px 24px 50px;
   height: 100%;
   width: 88px;
   font-size: 24px;
-  @include medium-label;
+  @include logo;
 
   @include md {
     width: 112px;
-    padding: 74px 32px 32px 36px;
-    @include medium-body;
+    padding: 68px 32px 24px 72px;
   }
   
   @include lg {
     width: 120px;
-    padding: 84px 24px 32px 56px;
-    @include medium-logo;
+    padding: 77px 24px 32px 72px;
   }
 
   @include important;

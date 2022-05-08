@@ -16,6 +16,13 @@ $regular: 'NON-Natural-Grotesk-Regular';
   font-weight: 400;
 }
 
+@mixin logo {
+  font-family: $regular;
+  font-size: 20px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
 @mixin big-label {
   font-family: $regular;
   font-size: 32px;
