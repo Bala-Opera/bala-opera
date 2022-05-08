@@ -14,13 +14,13 @@ import useWindowSize from '../../common/hooks/useWindowSize'
 import useMediaQuery, { MEDIA_SIZES } from '../../common/hooks/useMediaQuery'
 import useDeviceType, { DEVICE_TYPES } from '../../common/hooks/useDeviceType';
 import { Dimension } from '../../common/types/animation'
-import { server, bucket } from '../../config/server'
-import { createIndexArray, getRandomInt } from '../../common/utils/random'
+import { server } from '../../config/server'
+import {  getRandomInt } from '../../common/utils/random'
 
 const CONFIG = {
   background: {
-    totalVideos: 5,
-    getPath: (videoId: number) => `${bucket}/videos/homepage/homepage-${videoId}.mp4`
+    getPath: (videoId: number) => `https://player.vimeo.com/video/${videoId}?background=1`,
+    videoIds: [706381134, 706381264, 706381557, 706381589, 706381612],
   },
   iconOverlay: {
     totalIconCount: 11, // icon-0 to icon-10
@@ -89,8 +89,6 @@ const STATUS = {
 }
 
 export default function Home() {
-  const initVideoSources = () => createIndexArray(CONFIG.background.totalVideos)
-
   /// [hasUserOpenedWhat] is used to keep animation open for closing animation
   const [hasUserOpenedWhat, setHasUserOpenedWhat] = useState(false)
   const [isWhatOpen, setIsWhatOpen] = useState(false)
@@ -98,7 +96,6 @@ export default function Home() {
   const [isMailingListOpen, setIsMailingListOpen] = useState(false)
   const [isSubmittingMailingList, setIsSubmittingMailingList] = useState(false)
   const [mailingListStatus, setMailingListStatus] = useState(STATUS.none)
-  const [videoSources, setVideoSources] = useState(initVideoSources())
   const [showIssueTransition, setShowIssueTransition] = useState(false)
   const windowDimension = useWindowSize()
   const mediaSize = useMediaQuery()
@@ -174,29 +171,20 @@ export default function Home() {
   // }
 
   const getNextVideo = () => {
-    const index = getRandomInt(0, videoSources.length) // RANDOM VIDEO
-    // const index = 1 // SEQUENTIAL VIDEO
-    let source = videoSources.splice(index, 1)[0]
-    if (source === undefined)
-      source = 0
-    if (videoSources.length) {
-      setVideoSources(videoSources)
-    } else {
-      setVideoSources(initVideoSources())
-    }
-    return CONFIG.background.getPath(source)
+    const index = getRandomInt(0, CONFIG.background.videoIds.length) // RANDOM VIDEO
+    return CONFIG.background.getPath(CONFIG.background.videoIds[index])
   }
+
   const playVideo = (videoSource?: string) => {
     if (!videoSource) {
       videoSource = getNextVideo()
     }
     const video = document.querySelector('#backgroundVideo') as HTMLVideoElement
     video.setAttribute('src', videoSource)
-    video.play()
   }
 
   useEffect(() => {
-    // playVideo()
+    playVideo()
   }, [])
 
   return (
@@ -292,7 +280,14 @@ export default function Home() {
         </Window>
       )}
 
-      <video playsInline muted loop className={styles.background} id="backgroundVideo" />
+      <div className={styles.background}>
+        <iframe
+          id="backgroundVideo"
+          frameBorder="0"
+          allow="autoplay; fullscreen"
+          allowFullScreen>
+        </iframe>
+      </div>
 
       {showIssueTransition && <div className={styles.issueTransition}></div>}
 
