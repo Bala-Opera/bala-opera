@@ -210,7 +210,7 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 }
 
 .bobbing {
-  animation: bob 2s alternate infinite ease-in-out calc(var(--bobDelay) * 0.2s);
+  animation: bob 4s alternate infinite ease-in-out calc(var(--bobDelay) * 0.2s);
 }
 
 @keyframes bob {
@@ -280,7 +280,7 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 }
 
 .holeLaser {
-  animation: laserUp 1000ms 300ms;
+  animation: laserUp 800ms 200ms;
   animation-fill-mode: forwards;
 }
 
@@ -292,7 +292,7 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 
 .laserCover {
   animation-fill-mode: both;
-  animation: laserCoverDown 1500ms linear;
+  animation: laserCoverDown 1000ms linear;
 }
 
 @keyframes laserCoverDown {
@@ -311,7 +311,7 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
   will-change: transform;
   transform-origin: center;
   transform: scale(var(--ringScale));
-  animation: ringIn 2000ms calc(var(--ringIndex) * 150ms + 1500ms);
+  animation: ringIn 1500ms calc(var(--ringIndex) * 150ms + 1000ms);
   animation-fill-mode: both;
 }
 
@@ -330,7 +330,7 @@ $colors: (1: $green-secondary, 2: $yellow-primary, 3: $pink-primary, 4: $magenta
 .ringPulse {
   will-change: transform;
   transform-origin: center;
-  animation: pulsate 2s infinite calc(var(--ringIndex) * 40ms + 3500ms);
+  // animation: pulsate 2s infinite calc(var(--ringIndex) * 40ms + 3500ms);
   animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }
 

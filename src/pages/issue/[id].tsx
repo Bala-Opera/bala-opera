@@ -53,7 +53,7 @@ export default function Issue({ name, overview } : {
   return (
     <>
       <CSSTransition classNames={{enter: styles.enter, enterActive: styles.enterActive}}
-        in={issueState.state === "project" && !("transitionTo" in issueState) && !tooNarrow} timeout={2000} mountOnEnter unmountOnExit appear>
+        in={issueState.state === "project" && !("transitionTo" in issueState) && !tooNarrow} timeout={1000} mountOnEnter unmountOnExit appear>
         {windowDimension ? <div>
           <OverviewGraphics
             width={windowDimension.width}
@@ -619,30 +619,51 @@ const OverviewGraphics = ({width, height, setTransitionTo, transitionTo}) => {
   </div>
 )
 }
-
+const ease = t => t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1
 const TransitionGraphics = ({onDone}) => {
   const [scrollPosition, setScrollPosition] = useState(0)
   useEffect(() => {
-    const onScroll = () => {
-      const el = document.documentElement
-      const c = el.scrollTop / (el.scrollHeight - el.clientHeight);
-      if (c > 0.95) {
-        onDone()
+    // const onScroll = () => {
+    //   const el = document.documentElement
+    //   const c = el.scrollTop / (el.scrollHeight - el.clientHeight);
+    //   if (c > 0.95) {
+    //     onDone()
+    //   }
+
+    //   setScrollPosition(c)
+    // }
+    // onScroll()
+    let t0 = Date.now()
+    let timer = setInterval(() => {
+      let t = Date.now()
+      const dt = t - t0
+
+      let k = ease(Math.max(0, dt / 4000 / 1.7))
+      // k = k ** 1.2
+      k *= 1.7
+
+      if (k != scrollPosition) {
+        setScrollPosition(k)
       }
 
-      setScrollPosition(c)
-    }
-    onScroll()
-    window.addEventListener('scroll', onScroll)
+      if (k > 1) {
+        clearInterval(timer)
+        onDone()
+      }
+    }, 1000 / 60)
+    // window.addEventListener('scroll', onScroll)
     return () => {
-      window.removeEventListener('scroll', onScroll)
+      clearInterval(timer)
+      // window.removeEventListener('scroll', onScroll)
     }
   }, [])
 
-  const rScale = lerp(1, 3, scrollPosition)
+  // const rScale = lerp(1, 3, scrollPosition)
+  const rScale = 1
 
   return (
-    <div id="height-ref" style={{height: '400vh'}} onScroll={() => console.log('scroll')}>
+    <div id="height-ref">
+    {/* <div id="height-ref" style={{height: '200vh'}}> */}
       <svg style={{position:"fixed", width:"100vw",height:"100vh"}} preserveAspectRatio="xMidYMid slice" width="1472" height="1080" viewBox="0 0 1472 1080" fill="none">
         <defs>
           <linearGradient id="paint0_linear_5251_111" x1="-198.967" y1="540" x2="1985.87" y2="417.418" gradientUnits="userSpaceOnUse">
@@ -701,7 +722,7 @@ const TransitionGraphics = ({onDone}) => {
         </div>
         <div style={{"--scroll": scrollPosition ** 4}} className={styles.shadowCircle}></div>
         <div style={{opacity: 1 - (scrollPosition ** 3)}}>
-        <div className={styles.scrollDown}>Scroll Down</div>
+        {/* <div className={styles.scrollDown}>Scroll Down</div> */}
       </div>
       </div>
 
