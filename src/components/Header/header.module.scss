@@ -26,9 +26,9 @@
 
 .minimize {
   width: 44px;
-  height: 44px;
   border: none;
   cursor: pointer;
+  border: 0.5px solid $white-primary;
 
   @include md {
     width: 52px;

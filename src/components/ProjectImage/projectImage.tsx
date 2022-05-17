@@ -1,22 +1,31 @@
 import Image from 'next/image'
 
 import styles from './projectImage.module.scss'
+import { Dimension } from '../../common/types/animation'
 
 export default function ProjectImage({
-  src, customStyles,
-} : {
+  src,
+  blurDataURL,
+  dimensions,
+  width = null,
+  priority = false,
+}: {
   src: string,
-  customStyles: Object,
+  blurDataURL: string,
+  dimensions: Dimension,
+  width?: string, // works best with percentages e.g. "100%"
+  priority?: boolean, // used for first image of project above the fold
 }) {
+  const customStyle = { width }
   return (
-    <div className={styles.outer} style={customStyles} key={src}>
+    <div style={customStyle} className={styles.outer} key={src}>
       <Image
-        loader={() => src}
         src={src}
-        layout="fill"
-        objectFit="contain"
-        loading="eager"
-        className={styles.image}
+        priority={priority}
+        width={dimensions.width}
+        height={dimensions.height}
+        blurDataURL={blurDataURL}
+        placeholder="blur"
       />
     </div>
   )

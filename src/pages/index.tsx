@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useState, useEffect, ChangeEvent } from 'react'
 
 import Button from '../components/Button/button'
-import Dropdown from '../components/Dropdown/dropdown'
+// import Dropdown from '../components/Dropdown/dropdown'
 import TextInput from '../components/TextInput/textInput'
 import Window from '../components/Window/window'
 import IconOverlay from '../components/IconOverlay/iconOverlay'
@@ -125,7 +125,7 @@ export default function Home() {
   const whatButtonHandler = () => {
     setIsWhatOpen(!isWhatOpen)
     if (isWhatOpen) {
-      setTimeout(() => setHasUserOpenedWhat(false), 500)
+      setTimeout(() => setHasUserOpenedWhat(false), 260)
     } else {
       setHasUserOpenedWhat(true)
     }
@@ -134,7 +134,7 @@ export default function Home() {
     setMailingListStatus(STATUS.none)
     setIsMailingListOpen(!isMailingListOpen)
     if (isMailingListOpen) {
-      setTimeout(() => setHasUserOpenedMailingList(false), 500)
+      setTimeout(() => setHasUserOpenedMailingList(false), 260)
     } else {
       setHasUserOpenedMailingList(true)
     }
@@ -174,11 +174,15 @@ export default function Home() {
     mailingListDestination = CONFIG.whatMailingList.getDestination(document, mediaSize)
   }
 
-  const handleIssueSelection = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target
-    event.preventDefault()
-    router.push(CONFIG.issues.getPath(value))
+  // until there's more issues, just make it a button for Issue 0
+  const handleIssue0Button = () => {
+    router.push(CONFIG.issues.getPath('0'))
   }
+  // const handleIssueSelection = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = event.target
+  //   event.preventDefault()
+  //   router.push(CONFIG.issues.getPath(value))
+  // }
 
   const getNextVideo = () => {
     const index = getRandomInt(0, videoSources.length) // RANDOM VIDEO
@@ -201,9 +205,9 @@ export default function Home() {
     video.setAttribute('src', videoSource)
     video.play()
   }
-  
+
   useEffect(() => {
-    playVideo()
+    // playVideo()
   }, [])
 
   return (
@@ -221,48 +225,53 @@ export default function Home() {
 
       <div className={styles.footer}>
         <div>
-        <Button
-          text="What?"
-          isImportant={isWhatOpen}
-          clickHandler={whatButtonHandler}
-        /></div><div>
+          <Button
+            text="What?"
+            isImportant={isWhatOpen}
+            clickHandler={whatButtonHandler}
+          /></div>
+        {/* <div>
         <Dropdown
           name='Issues'
           options={CONFIG.issues.options}
           changeHandler={handleIssueSelection}
-        /></div>
+        /></div> */}
+        <Button
+          text="Issue 0"
+          clickHandler={handleIssue0Button}
+        /></div><div>
       </div>
 
       {hasUserOpenedWhat && (
-      <Window
-        title={CONFIG.whatWindow.title}
-        dimension={CONFIG.whatWindow.dimension}
-        source={CONFIG.whatWindow.getSource(windowDimension)}
-        destination={CONFIG.whatWindow.getDestination(windowDimension)}
-        isOpen={isWhatOpen}
-        isFullscreen={mediaSize !== MEDIA_SIZES.lg}
-        clickHandler={whatButtonHandler}
-      >
-        <div className={styles.whatDescription}>
-          <div>{Copy.WHAT[0]}</div>
-          <div>{Copy.WHAT[1]}</div>
-        </div>
-        <div className={styles.whatFooter}>
-          <div>
-            <Button
-              text={CONFIG.whatSocial.text}
-              clickHandler={socialButtonHandler}
-            />
+        <Window
+          title={CONFIG.whatWindow.title}
+          dimension={CONFIG.whatWindow.dimension}
+          source={CONFIG.whatWindow.getSource(windowDimension)}
+          destination={CONFIG.whatWindow.getDestination(windowDimension)}
+          isOpen={isWhatOpen}
+          isFullscreen={mediaSize !== MEDIA_SIZES.lg}
+          clickHandler={whatButtonHandler}
+        >
+          <div className={styles.whatDescription}>
+            <div>{Copy.WHAT[0]}</div>
+            <div>{Copy.WHAT[1]}</div>
           </div>
-          <div id={CONFIG.whatMailingList.id}>
-            <Button
-              text={CONFIG.whatMailingList.text}
-              clickHandler={mailingListWindowButtonHandler}
-              isImportant={isMailingListOpen}
-            />
+          <div className={styles.whatFooter}>
+            <div>
+              <Button
+                text={CONFIG.whatSocial.text}
+                clickHandler={socialButtonHandler}
+              />
+            </div>
+            <div id={CONFIG.whatMailingList.id}>
+              <Button
+                text={CONFIG.whatMailingList.text}
+                clickHandler={mailingListWindowButtonHandler}
+                isImportant={isMailingListOpen}
+              />
+            </div>
           </div>
-        </div>
-      </Window>)}
+        </Window>)}
 
       {hasUserOpenedMailingList && (
         <Window
@@ -274,10 +283,11 @@ export default function Home() {
           source={mailingListSource}
           destination={mailingListDestination}
           clickHandler={mailingListWindowButtonHandler}
+          animationDuration={100}
         >
           {mailingListStatus === STATUS.success
-          ? <p className={styles.successMailing}>You've joined our mailing list.</p>
-          : <>
+            ? <p className={styles.successMailing}>You've joined our mailing list.</p>
+            : <>
               <TextInput
                 name={CONFIG.whatMailingList.text}
                 placeholder={CONFIG.whatMailingList.placeholder}
@@ -285,7 +295,7 @@ export default function Home() {
                 isSubmitting={isSubmittingMailingList}
               />
               {mailingListStatus === STATUS.error &&
-              <p className={styles.errorMailing}>Your email could not be added. Please try again.</p>}
+                <p className={styles.errorMailing}>Your email could not be added. Please try again.</p>}
             </>
           }
         </Window>
@@ -296,6 +306,7 @@ export default function Home() {
       <style global jsx>{`
         html, body {
           overflow: hidden;
+          position: absolute;
         }
       `}</style>
     </>

@@ -3,6 +3,7 @@
 @import '../../styles/fonts.module.scss';
 
 .text {
+  margin: 0;
   text-align: center;
   color: $white-primary;
   @include medium-body;

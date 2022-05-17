@@ -1,26 +1,8 @@
 @import '../../styles/breakpoints.module.scss';
 
-.image {
-  object-fit: contain;
-  width: 100% !important;
-  position: relative !important;
-  height: unset !important;
-}
-
 .outer {
-  width: 100%;
   margin: 0 auto;
-  margin-bottom: 40px;
-  @include md {
-    margin-bottom: 60px;
-  }
   @include lg {
-    width: 50%;
-    margin-bottom: 150px;
+    width: 80%;
   }
-}
-.outer > div {
-  position: unset !important;
-  text-align: center;
-  flex: 1;
 }

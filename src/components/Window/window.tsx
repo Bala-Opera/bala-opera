@@ -15,7 +15,7 @@ export default function Window({
   destination,
   isOpen,
   isFullscreen = false,
-  animationDuration = 400,
+  animationDuration = 200,
   isFade = false,
   isScrollable = false,
   hasContentPadding = true,
@@ -94,13 +94,13 @@ export default function Window({
     headerStyle = useSpring({
       from: { opacity: 0 },
       to: { opacity: 1, cursor: 'move' },
-      delay: animationDuration + 300,
+      delay: animationDuration,
       reverse: !isOpen,
     })
     contentStyle = useSpring({
       from: { opacity: 0 },
       to: { opacity: 1 },
-      delay: animationDuration + 400,
+      delay: animationDuration + 50,
       reverse: !isOpen,
     })
   }
@@ -108,26 +108,27 @@ export default function Window({
   const contentPaddingStyle = hasContentPadding ? styles.contentPadding : ''
 
   const FullScreen = (style) => (
-    <animated.div className={styles.fullscreen} style={{ ...style }}>
-      <div className={styles.fullscreen}>
-        <Header title={title} minimizeHandler={clickHandler} />
-        <div className={`${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
-          {children}
-        </div>
+    <div style={{ position: isScrollable ? 'relative' : 'fixed' }} className={styles.fullscreen}>
+      <Header title={title} minimizeHandler={clickHandler} />
+      <div className={`${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
+        <animated.div style={{ ...style, height: '100%', overflow: 'auto' }}>{children}</animated.div>
       </div>
-    </animated.div>
-    )
+    </div>
+  )
 
   return isFullscreen || !canAnimate
     ? (isOpen ? applyOpen(FullScreen) : applyClosed(FullScreen))
     : (<animated.div className={styles.window} style={{ ...windowOpenStyle, transform: `translateX(${translate.x}px) translateY(${translate.y}px)` }}>
-          <animated.div style={headerStyle} id='header'>
+          {/* <animated.div style={headerStyle} id='header'>
             {isOpen && (
               <DragMove onDragMove={handleDragMove}>
                 <Header title={title} minimizeHandler={clickHandler} />
               </DragMove>
             )}
-          </animated.div>
+          </animated.div> */}
+          {isOpen && <DragMove onDragMove={handleDragMove}>
+            <Header title={title} minimizeHandler={clickHandler} />
+          </DragMove>}
           <div className={
             `${isOpen && contentPaddingStyle} ${isScrollable ? styles.scrollableContent : styles.content}`}>
             {isOpen && (

@@ -5,16 +5,24 @@
 .navigationButton {
   display: inline-flex;
   justify-content: space-between;
-  height: 44px;
+  min-height: 44px;
   @include md {
-    height: 52px;
+    min-height: 52px;
   }
 }
 
 .navigationButton:hover {
-  opacity: 0.9;
   cursor: pointer;
+
+  .arrowContainer {
+    @include important;
+  }
+  .arrow > path {
+    fill: $yellow-primary;
+  }
 }
+
+
 
 .navigationText {
   margin: 0;

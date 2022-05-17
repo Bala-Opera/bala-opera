@@ -13,10 +13,10 @@ export default function ProjectVideo({
   const videoStyle = (mediaSize === MEDIA_SIZES.lg) ? customStyles : {}
   return (
     <div className={styles.projectVideo} key={src}>
-      <video key={`${src}-video`} controls style={videoStyle} className={styles.video} poster={poster}>
+      {/* <video key={`${src}-video`} controls style={videoStyle} className={styles.video} poster={poster}>
         <source src={src} type={type} />
         Your browser does not support this video.
-      </video>
+      </video> */}
     </div>
   )
 }

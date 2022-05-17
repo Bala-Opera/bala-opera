@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import Window from '../Window/window'
 import NavigationButton from '../NavigationButton/navigationButton'
@@ -20,6 +20,7 @@ export default function Project({
 
   return (
     <Window
+      key={data.title}
       title={data.title}
       clickHandler={handleMinimize}
       isOpen={isOpen}
@@ -42,10 +43,10 @@ export default function Project({
         <div className={styles.links}>
           {
             data.links.map((link, index) => (
-              <>
+              <React.Fragment key={`${link.href}-unit`}>
                 {index > 0 && <span key={`/${link.href}`} className={styles.separator}> / </span>}
                 <a key={link.href} className={styles.link} href={link.href} target="_blank">{link.displayName}</a>
-              </>
+              </React.Fragment>
             ))
           }
         </div>
