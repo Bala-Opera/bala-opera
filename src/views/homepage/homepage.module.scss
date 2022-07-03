@@ -15,7 +15,7 @@
   padding: 64px 24px 24px 50px;
   height: 100%;
   width: 88px;
-  font-size: 24px;
+  font-size: 32px;
   @include logo;
 
   @include md {
@@ -25,7 +25,7 @@
   
   @include lg {
     width: 120px;
-    padding: 77px 24px 32px 72px;
+    padding: 87px 24px 50px 40px;
   }
 
   @include important;
