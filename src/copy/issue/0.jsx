@@ -162,16 +162,16 @@ export default {
         { id: 'space-1', Component: ProjectSpace },
         { id: 'text', Component: ProjectText, props: { text: 'The first thing that came to mind when Jessica gave me the prompt “Favorite Water” was: I’ll write about men crying. I had been stuck at home with my parents for 6 months at that point and had torn through all the Josei manga on the internet I could get my hands on. Something about seeing men being vulnerable made it easier to come to terms with my situation. I pitched the idea to Jessica, along with my second idea of writing a research paper about the water temple turned open market in Tainan. Jessica suggested I explore the crying men idea. I didn’t.' }, },
         { id: 'space-2', Component: ProjectSpace },
+        { id: 'essay', Component: FavoriteWaterEssay },
+        { id: 'space-3', Component: ProjectSpace },
         {
           id: 'image', Component: ProjectImage, props: {
             priority: true,
-            dimensions: { width: 600, height: 800 },
+            dimensions: { width: 675, height: 900 },
             src: `${bucket}/images/issues/0/sharon.png`,
             blurDataURL: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAC4jAAAuIwF4pT92AAABx0lEQVQYlQG8AUP+AP/Wuf/00f/rxP/nvv/ctf/NqP/Xov/3sf/9sP/rn//4qv/anQD/xpD/y4/5t3v/3qj/1qH/z5j/1ZH/1JT/4pX/247/1Yf2sGgA/8V++bBt655Q/75/+rl38bN3/8h79sl4/8hw/9p5/9V/8ahXAP/Jhfesa+eZT//AhP/LlPa2iPrAiv/UkP/Gfv/Bffu5d+2cTwDypWf2rHb2qnL7s3z2q2z/uYH+vHnzs3bmoWTypWrqmWbUdz8A4olR8ap+2Jx3pmpIyoBO55Na45Zf7p1i5ItV03BF2X1Yy2I4ANySZdSedYpuVVpfXJuDbZ12VaBpUYFRP61jSbllSb5oSclmOgDRlGych2tVVlFEX5QCOVQyQ0lsaFc/MShnSTi0bEyqUiuqSSoAkmVBUFVNASM5ACZDABw2ADVJOVt1KTdLPEZJZko3nlAoqkwsACMbFllJQWU9AAARIwA1TAA4TAAaKQArSzkzPBcYEXo9IrxYMQAmKiqzQAubAABlSwkAIiwERSYAJic9IwChFwB5OABCJRyGOSUAnXU+rzcAvkwovlQAKDUEAEIxHlYBtkUApycAoRcAhVAAXToRH4jbsSJUndoAAAAASUVORK5CYII='
           }
         },
-        { id: 'space-3', Component: ProjectSpace },
-        { id: 'essay', Component: FavoriteWaterEssay },
       ],
       links: [
         { displayName: 'Website', href: 'http://www.sharonyu.com/' },
