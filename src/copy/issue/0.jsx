@@ -11,7 +11,7 @@ const basePath = '/issue/0'
 export default {
   name: 'Issue 0',
   overview: {
-    concept: 'We are always curious about how people express themselves. We invited seven different participants to showcase what it means to communicate between a group of seven people in nine days. Each recipient creates a prompt that passes to the next individual.',
+    concept: 'Every piece produced in this issue was created through an exercise of telephone, or chain letters, if you will. The first participant was given a randomly generated topic, a set of instructions, and 9 days to create a piece based on that topic. There were no constraints in medium. Once they had finished, they were asked to distill their experience into a topic to pass to the next participant, and so on and so forth. ',
     participants: ['Cindy Hsu', 'WCC', 'Helen Shu', 'Ty van De Zande', 'Jessica Tsai', 'Sharon Yu', 'Rhea Nayyar'],
   },
   data: {
@@ -23,9 +23,9 @@ export default {
       author: 'Cindy Hsu',
       content: [
         { id: 'space-1', Component: ProjectSpace },
-        { id: 'text', Component: ProjectText, props: { text: 'This is a dramatized portrayal of how it felt to be 25 yet still sad to hear that my mama threw away all my toys, my dear peach-fuzzed Calico Critter babies.' }, },
+        { id: 'text', Component: ProjectText, props: { text: 'I was given the generated topic "Object of Attachment." In response, I created a horror non-game to express how it felt to be an adult yet extremely anguished to hear that my mother had thrown away my beloved toys while clearing out our moldy childhood home to put up for sale. My response is dramatic, but fitting, as my inner child was throwing a tantrum. Rest in peace, my dear peach-fuzzed Calico Critters.' }, },
         { id: 'space-2', Component: ProjectSpace },
-        { id: 'video', Component: ProjectVideo, props: { videoId: 706378261, height: 640 } },
+        { id: 'video', Component: ProjectVideo, props: { videoId: 706378261, height: 900 } },
       ],
       links: [
         { displayName: 'Website', href: 'http://ogskinman.com/' },
@@ -42,7 +42,7 @@ export default {
         { id: 'space-1', Component: ProjectSpace },
         { id: 'text', Component: ProjectText, props: { text: 'Sometimes it strikes me realizing the similarity between the COVID situation and my childhood: to live without any other options but the long and dull waiting. Can’t imagine experiencing both of them at the same time.' }, },
         { id: 'space-2', Component: ProjectSpace },
-        { id: 'video', Component: ProjectVideo, props: { videoId: 706376278, height: 720 } },
+        { id: 'video', Component: ProjectVideo, props: { videoId: 706376278, height: 900 } },
       ],
       links: [
         { displayName: 'Website', href: 'https://wccsnapshots.com' },
@@ -159,7 +159,18 @@ export default {
       displayTitle: 'Rested on Water',
       author: 'Sharon Yu',
       content: [
-        { id: 'space', Component: ProjectSpace },
+        { id: 'space-1', Component: ProjectSpace },
+        { id: 'text', Component: ProjectText, props: { text: 'The first thing that came to mind when Jessica gave me the prompt “Favorite Water” was: I’ll write about men crying. I had been stuck at home with my parents for 6 months at that point and had torn through all the Josei manga on the internet I could get my hands on. Something about seeing men being vulnerable made it easier to come to terms with my situation. I pitched the idea to Jessica, along with my second idea of writing a research paper about the water temple turned open market in Tainan. Jessica suggested I explore the crying men idea. I didn’t.' }, },
+        { id: 'space-2', Component: ProjectSpace },
+        {
+          id: 'image', Component: ProjectImage, props: {
+            priority: true,
+            dimensions: { width: 600, height: 800 },
+            src: `${bucket}/images/issues/0/sharon.png`,
+            blurDataURL: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAC4jAAAuIwF4pT92AAABx0lEQVQYlQG8AUP+AP/Wuf/00f/rxP/nvv/ctf/NqP/Xov/3sf/9sP/rn//4qv/anQD/xpD/y4/5t3v/3qj/1qH/z5j/1ZH/1JT/4pX/247/1Yf2sGgA/8V++bBt655Q/75/+rl38bN3/8h79sl4/8hw/9p5/9V/8ahXAP/Jhfesa+eZT//AhP/LlPa2iPrAiv/UkP/Gfv/Bffu5d+2cTwDypWf2rHb2qnL7s3z2q2z/uYH+vHnzs3bmoWTypWrqmWbUdz8A4olR8ap+2Jx3pmpIyoBO55Na45Zf7p1i5ItV03BF2X1Yy2I4ANySZdSedYpuVVpfXJuDbZ12VaBpUYFRP61jSbllSb5oSclmOgDRlGych2tVVlFEX5QCOVQyQ0lsaFc/MShnSTi0bEyqUiuqSSoAkmVBUFVNASM5ACZDABw2ADVJOVt1KTdLPEZJZko3nlAoqkwsACMbFllJQWU9AAARIwA1TAA4TAAaKQArSzkzPBcYEXo9IrxYMQAmKiqzQAubAABlSwkAIiwERSYAJic9IwChFwB5OABCJRyGOSUAnXU+rzcAvkwovlQAKDUEAEIxHlYBtkUApycAoRcAhVAAXToRH4jbsSJUndoAAAAASUVORK5CYII='
+          }
+        },
+        { id: 'space-3', Component: ProjectSpace },
         { id: 'essay', Component: FavoriteWaterEssay },
       ],
       links: [
