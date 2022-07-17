@@ -16,15 +16,20 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "components/Project/project.tsx"  ],
+    "**/*.tsx",
+    "components/Project/project.tsx"
+  ],
   "exclude": [
     "node_modules"
   ],
-  "typeRoots": ["./src/@types", "./node_modules/@types"],
+  "typeRoots": [
+    "./src/@types",
+    "./node_modules/@types"
+  ]
 }
