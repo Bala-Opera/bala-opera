@@ -159,11 +159,11 @@ export default {
       displayTitle: 'Rested on Water',
       author: 'Sharon Yu',
       content: [
-        { id: 'space-1', Component: ProjectSpace },
+        { id: 'space', Component: ProjectSpace },
         { id: 'text', Component: ProjectText, props: { text: 'The first thing that came to mind when Jessica gave me the prompt “Favorite Water” was: I’ll write about men crying. I had been stuck at home with my parents for 6 months at that point and had torn through all the Josei manga on the internet I could get my hands on. Something about seeing men being vulnerable made it easier to come to terms with my situation. I pitched the idea to Jessica, along with my second idea of writing a research paper about the water temple turned open market in Tainan. Jessica suggested I explore the crying men idea. I didn’t.' }, },
-        { id: 'space-2', Component: ProjectSpace },
+        { id: 'space-1', Component: ProjectSpace },
         { id: 'essay', Component: FavoriteWaterEssay },
-        { id: 'space-3', Component: ProjectSpace },
+        { id: 'space-2', Component: ProjectSpace },
         {
           id: 'image', Component: ProjectImage, props: {
             priority: true,
