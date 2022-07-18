@@ -208,7 +208,7 @@ export default {
       ],
       links: [
         { displayName: 'Website', href: 'https://www.rhea-nayyar.com/' },
-        { displayName: 'Instagram', href: 'https://www.instagram.com/sicksadshawty/' },
+        { displayName: 'Instagram', href: 'https://www.instagram.com/rheanayyar.art/' },
       ],
     },
   }
