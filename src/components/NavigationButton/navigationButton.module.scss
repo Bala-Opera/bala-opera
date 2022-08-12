@@ -23,7 +23,7 @@
 
 .navigationText {
   margin: 0;
-  padding: 14px;
+  padding: 12px;
   position: relative;
   color: $white-primary;
   @include small-label;
@@ -32,13 +32,16 @@
 
 .arrowContainer {
   border: 1px solid $white-primary;
-  padding: 15px;
+  //padding: 15px;
   position: relative;
+  transform-origin:0 100%;
   display: inline-block;
-
-  @include md {
-    padding: 17px;
-  }
+  width: 52px;
+  height: 52px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 18.2px;
+  padding-bottom: 18.2px;
 }
 
 .important {

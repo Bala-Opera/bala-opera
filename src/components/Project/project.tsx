@@ -1,10 +1,12 @@
 import React from 'react'
+import { SRLWrapper } from "simple-react-lightbox";
 import { useNavigate } from 'react-router-dom'
 
 import Window from '../Window/window'
 import NavigationButton from '../NavigationButton/navigationButton'
 import { Data, Link } from '../../common/types/issue'
 import styles from './project.module.scss'
+
 
 export default function Project({
   issueId, data, previousProject, nextProject,
@@ -33,7 +35,7 @@ export default function Project({
           {
             data.content.map(({ Component, props, id }) => (
               <Component key={id} {...props} />
-            ))
+            )) 
           }
         </div>
         <div className={styles.links}>

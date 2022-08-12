@@ -8,7 +8,9 @@
     padding: 160px 128px;
   }
   @include lg {
-    padding: 160px 150px;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
