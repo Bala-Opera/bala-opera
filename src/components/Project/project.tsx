@@ -1,12 +1,11 @@
-import React from 'react'
-import { SRLWrapper } from "simple-react-lightbox";
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Window from '../Window/window'
 import NavigationButton from '../NavigationButton/navigationButton'
 import { Data, Link } from '../../common/types/issue'
 import styles from './project.module.scss'
-
+import Lightbox from '../Lightbox/lightbox'
 
 export default function Project({
   issueId, data, previousProject, nextProject,
@@ -18,6 +17,24 @@ export default function Project({
     navigate(`/issue/${issueId}`, { state: { enter: 'rotate' }})
   }
 
+  const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false)
+  const [lightboxIndex, setlightboxIndex] = useState<number>(0)
+  const [images, setImages] = useState<any[]>([])
+  
+  useEffect(() => {
+    const images = data.content.filter(el => {
+      if (el.id.includes('image'))
+        return true
+    }).map((el, index) => ({
+      ...el.props, 
+      ...el.props.dimensions,
+      id: el.id,
+      index
+    }))
+
+    setImages(images)
+  }, [data])
+  
   return (
     <Window
       key={data.title}
@@ -33,9 +50,16 @@ export default function Project({
         <h4 className={styles.author}>{data.author}</h4>
         <div className={styles.content}>
           {
-            data.content.map(({ Component, props, id }) => (
-              <Component key={id} {...props} />
-            )) 
+            data.content.map(({ Component, props, id }) => {
+              if (id.includes('image'))
+                return <Component key={id} {...props} 
+                  onClick={() => {
+                    setlightboxIndex(images.find((el) => el.id === id).index || 0)
+                    setIsLightboxOpen(true)
+                  }}/>
+
+              return <Component key={id} {...props} />
+            }) 
           }
         </div>
         <div className={styles.links}>
@@ -59,6 +83,7 @@ export default function Project({
             <NavigationButton href={nextProject.href} text={nextProject.displayName} />
           </div>}
       </div>
+      <Lightbox open={isLightboxOpen} index={lightboxIndex} setIsOpen={setIsLightboxOpen} images={images} />
     </Window>
   )
 }

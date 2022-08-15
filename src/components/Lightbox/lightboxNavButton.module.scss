@@ -1,0 +1,62 @@
+@import "../../styles/breakpoints.module.scss";
+@import "../../styles/colors.module.scss";
+@import "../../styles/fonts.module.scss";
+
+.posPrev {
+  @media only screen and (max-width: 768px) {
+    top: 80%;
+    left: 0;
+  }
+  @media only screen and (min-width: 1000px) {
+    left: 15%;
+  }
+}
+
+.posNext {
+  @media only screen and (max-width: 768px) {
+    top: 80%;
+    right: 0;
+  }
+  @media only screen and (min-width: 1000px) {
+    right: 15%;
+  }
+}
+
+.navigationButton {
+  display: inline-flex;
+  justify-content: space-between;
+  min-height: 44px;
+}
+
+.navigationButton:hover {
+  cursor: pointer;
+
+  .arrowContainer {
+    @include important;
+  }
+  .arrow > path {
+    fill: $yellow-primary;
+  }
+}
+
+.arrowContainer {
+  border: 1px solid $white-primary;
+  position: relative;
+  transform-origin: 0 100%;
+  display: inline-block;
+  width: 52px;
+  height: 52px;
+  transform: scale(0.9);
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 18.2px;
+  padding-bottom: 18.2px;
+}
+
+.important {
+  @include important;
+}
+
+.default {
+  @include default;
+}
