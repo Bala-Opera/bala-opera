@@ -1,7 +1,5 @@
-import React from 'react'
-import { SRLWrapper } from "simple-react-lightbox";
+import React, { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import Window from '../Window/window'
 import NavigationButton from '../NavigationButton/navigationButton'
 import { Data, Link } from '../../common/types/issue'
