@@ -26,7 +26,7 @@ export default {
         { id: 'space-1', Component: ProjectSpace },
         { id: 'text', Component: ProjectText, props: { text: 'I was given the generated topic "Object of Attachment." In response, I created a horror non-game to express how it felt to be an adult yet extremely anguished to hear that my mother had thrown away my beloved toys while clearing out our moldy childhood home to put up for sale. My response is dramatic, but fitting, as my inner child was throwing a tantrum. Rest in peace, my dear peach-fuzzed Calico Critters.' }, },
         { id: 'space-2', Component: ProjectSpace },
-        { id: 'video', Component: ProjectVideo, props: { videoId: 706378261, height: 900 } },
+        { id: 'video', Component: ProjectVideo, props: { videoId: 706378261, height:1200 } },
       ],
       links: [
         { displayName: 'Website', href: 'http://ogskinman.com/' },
@@ -170,7 +170,8 @@ export default {
         {
           id: 'image', Component: ProjectImage, props: {
             priority: true,
-            dimensions: { width: 675, height: 900 },
+            dimensions: { width: 1512, height: 2016 },
+            width: '75%',
             src: `${bucket}/images/issues/0/sharon.png`,
             blurDataURL: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAACXBIWXMAAC4jAAAuIwF4pT92AAABx0lEQVQYlQG8AUP+AP/Wuf/00f/rxP/nvv/ctf/NqP/Xov/3sf/9sP/rn//4qv/anQD/xpD/y4/5t3v/3qj/1qH/z5j/1ZH/1JT/4pX/247/1Yf2sGgA/8V++bBt655Q/75/+rl38bN3/8h79sl4/8hw/9p5/9V/8ahXAP/Jhfesa+eZT//AhP/LlPa2iPrAiv/UkP/Gfv/Bffu5d+2cTwDypWf2rHb2qnL7s3z2q2z/uYH+vHnzs3bmoWTypWrqmWbUdz8A4olR8ap+2Jx3pmpIyoBO55Na45Zf7p1i5ItV03BF2X1Yy2I4ANySZdSedYpuVVpfXJuDbZ12VaBpUYFRP61jSbllSb5oSclmOgDRlGych2tVVlFEX5QCOVQyQ0lsaFc/MShnSTi0bEyqUiuqSSoAkmVBUFVNASM5ACZDABw2ADVJOVt1KTdLPEZJZko3nlAoqkwsACMbFllJQWU9AAARIwA1TAA4TAAaKQArSzkzPBcYEXo9IrxYMQAmKiqzQAubAABlSwkAIiwERSYAJic9IwChFwB5OABCJRyGOSUAnXU+rzcAvkwovlQAKDUEAEIxHlYBtkUApycAoRcAhVAAXToRH4jbsSJUndoAAAAASUVORK5CYII='
           }
@@ -203,7 +204,6 @@ export default {
         {
           id: 'image-2', Component: ProjectImage, props: {
             dimensions: { width: 1058, height: 1313 },
-            width: '60%',
             src: `${bucket}/images/issues/0/rhea-2.png`,
             blurDataURL: 'data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgABoDASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAABQQGBwP/xAAqEAACAgIBAwQBAwUAAAAAAAABAgMEBREABhIhEzFBYSIHMqEUQnGR8P/EABcBAQEBAQAAAAAAAAAAAAAAAAQCAQP/xAAgEQABBAIBBQAAAAAAAAAAAAABAAIDERIhBEFRYaHR/9oADAMBAAIRAxEAPwDQrsiVcdkcjYsTRwUou5o4YQ7OD48bI88iW81h6eNTI2cneekIg8pWBFMLEBu2QFthteda+ePUh3V8kjSekJDHH3qATot9/X+vjlY6kx9e/kZbFbB4S7uNS72K3e7mIN6jFVO3b9igH5U+eAxtgrRv0lsoOJdsdvKs9vA0Jmkjgy8sknps6qVI7tDZ0fb/AL64CkMjorCaXRGx+fOWJy7z9bNZvYC7VTIBooHjuiVYj2EgTRgDX92tFgp3xKshFeIDWgo9/wDHOebHi4za10b4zTwqZ+rVK/k8JVx2KM39bdykUcQRu0FuyQ6J+PAP88R6fwePwXTcuMCSrdMZa3Y9VlklJPkCT90evYa+t788Y6hp3p2oti7lerZrWxO0liIyKV9N0IAHkH8h5/ngOQsdXTVuySTAo8RHa8plmay7H22qqUHvs+fB+uSbvSdx5IwzGQfVLyebrdPV3zMMclpEtRV/TiRgwEmlBYtsHQJGzruJB++PmJ4yUJO18czLI9L9SdRZCpDl8pjKuJjuJNYp42FoopnBBkkca/JyANFt7+tc0z1t/tVlX4G/bl0OiLMGiqX/2Q=='
           },

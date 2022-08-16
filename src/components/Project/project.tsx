@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import Window from '../Window/window'
 import NavigationButton from '../NavigationButton/navigationButton'
 import { Data, Link } from '../../common/types/issue'
