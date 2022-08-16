@@ -8,6 +8,7 @@
   align-items: center;
   flex-direction: column;
   height: 100%;
+
 }
 
 .content {
@@ -17,11 +18,13 @@
   margin: auto 0;
 
   @include md {
-    padding: 48px 24px;
+  padding: 48px 24px;
   }
 
   @include lg {
-    padding: 64px 152px;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
   }
 }
 
