@@ -3,6 +3,6 @@
 .outer {
   margin: 0 auto;
   @include lg {
-    width: 50%;
+    width: 100%;
   }
 }
