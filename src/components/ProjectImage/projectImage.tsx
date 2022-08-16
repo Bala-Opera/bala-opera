@@ -9,16 +9,19 @@ export default function ProjectImage({
   dimensions,
   width = null,
   priority = false,
+  onClick
 }: {
   src: string,
   blurDataURL: string,
   dimensions: Dimension,
   width?: string, // works best with percentages e.g. "100%"
-  priority?: boolean, // used for first image of project above the fold
+  priority?: boolean,
+  onClick?: () => void // used for first image of project above the fold
 }) {
   const customStyle = { width }
   return (
-    <div style={customStyle} className={styles.outer} key={src}>
+    <div style={customStyle} className={styles.outer} key={src}
+      onClick={onClick}>
       <Image
         src={src}
         priority={priority}

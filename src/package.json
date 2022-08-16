@@ -21,7 +21,8 @@
     "react-spring": "^9.2.4",
     "react-transition-group": "^4.4.2",
     "sass": "^1.36.0",
-    "sharp": "^0.30.1"
+    "sharp": "^0.30.1",
+    "yet-another-react-lightbox": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "^16.4.2",
