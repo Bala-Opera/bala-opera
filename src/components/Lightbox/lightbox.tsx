@@ -21,7 +21,7 @@ export default function Lightbox({
     <ImageLightbox
       styles={{
         container: {
-          backgroundColor: "rgba(0, 0, 0, .75)",
+          backgroundColor: "rgba(0, 0, 0)",
         },
       }}
       open={open}
